@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:body>
+	<ui:composition template="#{MBCidade.template}">
+		<ui:define name="content">
+			<p:panel header=" Cadastro de Logradouro" >											
+				<h:form id="formLogradouro">
+				
+					<p:messages id="msgs1" showDetail="true">  
+	                     <p:effect type="pulsate" event="load" delay="500" />  
+	                </p:messages>
+													
+					<h:panelGrid columns="3" style="margin: 10px auto;" >
+						<p:selectOneMenu style="width:80px;" id="cbEstado" value="#{MBLogradouro.estadoSelecionado}"
+						converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Sel. Estado" />
+							<f:selectItems value="#{MBLogradouro.listaEstado}" var="estado"
+								itemValue="#{estado}"
+								itemLabel="#{estado.sigla}" />
+							<p:ajax event="change" listener="#{MBLogradouro.buscaCidade}" update="cbCidade, cbBairro" />						
+						</p:selectOneMenu>
+						
+						<p:selectOneMenu style="width:200px;" id="cbCidade" value="#{MBLogradouro.cidadeSelecionado}"
+						converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Sel. Cidade" />
+							<f:selectItems value="#{MBLogradouro.listaCidade}" var="cidade"
+								itemValue="#{cidade}"
+								itemLabel="#{cidade.nome}" />
+							<p:ajax event="change" listener="#{MBLogradouro.buscaBairro}" update="cbBairro" />						
+						</p:selectOneMenu>
+						
+						<p:selectOneMenu style="width:250px;" id="cbBairro" value="#{MBLogradouro.bairroSelecionado}"
+						converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Sel. Bairro" />
+							<f:selectItems value="#{MBLogradouro.listaBairro}" var="bairro"
+								itemValue="#{bairro}"
+								itemLabel="#{bairro.nome}" />																			
+						</p:selectOneMenu>
+					</h:panelGrid>
+						
+						<h:panelGrid columns="3" style="margin: 10px auto;" >
+						<p:inputText value="#{MBLogradouro.nomeBusca}" size="70" placeholder="Nome Logradouro.."/>
+						<p:commandButton value="Buscar" actionListener="#{MBLogradouro.buscaLogradouro}" update="formLogradouro" />
+						<p:commandButton value="Novo" actionListener="#{MBLogradouro.limpaListas}" oncomplete="PF('dlgCadastro').show();" />						
+					</h:panelGrid>
+					
+					<p:dataTable id="tblBairro" var="logradouro" value="#{MBLogradouro.listaLogradouro}" paginator="true" rows="10" emptyMessage="Nenhum registro encontrado, refaça sua busca.">
+					        <p:column headerText="Nome do logradouro">
+					            <h:outputText value="#{logradouro.nome}" />
+					        </p:column>
+
+							<p:column style="width:100px;text-align: center" headerText="CEP">
+					            <h:outputText value="#{logradouro.cep}" />
+					        </p:column>
+
+					        <p:column style="width:140px;text-align: center; border: 0px;">
+					        						        	
+				        		<p:commandButton value="Editar" actionListener="#{MBLogradouro.preparaEdita}" oncomplete="PF('dlgCadastro').show()" update=":formCadastro">
+				                	<f:attribute name="logradouroSelecionado" value="#{logradouro}" />				                	
+				            	</p:commandButton>
+				            	
+				            	<p:commandButton value="Excluir"   actionListener="#{MBLogradouro.excluir}" update="formLogradouro" >
+				                	<f:attribute name="logradouroSelecionado" value="#{logradouro}" />
+				                	<p:confirm header="Confirmation" message="Deseja realmente excluir?" icon="ui-icon-alert" />
+				            	</p:commandButton>
+					        						        						           
+					        </p:column>
+					       					        					        					      
+					    </p:dataTable>							
+					</h:form>						
+			</p:panel>
+			
+			
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+		        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+		        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		    </p:confirmDialog>
+			
+			<p:dialog header="Cadastro de Logradouro" widgetVar="dlgCadastro" height="190" width="700" 
+					  resizable="false" modal="true" appendTo="@(body)" closable="false" >
+				<h:form id="formCadastro">
+					
+					<p:messages id="msgs1" showDetail="true">  
+	                     <p:effect type="pulsate" event="load" delay="500" />  
+	                </p:messages>
+					
+					<h:panelGrid columns="3" style="margin: 10px auto;" >
+						<p:selectOneMenu style="width:80px;" id="cbEstado" value="#{MBLogradouro.estadoSelecionado}"
+						converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Sel. Estado" />
+							<f:selectItems value="#{MBLogradouro.listaEstado}" var="estado"
+								itemValue="#{estado}"
+								itemLabel="#{estado.sigla}" />
+							<p:ajax event="change" listener="#{MBLogradouro.buscaCidade}" update="cbCidade, cbBairro" />						
+						</p:selectOneMenu>
+						
+						<p:selectOneMenu style="width:200px;" id="cbCidade" value="#{MBLogradouro.cidadeSelecionado}"
+						converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Sel. Cidade" />
+							<f:selectItems value="#{MBLogradouro.listaCidade}" var="cidade"
+								itemValue="#{cidade}"
+								itemLabel="#{cidade.nome}" />
+							<p:ajax event="change" listener="#{MBLogradouro.buscaBairro}" update="cbBairro" />						
+						</p:selectOneMenu>
+						
+						<p:selectOneMenu style="width:250px;" id="cbBairro" value="#{MBLogradouro.bairroSelecionadoCadastro}"
+						converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Sel. Bairro" />
+							<f:selectItems value="#{MBLogradouro.listaBairro}" var="bairro"
+								itemValue="#{bairro}"
+								itemLabel="#{bairro.nome}" />																			
+						</p:selectOneMenu>
+					</h:panelGrid>
+					<h:panelGrid columns="3" style="margin: 10px auto;" >
+						<p:inputMask placeholder="cep" size="19" mask="99999-999" value="#{MBLogradouro.cep}" />
+						<p:inputText placeholder="Logradouro" size="59" value="#{MBLogradouro.nome}" />
+					</h:panelGrid>
+					<h:panelGrid columns="3" style="margin: 10px auto;" >
+						<p:commandButton value="Cadastrar" actionListener="#{MBLogradouro.salvar}" update="formCadastro" />
+						<p:commandButton value="Sair" actionListener="#{MBLogradouro.limpaListas}" oncomplete="PF('dlgCadastro').hide();" update="formCadastro, :formLogradouro"/>
+					</h:panelGrid>									    
+			    </h:form>
+			</p:dialog>
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:body>
+	<ui:composition template="template_adm.xhtml">
+		<ui:define name="content">
+			<p:panel header=" Cadastro de Violador não Parente">
+			
+				<p:messages id="msgs1" showDetail="true">
+					<p:effect type="pulsate" event="load" delay="500" />
+				</p:messages>
+					
+					<h:form id="formViolNaoParen">	
+				
+					<h:panelGrid id="grdCentral">
+
+					<!-- Linha 1 -->
+					<h:panelGrid columns="1">
+					<p:spacer width="20px;" />
+						<p:outputLabel value="Nome :" />
+						<h:inputHidden />
+						
+						<p:inputText value="#{MBResponsavelCadastro.nome}" size="61" />
+						
+					</h:panelGrid>
+						
+					<!-- Linha 2 -->
+					<h:panelGrid columns="9">
+				        <p:outputLabel value="CPF:" />
+						<h:inputHidden />
+						<p:outputLabel value="RG:" />
+						<h:inputHidden />
+						<p:outputLabel value="Org. Emissor:" />
+						<h:inputHidden />
+						<p:outputLabel value="Fone I:" />
+						<h:inputHidden />
+						<p:outputLabel value="Fone II:" />
+						
+						
+                        <p:inputMask id="cpf" value="#{MBResponsavelCadastro.cpf}" mask="999.999.999-99" size="10">
+						<p:ajax event="blur" listener="#{MBResponsavelCadastro.validaCPF}" update=":msgs1" />							
+						</p:inputMask>															
+						<p:spacer width="10px;" />
+						
+						<p:inputText value="#{MBResponsavelCadastro.rg}" size="10" maxlength="9"  />								
+						<p:spacer width="10px;" />
+						
+						<p:selectOneMenu style="width:90px;" id="cbOrgao" value="#{MBResponsavelCadastro.orgaoSelecionado}"
+							converter="omnifaces.SelectItemsConverter" filter="true" 
+							filterMatchMode="contains">
+						<f:selectItem noSelectionOption="true" itemLabel="Selecione  " />
+						<f:selectItems value="#{MBResponsavelCadastro.listaOrgao}"
+							var="orgao" itemValue="#{orgao}"
+							itemLabel="#{orgao.nome}" />
+				  		</p:selectOneMenu>
+				  		<p:spacer width="10px;" />
+
+							<p:inputMask id="foneII" value="#{MBInstituicaoCadastro.foneII}"
+								mask="(99)999?9-9999" size="11" />
+							<p:spacer width="10px;" />
+				       
+				       <p:inputMask id="foneI" value="#{MBInstituicaoCadastro.foneII}"
+						    mask="(99)999?9-9999" size="11"/>
+				       <p:spacer width="10px;" />
+					</h:panelGrid>
+
+					<p:fieldset legend="Endereço" toggleable="false">
+
+					<!-- Linha 3 -->
+					<h:panelGrid columns="5">
+						<p:outputLabel value="Estado:" />
+						<h:inputHidden />
+						<p:outputLabel value="Cidade:" />
+						<h:inputHidden />
+						<p:outputLabel value="Bairro:" />
+
+						<p:selectOneMenu style="width:80px;" id="cbEstado"
+							value="#{MBInstituicaoCadastro.estadoSelecionado}" converter="omnifaces.SelectItemsConverter" filter="true"
+							filterMatchMode="contains">
+						<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+						<f:selectItems value="#{MBInstituicaoCadastro.listaEstado}"
+							var="estado" itemValue="#{estado}" itemLabel="#{estado.sigla}" />
+						<p:ajax event="change" listener="#{MBInstituicaoCadastro.buscaCidade}" update="cbCidade, cbBairro, cbLogradouro" />
+						</p:selectOneMenu>
+						<p:spacer width="2px;" />
+
+						<p:selectOneMenu style="width:270px;" id="cbCidade"
+							value="#{MBInstituicaoCadastro.cidadeSelecionado}" converter="omnifaces.SelectItemsConverter" filter="true"
+							filterMatchMode="contains">
+						<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+						<f:selectItems value="#{MBInstituicaoCadastro.listaCidade}"
+								var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
+						<p:ajax event="change" listener="#{MBInstituicaoCadastro.buscaBairro}" update="cbBairro, cbLogradouro" />
+						</p:selectOneMenu>
+						<p:spacer width="2px;" />
+
+						<p:selectOneMenu style="width:282px;" id="cbBairro" value="#{MBInstituicaoCadastro.bairroSelecionado}"
+							converter="omnifaces.SelectItemsConverter" filter="true"
+							filterMatchMode="contains">
+						<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+						<f:selectItems value="#{MBInstituicaoCadastro.listaBairro}"
+								var="bairro" itemValue="#{bairro}" itemLabel="#{bairro.nome}" />
+						<p:ajax event="change" listener="#{MBInstituicaoCadastro.buscaLogradouro}" update="cbLogradouro" />
+						</p:selectOneMenu>
+						<p:spacer width="2px;" />
+						</h:panelGrid>
+
+					<!-- Linha 4 -->
+					<h:panelGrid columns="7">
+						<p:outputLabel value="Logradouro:" />
+						<h:inputHidden />
+						<p:outputLabel value="Numero:" />
+						<h:inputHidden />
+						<p:outputLabel value="Complem.:" />
+						<h:inputHidden />
+						<p:outputLabel value="CEP:" />
+
+						<p:selectOneMenu style="width:398px;" id="cbLogradouro" value="#{MBInstituicaoCadastro.logradouroSelecionado}"
+							converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+						<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+						<f:selectItems value="#{MBInstituicaoCadastro.listaLogradouro}"
+							var="logradouro" itemValue="#{logradouro}" itemLabel="#{logradouro.nome}" />
+
+						</p:selectOneMenu>
+						<p:spacer width="2px;" />
+						<p:inputText value="#{MBInstituicaoCadastro.numero}" size="4" />
+						<p:spacer width="2px;" />
+						<p:inputText value="#{MBInstituicaoCadastro.complemento}" size="6" />
+						<p:spacer width="2px;" />
+						<p:inputMask id="cep" value="#{MBInstituicaoCadastro.cep}" mask="99999-999" size="6" />
+					</h:panelGrid>
+					</p:fieldset>
+					</h:panelGrid>
+
+					<h:panelGrid id="grdBotoes" style="margin: 10px auto;" columns="7" >
+
+						<p:commandButton value="Salvar"
+							actionListener="#{MBInstituicaoCadastro.salvar}" update=":msgs1" />
+						<p:commandButton value="Voltar" title="Busca Respons. Instiuição"
+							action="instituicao_busca?faces-redirect=true" />
+					</h:panelGrid>
+				</h:form>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

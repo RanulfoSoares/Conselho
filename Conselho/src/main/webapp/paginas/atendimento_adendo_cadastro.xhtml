@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:body>
+	<ui:composition template="template_adm.xhtml">
+		<ui:define name="content">
+
+			<p:panel header=" Adendo à atendimento">
+				<h:form id="formCidadao">
+
+					<p:messages id="msgs1" showDetail="true" >
+						<p:effect type="pulsate" event="load" delay="500" />
+					</p:messages>
+
+					<h:panelGrid>
+
+						<!-- Linha 1 -->
+						<h:panelGrid columns="3" style="margin-top: 20px;">
+						
+						<p:outputLabel value="Data Cadastro :" />
+						<h:inputHidden />
+						<p:outputLabel value="Conselheiro :" />
+                          
+							<p:inputText value="#" size="10" disabled="true" />
+							<p:spacer width="10px;" />
+							<p:inputText value="#" size="41" disabled="true" />
+						</h:panelGrid>
+						
+						<!-- Linha 7 -->	
+										<h:panelGrid columns="1">
+											<p:outputLabel value="Descrição do atendimento: *" />
+											<h:inputHidden />
+											
+											<p:inputTextarea value="#{MBAtendimento.descricaoAtendimento}" autoResize="False" rows="2" id="txtObs" cols="88" type="text" placeholder="Descreva o atendimento"/>
+									</h:panelGrid>
+									
+									<!-- Linha 8 -->	
+										
+										<h:panelGrid columns="2" styleClass=" texto_center_2">	
+										<p:outputLabel value="Denuncia tem fundamento/procedência: *" />
+																	
+										<p:selectOneRadio id="denuncia" value="#{MBAtendimento.procedenciaDenuncia}" >
+										<f:selectItem itemLabel="Sim" itemValue="S" />
+										<f:selectItem itemLabel="Não" itemValue="N" />
+										</p:selectOneRadio>
+										</h:panelGrid>
+							
+						
+					    </h:panelGrid>
+					<h:panelGrid style="margin: 10px auto;" columns="3">
+					<p:commandButton icon="ui-icon-arrowreturnthick-1-n" disabled="#{pessoa.membro}" 
+					                action="#{MBBuscaCidadao.preparaMostraNucleoFamiliar}" title="Voltar para o Núcleo Familiar">
+					                <f:setPropertyActionListener value="#{pessoa.membro.familia.id}" target="#{MBBuscaCidadao.idPessoaSelecionada}" />					               
+					            </p:commandButton>   
+						<p:commandButton value="Salvar" actionListener="#{MBCidadoaCadastro.salvar}" update="msgs1, formCidadao" title="Salvar Cidadã(o)" />
+						<p:commandButton value="Voltar" action="cidadao_busca?faces-redirect=true" title="Busca Cidada(o)"/>	
+													
+					</h:panelGrid>
+
+				</h:form>
+			</p:panel>
+		</ui:define>
+	</ui:composition>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+</h:body>
+
+</html>

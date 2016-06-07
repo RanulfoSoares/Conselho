@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:body>
+	<ui:composition template="template_adm.xhtml">
+		<ui:define name="content">				
+
+			<p:panel header=" Cadastro de Responsável Instituicão ">
+				
+				<p:messages id="msgs1" showDetail="true">
+				 	<p:effect type="pulsate" event="load" delay="500" />
+				</p:messages>
+				
+				<h:form id="formResp">										
+					
+					<h:panelGrid columns="3" style="margin: 18px 30px;" >						
+							<h:outputText value="Ref. Criança/Adolescente:" />
+							<h:outputText value="#{MBResponsavelInstituicao.nomeCriancaSelecionado}" styleClass="texto_informativo" />		
+					</h:panelGrid>
+					
+					<h:panelGrid style="margin: 10px auto;" columns="4" >
+						
+						<p:selectOneRadio id="tpBusca" value="#{MBResponsavelInstituicao.tipoBusca}" >
+							<f:selectItem itemLabel="CIE" itemValue="CIE" />
+							<f:selectItem itemLabel="CNPJ" itemValue="CNPJ" />
+						</p:selectOneRadio>
+						<p:inputMask value="#{MBResponsavelInstituicao.documentoBusca}" maxlength="11" mask="999999?99999999" />											
+						
+						<p:commandButton value="Buscar" title="Busca responsável"
+								actionListener="#{MBResponsavelInstituicao.buscaInstituicao}" update=":msgs1,:formGrid"/>
+								
+						<p:commandButton value="Voltar" action="#{MBResponsavelInstituicao.navegaResponsavel}" />
+
+					</h:panelGrid>
+					
+					</h:form>
+					
+					<h:form id="formGrid">
+					<h:panelGrid id="grdCentral" rendered="#{MBResponsavelInstituicao.mostraCadastro}">						
+
+						<!-- Linha 2 -->
+					<h:panelGrid columns="5">
+						<p:outputLabel value="Nome Fantasia :" />
+						<h:inputHidden />
+						<p:outputLabel value="CIE:" />
+						<h:inputHidden />						
+						<p:outputLabel value="CNPJ:" />
+						
+
+						<p:inputText value="#{MBResponsavelInstituicao.instituicaoSelecionado.fantasia}" size="56" disabled="true" />
+						<p:spacer width="10px;" />
+												
+						<p:inputMask value="#{MBResponsavelInstituicao.instituicaoSelecionado.cie}" size="5" mask="999999" disabled="true" />
+						<p:spacer width="2px;" />																							
+						
+						<p:inputMask id="cnpj" value="#{MBResponsavelInstituicao.instituicaoSelecionado.cnpj}"
+							mask="99.999.999/9999-99" size="15" disabled="true">							
+						</p:inputMask>
+						
+					 </h:panelGrid>											
+
+						<h:panelGrid columns="7">
+						    <p:outputLabel value="Contato :" />
+						    <h:inputHidden />
+							<p:outputLabel value="Fone I:" />
+							<h:inputHidden />
+							<p:outputLabel value="Tipo Instituição:" />
+							<h:inputHidden />
+                     	    <p:outputLabel value="Grau de Responsabilidade:" />							
+							
+							<p:inputText value="#{MBResponsavelInstituicao.instituicaoSelecionado.contato}" size="22" disabled="true" />
+						    <p:spacer width="5px;" />
+							<p:inputMask id="foneI" value="#{MBResponsavelInstituicao.instituicaoSelecionado.foneI}" mask="(99)999?9-9999" size="11" disabled="true" />
+							<p:spacer width="5px;" />
+							<p:inputText value="#{MBResponsavelInstituicao.instituicaoSelecionado.tipoInstituicao.nome}" size="15" disabled="true" />
+							<p:spacer width="5px;" />
+							<p:inputText value="#{MBResponsavelInstituicao.grauResponsabilidadeSelecionado.nome}" size="21" disabled="true" />
+						</h:panelGrid>						
+						
+						<p:fieldset legend="Endereço" toggleable="false" >
+							<!-- Linha 4 -->							
+							<h:panelGrid columns="5">
+								<p:outputLabel value="Estado:" />
+								<h:inputHidden />								
+								<p:outputLabel value="Cidade:" />
+								<h:inputHidden />								
+								<p:outputLabel value="Bairro:" />
+	                     	    
+	                         	<p:inputText value="#{MBResponsavelInstituicao.instituicaoSelecionado.logradouro.bairro.cidade.estado.sigla}" size="5" disabled="true" />
+						        <p:spacer width="5px;" />
+								<p:inputText value="#{MBResponsavelInstituicao.instituicaoSelecionado.logradouro.bairro.cidade.nome}" size="30" disabled="true" />
+						        <p:spacer width="5px;" />
+								<p:inputText value="#{MBResponsavelInstituicao.instituicaoSelecionado.logradouro.bairro.nome}" size="40" disabled="true" />
+						        <p:spacer width="5px;" />
+								
+							</h:panelGrid>
+							
+							<h:panelGrid columns="7">
+								<p:outputLabel value="Logradouro:" />	                     	    
+								<h:inputHidden />
+								<p:outputLabel value="Numero:" />
+								<h:inputHidden />
+								<p:outputLabel value="Complem.:" />
+								<h:inputHidden />
+								<p:outputLabel value="CEP:" />
+	
+								<p:inputText value="#{MBResponsavelInstituicao.instituicaoSelecionado.logradouro.nome}" size="53" disabled="true" />
+						        <p:spacer width="5px;" />
+								<p:inputText value="#{MBResponsavelInstituicao.instituicaoSelecionado.numero}" size="4" disabled="true" />
+								<p:spacer width="2px;" />
+								<p:inputText value="#{MBResponsavelInstituicao.instituicaoSelecionado.complemento}" size="6" disabled="true" />
+								<p:spacer width="2px;" />	
+								<p:inputText id="cep" value="#{MBResponsavelInstituicao.instituicaoSelecionado.logradouro.cep}" size="6" disabled="true" />					
+							</h:panelGrid>													     								
+						</p:fieldset>	
+																
+					</h:panelGrid>
+					
+					<h:panelGrid id="grdBotoes" style="margin: 10px auto;" columns="2" rendered="#{MBResponsavelInstituicao.mostraCadastro}" >
+						<p:commandButton value="Criar Vinculo" title="Vincular como guardião" actionListener="#{MBResponsavelInstituicao.vincularInstituicao}" update=":msgs1, :formGrid" />
+						<p:commandButton value="Voltar" action="#{MBResponsavelInstituicao.navegaResponsavel}" />
+					</h:panelGrid>
+					
+				</h:form>												
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

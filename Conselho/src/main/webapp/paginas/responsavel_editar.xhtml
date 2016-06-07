@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:body>
+	<ui:composition template="template_adm.xhtml">
+		<ui:define name="content">				
+
+			<p:panel header=" Editar Responsável">
+				
+				<p:messages id="msgs1" showDetail="true">
+				 	<p:effect type="pulsate" event="load" delay="500" />
+				</p:messages>
+																	
+					
+				<h:panelGrid columns="4" style="margin: 18px 30px;" >						
+					<h:outputText value="Ref. Criança/Adolescente:" />
+					<h:outputText value="#{MBResponsavelEdita.nomeCriancaSelecionado}" styleClass="texto_informativo" />		
+				</h:panelGrid>																	
+					
+				<h:form id="formGrid">
+					<h:panelGrid id="grdCentral" >						
+
+						<!-- Linha 2 -->
+						<h:panelGrid columns="7">
+							<p:outputLabel value="Nome :" />
+							<h:inputHidden />
+							<p:outputLabel value="CPF:" />
+							<h:inputHidden />
+							<p:outputLabel value="RG:" />
+							<h:inputHidden />
+							<p:outputLabel value="Org. Emissor:" />
+
+							<p:inputText value="#{MBResponsavelEdita.nome}" size="39" />
+							<p:spacer width="10px;" />
+							
+							<p:inputMask id="cpf" value="#{MBResponsavelEdita.cpf}" mask="999.999.999-99" size="10">
+								<p:ajax event="blur" listener="#{MBResponsavelEdita.validaCPF}" update=":msgs1" />							
+							</p:inputMask>															
+							<p:spacer width="10px;" />
+							
+							<p:inputText value="#{MBResponsavelEdita.rg}" size="11" maxlength="9"  />								
+							<p:spacer width="10px;" />
+							
+								<p:selectOneMenu style="width:90px;" id="cbOrgao" value="#{MBResponsavelEdita.orgaoSelecionado}"
+								converter="omnifaces.SelectItemsConverter" filter="true" 
+								filterMatchMode="contains">
+								<f:selectItem noSelectionOption="true" itemLabel="Selecione  " />
+								<f:selectItems value="#{MBResponsavelEdita.listaOrgao}"
+									var="orgao" itemValue="#{orgao}"
+									itemLabel="#{orgao.nome}" />
+							</p:selectOneMenu>
+														
+						</h:panelGrid>
+						
+						<!-- Linha 5 -->
+						<h:panelGrid columns="8">
+							<p:outputLabel value="Fone I:" />
+							<h:inputHidden />
+							<p:outputLabel value="Fone II:" />
+							<h:inputHidden />
+							<p:outputLabel value="Local de Trabalho:" />
+							<h:inputHidden />
+							<p:outputLabel value="Fone Trabalho:" />
+							<h:inputHidden />
+
+							<p:inputMask id="foneI" value="#{MBResponsavelEdita.foneI}" mask="(99)999?9-9999" size="11" />
+							<p:spacer width="5px;" />
+							<p:inputMask id="foneII" value="#{MBResponsavelEdita.foneII}" mask="(99) 999?9-99999" size="11" />
+							<p:spacer width="5px;" />
+								<p:inputText value="#{MBResponsavelEdita.localDeTrabalho}" size="36" />
+							<p:spacer width="5px;" />
+							<p:inputMask id="fonetrabalho" value="#{MBResponsavelEdita.foneTrabalho}" mask="(99) 999?9-99999" size="11" />
+							<p:spacer width="5px;" />
+							
+							
+						</h:panelGrid>
+
+						<!-- Linha 6 -->
+						<h:panelGrid columns="6">							
+							<p:outputLabel value="Situação Matrimonial:" />
+                     	    <h:inputHidden />
+                     	    <p:outputLabel value="Grau de Parentesco:" />
+                     	    <h:inputHidden />
+                     	    <p:outputLabel value="Grau de Responsabilidade:" />
+                     	    <h:inputHidden />
+
+							
+                           <p:selectOneMenu style="width:210px" id="situacaoMatrimonial" value="#{MBResponsavelEdita.situacaoMatrimonial}">
+							<f:selectItem itemLabel="Selecione" itemValue=""
+								noSelectionOption="true" />
+							<p:spacer width="10px;" />
+							<f:selectItem itemLabel="Amasiada(o)" itemValue="AM" />
+							<f:selectItem itemLabel="Casada(o)" itemValue="CS" />
+							<f:selectItem itemLabel="Divorciada(o)" itemValue="DV" />
+							<f:selectItem itemLabel="Falecida(o)" itemValue="FL" />
+							<f:selectItem itemLabel="Separada(o)" itemValue="SP" />
+							<f:selectItem itemLabel="Solteira(o)" itemValue="ST" />
+							<f:selectItem itemLabel="Viuva(o)(o)" itemValue="VV" />
+							</p:selectOneMenu>
+							<p:spacer width="10px;" />
+														
+							<p:selectOneMenu style="width:210px;" id="cbParentesco" value="#{MBResponsavelEdita.grauDeParentesco}" converter="omnifaces.SelectItemsConverter" filter="true" ilterMatchMode="contains" >
+							<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+							<f:selectItems value="#{MBResponsavelEdita.listaParentesco}"
+								var="parentesco" itemValue="#{parentesco}"
+								itemLabel="#{parentesco.nome}" />
+							</p:selectOneMenu>
+							<p:spacer width="15px;" />
+							
+							<p:selectOneMenu style="width:210px;" id="cbResponsabilidade" value="#{MBResponsavelEdita.grauDeResponsabilidade}" converter="omnifaces.SelectItemsConverter" filter="true"  
+								    filterMatchMode="contains">
+								<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+								<f:selectItems value="#{MBResponsavelEdita.listaResponsabilidade}"
+									var="responsabilidade" itemValue="#{responsabilidade}"
+									itemLabel="#{responsabilidade.nome}" />
+							</p:selectOneMenu>
+							<p:spacer width="15px;" />
+						</h:panelGrid>						
+						
+						<p:fieldset legend="Endereço" toggleable="false" >
+							<!-- Linha 4 -->							
+							<h:panelGrid columns="5">
+								<p:outputLabel value="Estado:" />
+								<h:inputHidden />								
+								<p:outputLabel value="Cidade:" />
+								<h:inputHidden />								
+								<p:outputLabel value="Bairro:" />
+	                     	    
+	                     	    <p:selectOneMenu style="width:80px;" id="cbEstado" value="#{MBResponsavelEdita.estadoSelecionado}" converter="omnifaces.SelectItemsConverter" filter="true"
+									filterMatchMode="contains">
+								<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+								<f:selectItems value="#{MBResponsavelEdita.listaEstado}"
+										var="estado" itemValue="#{estado}"
+										itemLabel="#{estado.sigla}" />
+								<p:ajax event="change" listener="#{MBResponsavelEdita.buscaCidade}" update="cbCidade, cbBairro, cbLogradouro" />
+								</p:selectOneMenu>
+								<p:spacer width="2px;" />
+								
+								<p:selectOneMenu style="width:270px;" id="cbCidade" value="#{MBResponsavelEdita.cidadeSelecionado}" converter="omnifaces.SelectItemsConverter" filter="true"
+									filterMatchMode="contains">
+								<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+								<f:selectItems value="#{MBResponsavelEdita.listaCidade}"
+										var="cidade" itemValue="#{cidade}"
+										itemLabel="#{cidade.nome}" />
+										<p:ajax event="change" listener="#{MBResponsavelEdita.buscaBairro}" update="cbBairro, cbLogradouro" />
+								</p:selectOneMenu>
+								<p:spacer width="2px;" />
+								
+								<p:selectOneMenu style="width:282px;" id="cbBairro" value="#{MBResponsavelEdita.bairroSelecionado}" converter="omnifaces.SelectItemsConverter" filter="true" 
+									filterMatchMode="contains">
+								<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+								<f:selectItems value="#{MBResponsavelEdita.listaBairro}"
+									var="bairro" itemValue="#{bairro}"
+									itemLabel="#{bairro.nome}" />
+								<p:ajax event="change" listener="#{MBResponsavelEdita.buscaLogradouro}" update="cbLogradouro" />
+								</p:selectOneMenu>
+								<p:spacer width="2px;" />
+							</h:panelGrid>
+							
+							<h:panelGrid columns="7">
+								<p:outputLabel value="Logradouro:" />	                     	    
+								<h:inputHidden />
+								<p:outputLabel value="Numero:" />
+								<h:inputHidden />
+								<p:outputLabel value="Complem.:" />
+								<h:inputHidden />
+								<p:outputLabel value="CEP:" />
+	
+								<p:selectOneMenu style="width:398px;" id="cbLogradouro" value="#{MBResponsavelEdita.logradouroSelecionado}" converter="omnifaces.SelectItemsConverter" filter="true" 
+									filterMatchMode="contains">
+								<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+								<f:selectItems value="#{MBResponsavelEdita.listaLogradouro}"
+									var="logradouro" itemValue="#{logradouro}"
+									itemLabel="#{logradouro.nome}" />
+										
+								</p:selectOneMenu> 
+								<p:spacer width="2px;" />
+									<p:inputText value="#{MBResponsavelEdita.numero}" size="4" />
+								<p:spacer width="2px;" />
+								<p:inputText value="#{MBResponsavelEdita.complemento}" size="6" />
+								<p:spacer width="2px;" />	
+								<p:inputMask id="cep" value="#{MBResponsavelEdita.cep}" mask="99999-999" size="6" />					
+							</h:panelGrid>													     								
+						</p:fieldset>	
+																
+					</h:panelGrid>
+					
+					<h:panelGrid id="grdBotoes" style="margin: 10px auto;" columns="7">
+						<p:commandButton value="Salvar" actionListener="#{MBResponsavelEdita.salvar}"  update=":msgs1,:formGrid" />
+						<p:commandButton value="Voltar" action="#{MBResponsavelEdita.navegaResponsavel}" />
+
+					</h:panelGrid>
+					</h:form>												
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

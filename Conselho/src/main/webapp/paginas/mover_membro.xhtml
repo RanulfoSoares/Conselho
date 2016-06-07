@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:body>
+	<ui:composition template="#{MBMoveMembro.template}">
+		<ui:define name="content">
+			<p:panel header=" Transferir Membro de Núcleo">
+			
+				<p:messages id="msgs1" showDetail="true">
+					<p:effect type="pulsate" event="load" delay="500" />
+				</p:messages>
+					
+					<h:form id="formGrid">	
+					
+					<h:panelGrid id="grdCentral">
+					
+					<h:panelGrid columns="4" style="margin: 8px 60px;" >						
+						<h:outputText value="Membro Familiar:" />
+						<h:outputText value="#{MBMoveMembro.membroSelecionado.pessoa.nomeCompleto}" styleClass="texto_informativo" />		
+					</h:panelGrid>
+					
+					<!-- Linha 1 -->
+					<h:panelGrid columns="3">
+						<p:outputLabel value="Data atual:" />
+						<h:inputHidden />
+						<p:outputLabel value="Conselheiro Atuante:" />
+						
+						<p:inputText value="#{MBMoveMembro.dataAtual}" size="18" />
+						<p:spacer width="15px;" />
+						<p:inputText value="#{MBMoveMembro.conselheiroLogado.pessoa.nomeCompleto}" size="28" />
+					</h:panelGrid>
+										
+					</h:panelGrid>	
+					
+					<!-- Linha 2 -->
+					 <h:panelGrid columns="1"> <p:spacer width="5px;" />
+					 <p:outputLabel value="Encontra-se em:" />
+						<h:inputHidden />
+						</h:panelGrid>	 
+								  		
+					<!-- Linha 3 -->
+					 <h:panelGrid columns="3">
+						<p:outputLabel value="Nº. Regis.Nucleo/CNPJ::" />
+						<h:inputHidden />
+						<p:outputLabel value="Conselheiro Responsável/Instituição::" />
+						
+						<p:inputText value="#{MBMoveMembro.nucleoCnpj}" size="19" />
+						<p:spacer width="15px;" />		
+						<p:inputText value="#{MBMoveMembro.conseRespInstituicao}" size="28" />
+					 </h:panelGrid>	 <p:spacer width="12px;" />
+					 
+					 <!-- Linha 4 -->
+					 <h:panelGrid columns="4">
+						<p:outputLabel value="Transferir para:" />
+						<h:inputHidden />
+						<p:outputLabel value="Motivo:" />
+						<h:inputHidden />
+					 
+						<p:selectOneRadio id="tipoBusca" value="#{MBMoveMembro.tipoBusca}" >
+							<f:selectItem itemLabel="Núcleo Familiar" itemValue="N" />
+							<f:selectItem itemLabel="Instituição" itemValue="I" />
+						</p:selectOneRadio>
+						
+						<p:spacer width="7px;" />
+					  	<p:selectOneMenu style="width:290px;" id="cor" value="#{MBMoveMembro.motivoSelecionado}">
+						<f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
+						<f:selectItem itemLabel="Acolhimento Institucional" itemValue="AI" />
+						<f:selectItem itemLabel="Adoção" itemValue="AD" />
+						<f:selectItem itemLabel="Colocação em família substituta" itemValue="CS" />
+						<f:selectItem itemLabel="Internação em estabelecimento educacional" itemValue="IE" />
+						<f:selectItem itemLabel="Retorno aos responsáveis, determinação Judicial" itemValue="RP" />
+						<f:selectItem itemLabel="Tratamento para dependência química" itemValue="TQ" />
+						<f:selectItem itemLabel="Tratamento psiquiátrico" itemValue="TP" />	
+						</p:selectOneMenu>  
+					 </h:panelGrid>	<p:spacer width="1px;" />
+						
+					<!-- Linha 5 -->
+					 <h:panelGrid columns="5">
+					    <p:outputLabel value="Nº. Regis.Nucleo/CNPJ:" />
+						<h:inputHidden />
+						<h:inputHidden />
+						<h:inputHidden />
+						<p:outputLabel value="Conselheiro Responsável/Instituição:" />					
+							
+						<p:inputText value="#{MBMoveMembro.documentoBusca}" size="19" />
+						<p:spacer width="1px;" />
+						<p:commandButton icon="ui-icon-search" actionListener="#{MBMoveMembro.buscaDestino}" title="Buscar" update=":msgs1, :formGrid" />											
+						<p:spacer width="10px;" />	
+						<p:inputText value="#{MBMoveMembro.nomeInstituicaoRespNucleo}" size="38" />
+						
+						
+												
+					 </h:panelGrid>	 
+					
+					<!-- Linha 6 -->
+				     <h:panelGrid columns="1">
+						<p:outputLabel value="Observação:" />
+						<f:selectItem noSelectionOption="true"/>
+						<p:inputTextarea autoResize="False" rows="2" id="txtObs" value="#{MBMoveMembro.obs}" cols="92"/>
+				     </h:panelGrid>
+				     
+					<!-- Linha 7 -->
+				 	 <h:panelGrid id="grdBotoes" style="margin: 10px auto;" columns="2" >
+						<p:commandButton value="Salvar" disabled="#{MBMoveMembro.flgBtSalvar}"
+							actionListener="#{MBMoveMembro.mover}" update=":formGrid ,:msgs1" title="Efetivar a transferência" />
+						<p:commandButton value="Voltar" title="Para o Núcleo Familiar"
+							action="#{MBMoveMembro.preparaCadastroFamiliar}" immediate="true" />
+					 </h:panelGrid>
+					
+				</h:form>								
+			</p:panel>
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

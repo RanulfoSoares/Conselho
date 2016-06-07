@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:body>
+	<ui:composition template="#{MBFamiliaCadastro.template}">
+		<ui:define name="content">
+			<p:panel header=" Cadastro do Núcleo Familiar">
+			
+				<p:messages id="msgs1" showDetail="true">
+					<p:effect type="pulsate" event="load" delay="500" />
+				</p:messages>
+					
+					<h:form id="formGrid">															
+
+					<h:panelGrid id="grdCentral">
+
+					<!-- Linha 2 -->
+					<h:panelGrid columns="6">
+						<p:outputLabel value=" Núcleo Familiar Nº.:" />
+						<h:inputHidden />
+						<p:outputLabel value="Data de Cadastro:" />
+						<h:inputHidden />
+						<p:outputLabel value="Conselheiro Responsável:" />
+						<h:inputHidden />
+							
+						<p:inputText value="#{MBFamiliaCadastro.familia.numeroPasta}" size="10" disabled="true" />
+						<p:spacer width="10px;" />
+						<p:inputText value="#{MBFamiliaCadastro.dataCadastro}" size="10" disabled="true" />
+						<p:spacer width="10px;" />												
+						<p:inputText value="#{MBCidadoaCadastro.nomeLogado}" size="20" disabled="true" />
+						<p:commandButton value="Histórico Familiar" rendered="#{MBFamiliaCadastro.rendBtHistorico}" onclick="PF('dlgHistorico').show();" />
+					 </h:panelGrid>	
+					 				
+					</h:panelGrid>
+					
+					<p:dataTable id="tblMemb" var="membro" value="#{MBFamiliaCadastro.listaMembros}" paginator="true" rows="6" style="margin-top: 2%;">						
+							 <f:facet name="header" >
+							 	<p:spacer width="25" />
+							 	<h:outputText value="Composição do Núcleo Familiar" style="font-size: 15px;"  />	
+							 	  <p:commandButton icon="ui-icon-folder-open" type="button" onclick="this.form.target='_self'; PF('dlg1').show();" title="Visualizar os atendimentos" style="float: right" />								 				 								
+					              <p:commandButton icon="ui-icon-plusthick" type="button" onclick="this.form.target='_self'; PF('dlg2').show();" title="Inserir membro no núcleo" style="float: right" />					           				           
+					        </f:facet>
+					        <p:column headerText="Nome" style="width: 70%;">
+					            <h:outputText value="#{membro.nome}" />
+					        </p:column>
+					        
+					        <p:column headerText="Idade">
+					            <h:outputText value="#{membro.idade}" />
+					        </p:column>	        				        					     
+					        
+					        <p:column style="width:130px;text-align: center;">					        						        						        							            
+					            
+					            <p:commandButton icon="ui-icon-pencil" action="#{MBFamiliaCadastro.preparaFamiliaMembro}" onclick="this.form.target='_self';" title="Editar Relacionamento" update=":msgs1, :formGrid" >
+					                <f:setPropertyActionListener value="#{membro.idMembro}" target="#{MBFamiliaCadastro.idMembro}"  />					               
+					            </p:commandButton>
+					            
+					             <p:commandButton icon=" ui-icon-person" action="#{MBFamiliaCadastro.preparaEditaPessoa}" onclick="this.form.target='_self';" title="Dados Pessoais" update=":msgs1, :formGrid" >
+					                <f:setPropertyActionListener value="#{membro.pessoa.id}" target="#{MBFamiliaCadastro.idMembro}"  />					               
+					            </p:commandButton>
+					            
+					            <p:commandButton icon=" ui-icon-transferthick-e-w" action="#{MBFamiliaCadastro.preparaMoverMembro}" onclick="this.form.target='_self';" title="Transferir Membro" update=":msgs1, :formGrid" >
+					            	<f:setPropertyActionListener value="#{membro.idMembro}" target="#{MBFamiliaCadastro.idMembro}"  />					               
+					            </p:commandButton>
+					            
+					            <p:commandButton icon="ui-icon-trash" actionListener="#{MBFamiliaCadastro.excluirMembroLista}" onclick="this.form.target='_self';" title="Excluir do Núcleo" update=":msgs1, :formGrid" >
+					            	<f:attribute name="membroSelecionado" value="#{membro}" />
+					                <p:confirm header="Confirme" message="Deseja realmente excluir ?" icon="ui-icon-alert" />					               
+					            </p:commandButton>					            					           
+					                    						        						           
+					        </p:column>
+					        <p:spacer width="25" />
+					        	        					        					      
+					    </p:dataTable>	
+					    
+					    <!-- Linha 7 -->
+					<h:panelGrid columns="1">
+						<p:outputLabel value="Observação :" />
+						
+						<p:inputTextarea autoResize="False" rows="2" id="txtObs" value="#{MBFamiliaCadastro.familia.obs}" cols="95"/>						
+					</h:panelGrid>					
+
+					<p:fieldset legend="Endereço" toggleable="false">
+
+					<!-- Linha 5 -->
+					<h:panelGrid columns="5">
+						<p:outputLabel value="Estado:" />
+						<h:inputHidden />
+						<p:outputLabel value="Cidade:" />
+						<h:inputHidden />
+						<p:outputLabel value="Bairro:" />
+
+						<p:selectOneMenu style="width:50px;" id="cbEstado" value="#{MBFamiliaCadastro.estadoSelecionado}"
+						    converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+						<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+						<f:selectItems value="#{MBFamiliaCadastro.listaEstado}"
+							var="estado" itemValue="#{estado}" itemLabel="#{estado.sigla}" />
+						<p:ajax event="change" listener="#{MBFamiliaCadastro.buscaCidade}" update="cbCidade, cbBairro, cbLogradouro" />
+						</p:selectOneMenu>
+						<p:spacer width="2px;" />
+
+						<p:selectOneMenu style="width:220px;" id="cbCidade" value="#{MBFamiliaCadastro.cidadeSelecionado}"
+						    converter="omnifaces.SelectItemsConverter" filter="true"
+							filterMatchMode="contains" >
+						<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+						<f:selectItems value="#{MBFamiliaCadastro.listaCidade}"
+							var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
+						<p:ajax event="change" listener="#{MBFamiliaCadastro.buscaBairro}" update="cbBairro, cbLogradouro" />
+						</p:selectOneMenu>
+						<p:spacer width="2px;" />
+
+						<p:selectOneMenu style="width:285px;" id="cbBairro" value="#{MBFamiliaCadastro.bairroSelecionado}"
+							converter="omnifaces.SelectItemsConverter" filter="true"
+							filterMatchMode="contains" >
+						<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+						<f:selectItems value="#{MBFamiliaCadastro.listaBairro}"
+							var="bairro" itemValue="#{bairro}" itemLabel="#{bairro.nome}" />
+						<p:ajax event="change" listener="#{MBFamiliaCadastro.buscaLogradouro}" update="cbLogradouro" />
+						</p:selectOneMenu>
+						<p:spacer width="2px;" />
+						</h:panelGrid>
+
+					<!-- Linha 6 -->
+					<h:panelGrid columns="7">
+						<p:outputLabel value="Logradouro:" />
+						<h:inputHidden />
+						<p:outputLabel value="Numero:" />
+						<h:inputHidden />
+						<p:outputLabel value="Complem.:" />
+						<h:inputHidden />
+						<p:outputLabel value="CEP:" />
+
+						<p:selectOneMenu style="width:398px;" id="cbLogradouro" value="#{MBFamiliaCadastro.logradouroSelecionado}"
+							converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" >
+						<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+						<f:selectItems value="#{MBFamiliaCadastro.listaLogradouro}"
+							var="logradouro" itemValue="#{logradouro}" itemLabel="#{logradouro.nome}" />
+						</p:selectOneMenu>
+						<p:spacer width="2px;" />
+						
+						<p:inputText value="#{MBFamiliaCadastro.familia.numero}" size="4" />
+						<p:spacer width="2px;" />
+						
+						<p:inputText value="#{MBFamiliaCadastro.familia.complemento}" size="4" />
+						<p:spacer width="2px;" />
+						
+						<p:inputMask id="cep" value="#{MBFamiliaCadastro.logradouroSelecionado.cep}" disabled="true" mask="99999-999" size="5" />
+					</h:panelGrid>
+					</p:fieldset>				    					   					    					    			
+
+						<h:panelGrid id="grdBotoes" style="margin: 10px auto;" columns="3" >
+							<p:commandButton value="Salvar"
+								actionListener="#{MBFamiliaCadastro.salvarNucleoFamiliar}" onclick="this.form.target='_self';" update=":formGrid, :msgs1, :formDlgNovaFamilia" />
+							<p:commandButton value="Voltar" title="Busca Núcleo Familiar"
+								action="familia_busca?faces-redirect=true" onclick="this.form.target='_self';" immediate="true" />
+						</h:panelGrid>
+					
+				</h:form>
+				
+				 <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+					 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+					 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				 </p:confirmDialog>
+				
+			</p:panel>
+			
+			<p:dialog header="Buscar Membros" widgetVar="dlg2" 
+					  modal="true" resizable="false" height="490"  appendTo="@(body)"
+					  closable="true" draggable="false">
+				
+				<p:messages id="msgs2" showDetail="true">
+					<p:effect type="pulsate" event="load" delay="500" />
+				</p:messages>
+			
+				<h:form id="formDlg">
+				    <h:panelGrid style="margin: 10px auto;" columns="4" >
+							
+							<p:selectOneRadio id="tpBusca" value="#{MBFamiliaCadastro.tipoBusca}" >
+								<f:selectItem itemLabel="CPF" itemValue="CPF" />
+								<f:selectItem itemLabel="RG" itemValue="RG" />
+								<f:selectItem itemLabel="Cert. Nascimento" itemValue="CrtNasc" />
+								<p:ajax event="click" listener="#{MBFamiliaCadastro.alteraOrgaoBusca}" update="cbOrgaoBusca" />
+							</p:selectOneRadio>
+							
+							<p:inputText value="#{MBFamiliaCadastro.documentoBusca}" maxlength="15" />
+							
+							<p:selectOneMenu style="width:90px;" id="cbOrgaoBusca" disabled="#{MBFamiliaCadastro.desativaOrgao}"
+									value="#{MBFamiliaCadastro.orgaoBuscaSelecionado}"
+									converter="omnifaces.SelectItemsConverter" filter="true"
+									filterMatchMode="contains">
+									<f:selectItem noSelectionOption="true" itemLabel="Orgão  " />
+									<f:selectItems
+										value="#{MBFamiliaCadastro.listaOrgaoBusca}"
+										var="orgao" itemValue="#{orgao}"
+										itemLabel="#{orgao.nome}" />
+							</p:selectOneMenu>
+							<p:commandButton value="Buscar" title="Busca responsável"
+											actionListener="#{MBFamiliaCadastro.buscaPessoa}" update=":msgs2,:formDlg"/>
+											
+<!-- 				 	<h:panelGrid style="margin:auto;" columns="1" > -->
+<!-- 						 	<p:commandButton value="Voltar" onclick="PF('dlg1').hilde();" />								 -->
+<!-- 				    </h:panelGrid> -->
+				
+					</h:panelGrid>
+					
+					 <p:tabView rendered="#{MBFamiliaCadastro.rendCadastro}" style="margin: 20px;">
+				        <p:tab title="Dados Principais">
+				            <h:panelGrid columns="2" >
+				            	<h:outputLabel styleClass="texto_informativo1" value="Nome Completo: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.pessoaSelecionada.nomeCompleto}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="CPF: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.pessoaSelecionada.cpf}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="RG: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.pessoaSelecionada.rg}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="Org. Emissor: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.pessoaSelecionada.orgao.nome}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="Data de Nasc.: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.dataNascimento}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="Idade: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.idade}" />
+				            </h:panelGrid>
+				        </p:tab>
+				        <p:tab title="Dados Adicionais">
+				            <h:panelGrid columns="2" >
+				            	<h:outputLabel styleClass="texto_informativo1" value="Fone I: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.pessoaSelecionada.foneI}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="Fone II: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.pessoaSelecionada.foneII}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="Sexo: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.pessoaSelecionada.sexo == 'M' ? 'Masculino' : 'Feminino' }" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="Cor: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.cor}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="Escolaridade: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.pessoaSelecionada.escolaridade.nome}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="Escola: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.pessoaSelecionada.escola.nomeRazao}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="Sit. Matrimonial: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.sitMatrimonial}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="Email: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.pessoaSelecionada.email}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="Trabalha: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.pessoaSelecionada.trabalha ? 'Sim' : 'Não'}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="Local trabalho: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.pessoaSelecionada.localTrabalho}" />
+								
+								<h:outputLabel styleClass="texto_informativo1" value="Observação: " />						
+								<h:outputLabel value="#{MBFamiliaCadastro.pessoaSelecionada.obs}" />
+				            </h:panelGrid>
+				        </p:tab>				        
+				    </p:tabView>					
+					
+					<h:panelGrid columns="2" style="margin: auto;" rendered="#{MBFamiliaCadastro.rendCadastro}" >
+						<p:commandButton value="Adicionar" actionListener="#{MBFamiliaCadastro.vinculaPessoa}" 
+										 update=":msgs2,:formDlg,:formGrid:tblMemb"
+										 oncomplete="manipularPedidoSalvar(xhr, status, args)"/>
+						<p:commandButton value="Voltar" onclick="PF('dlg2').hilde();"/>							
+					</h:panelGrid>
+					
+				</h:form>
+			</p:dialog>
+			<script>
+				function manipularPedidoSalvar(xhr, status, args) {					
+					if (!args.salvou) {
+						PF('dlg2').jq.effect("shake", {
+							times : 5
+						}, 100);
+					} else {
+						PF('dlg2').hide();
+					}
+				}
+			</script>
+			
+			<p:dialog header="Lista dos Atendimentos" widgetVar="dlg1" 
+					  modal="true" resizable="false" height="450" width="1050"  appendTo="@(body)"
+					  closable="true" draggable="false" >					  			
+				<h:form id="formListaAtendimento">
+					<p:dataTable id="tblAtendimento" style="margin:10px 5px;"								 
+								 var="atendimento" value="#{MBFamiliaCadastro.listaAtendimentos}" 
+								 paginator="true" rows="6">
+								 						       	
+						        <p:column style="width:70px;" headerText="Data do Fato">
+						            <h:outputText value="#{atendimento.dataFatoFormatada}" />
+						        </p:column>
+						        
+						        <p:column style="width:165px;" headerText="Conselheiro Responsável">
+						            <h:outputText value="#{atendimento.conselheiroRegistro.pessoa.nomeCompleto}" />
+						        </p:column> 		        
+						        
+						        <p:column headerText="Resumo Descrição">					        						        						        							            
+						            <h:outputText value="#{atendimento.resumoDescricao}" />       						        						           
+						        </p:column>
+						        
+						        <p:column style="width:40px;">					        						        						        							            
+						            <p:commandButton icon="ui-icon-search" action="#{MBFamiliaCadastro.navegaAtendimento}" title="Buscar Cadastro de  Atendimento" style="float: right" >	
+					                	<f:setPropertyActionListener value="#{atendimento.id}" target="#{MBFamiliaCadastro.idAtendimentoSelecionado}" />					               
+					            	</p:commandButton>       						        						           
+						        </p:column>				        					        					        					       					        					        					    
+					</p:dataTable>
+								
+				
+					<h:panelGrid style="margin: 10px auto;" columns="1">
+							<p:commandButton value="Voltar" onclick="PF('dlg1').hilde();" />
+					</h:panelGrid>
+				</h:form>
+				
+			</p:dialog>
+			
+			<p:dialog header="Consulta Histórico Familiar" widgetVar="dlgHistorico" 
+					  modal="true" resizable="false" height="150"  appendTo="@(body)"
+					  closable="true" draggable="false">
+					 <h:form id="formDlgHistorico">
+						 <h:panelGrid style="margin-top:10px; margin-bottom:5px;" >
+						 	<h:outputText styleClass="texto_informativo_14" value="Selecione o periodo do historico" />
+						 </h:panelGrid>
+						 
+						 <h:panelGrid columns="3" >
+						 	<p:calendar id="dataInicio" value="#{MBFamiliaCadastro.dataIniHistorico}" pattern="dd/MM/yyyy" />
+						 	<h:outputText styleClass="texto_informativo_12" value="a" />
+						 	<p:calendar id="dataFim" value="#{MBFamiliaCadastro.dataFimHistorico}" pattern="dd/MM/yyyy" />
+						 </h:panelGrid>
+						 <h:panelGrid columns="2" style="margin: 5px auto;" >
+						 	<p:commandButton value="Buscar Histórico" actionListener="#{MBFamiliaCadastro.executaRelatorioPrincipal}" ajax="false" onclick="form.target='_blank'" />
+						 	<p:commandButton value="Cancelar" onclick="this.form.target='_self'; PF('dlgHistorico').hilde();" />
+						 </h:panelGrid>
+					</h:form>
+			</p:dialog>
+			
+			<p:dialog header="Novo Nucleo Familiar" widgetVar="dlgNovaFamilia" 
+					  modal="true" resizable="false" height="100"  appendTo="@(body)"
+					  closable="true" draggable="false">
+				 <h:form id="formDlgNovaFamilia">
+					 <h:panelGrid style="margin-top:10px; margin-bottom:5px;" >
+					 	<h:outputText styleClass="texto_informativo_14" value="Novo Nucleo Familiar Criado nº: #{MBFamiliaCadastro.numeroNovaPastaFamilia}" />
+					 </h:panelGrid>
+					 <h:panelGrid style="margin:10px auto;" >
+					 	<p:commandButton value="OK" onclick=" PF('dlgNovaFamilia').hilde();" />
+					 </h:panelGrid>						 						 
+				</h:form>
+			</p:dialog>
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

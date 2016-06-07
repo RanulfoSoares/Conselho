@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputScript library="js" name="locale-primefaces.js" />		
+		
+</h:head>
+<h:body>
+	<div id="top">
+		<div id="centro_topo" >
+			<h:panelGrid style="width: 898px;" border="0" columns="3">
+				<p:graphicImage style="border: none" library="img" name="logoConselho.png" /> 				
+				<h:outputText value="Conselho Tutelar  -  Princesa - SP" styleClass="texto_topo" />
+				<p:graphicImage style="border: none" library="img" name="logoPedreira.png" />
+			</h:panelGrid>
+		</div>	
+	</div>
+
+	<div>	
+		<p:layout style="width: 940px; height: 850px;  margin: 10px auto">
+			
+			<p:layoutUnit id="north" position="north"  minSize="59" maxSize="59"> 
+				<h:panelGrid columns="2">
+	                <h:panelGrid style="width: 100%;" >
+	                 <h:outputText value="Usuario:" styleClass=" texto_center_11" style="margin-left: 5px; "/>
+	                   <h:outputText value= "#{MBLogin.conselheiroLogado.nomeUsual} - #{MBLogin.conselheiroLogado.nomeNivelAcesso}"  styleClass="texto_center_11"/>                   
+                	</h:panelGrid>
+                	
+                	<h:form id="botao-sair" style="margin-left: 570px;">
+                      <h:commandLink id="lk-sair" action="#{MBMenu.logout}" >
+                         <h:panelGrid id="pnSair" columns="2" style="width:40%; border-radius: 3px 3px 3px 3px;" styleClass="texto_sair" >
+                            <h:outputText value="Sair"/>
+                            <p:graphicImage style="border: none;" library="img" name="sair.jpg"/>
+                         </h:panelGrid>
+                      </h:commandLink>
+                   	</h:form>
+                	
+                </h:panelGrid>
+			</p:layoutUnit>			
+					
+		    <p:layoutUnit position="west" size="200" minSize="40" maxSize="200">
+		    	<h:form id="formMenu">
+			        <p:accordionPanel >				        				        
+				        				          				        
+				        <p:tab title=" Consulta">
+				          <h:commandLink action="/paginas/relatorios.xhtml?faces-redirect=true">
+	                          <h:panelGrid columns="2">
+	<!--                             <p:graphicImage style="border: none"  value="/img/nota.png" /> -->
+	                            <h:outputText styleClass="texto_menu" value=" Relatórios" />
+	                          </h:panelGrid>
+	                        </h:commandLink>
+	                        <hr/>	                        				        
+				        </p:tab>				        				        
+				         
+				    </p:accordionPanel>
+			    </h:form>
+		    </p:layoutUnit>
+		 
+		    <p:layoutUnit position="center">
+		        <ui:insert name="content">corpo</ui:insert>
+		    </p:layoutUnit>
+		</p:layout>
+		
+		<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>
+        <p:dialog modal="true" widgetVar="statusDialog" appendTo="@(body)" width="245" id="load" 
+                  draggable="false" closable="false" resizable="false" styleClass="loadPanel">
+            <h:panelGrid>
+                 <div align="center">
+                    <h:outputText value="Aguarde..." style="font-style: italic; font-weight: bold;"/>
+                    <p:graphicImage value="/img/barra_pross.gif"/>
+                 </div>
+             </h:panelGrid>
+         </p:dialog>
+
+	</div>
+
+</h:body>
+
+</html>

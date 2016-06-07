@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:body>
+	<ui:composition template="template_adm.xhtml">
+		<ui:define name="content">
+			<p:panel header="Busca de Atendimento" >											
+				<h:form id="formAtend">
+				
+	
+					<p:messages id="msgs1" showDetail="true">  
+	                     <p:effect type="pulsate" event="load" delay="500" />  
+	                </p:messages>
+	                
+	                <h:panelGrid columns="4" style="margin: 18px 30px;" >						
+							<h:outputText value="Ref. Núcleo Familiar Nº.:" />
+							<h:outputText value="#{MBResponsavelBusca.nomeCriancaSelecionado}" styleClass="texto_informativo" />		
+					</h:panelGrid>		
+										
+					<p:dataTable id="tblAtend" var="atendimento" value="" paginator="true" rows="6">						
+							 <f:facet name="header" >
+							 	<p:spacer width="25" />
+							 	<h:outputText value="Atendimento" style="font-size: 15px;"  />	
+							 	<p:commandButton icon="ui-icon-plusthick" action="#{MBAtendimentoBusca.navegaCadastroAtendimento}" title="Novo Atendimento" style="float: right" />	
+							 			 								 
+					            <p:commandButton value="Buscar" actionListener="#{MBAtendimentoBusca.buscarAtendimento}" style="float: right" />
+					        </f:facet>
+					         <p:column style="width:75px;" headerText="Data">
+					            <h:outputText value="#{pessoa.membro.familia.numeroPasta}" />
+					        </p:column>
+					        
+					         <p:column style="width:110px;" headerText="Conselheiro">
+					            <h:outputText value="#{pessoa.membro.familia.numeroPasta}" />
+					        </p:column>
+					        
+					        <p:column headerText="Descrição">
+					            <h:outputText value="" />
+					        </p:column>					        					      
+					        
+					        <p:column style="width:100px;text-align: center;">	
+					      		        						        						        							            
+					            <p:commandButton icon="ui-icon-search" action="#" title="Visualizar" >
+					                <f:setPropertyActionListener value="#" target="#" />  </p:commandButton>
+					              <p:commandButton icon="ui-icon-comment" action="#{MBAtendimentoBusca.navegaCadastroAtendimento}" title="Adendo" style="float: right" />						            					        						        						           
+					              <p:commandButton icon="ui-icon-arrowreturnthick-1-n" 
+					                action="#{MBBuscaCidadao.preparaMostraNucleoFamiliar}" title="Voltar para o Núcleo Familiar"></p:commandButton>			        
+					        </p:column>
+					        					       					        					        					      
+					    </p:dataTable>
+					    
+					    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+					        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+					        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					    </p:confirmDialog>
+					    							
+					</h:form>						
+			</p:panel>			
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

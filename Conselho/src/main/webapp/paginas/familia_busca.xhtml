@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:body>
+	<ui:composition template="#{MBFamiliaBusca.template}">
+		<ui:define name="content">
+			<p:panel header=" Busca Núcleo Familiar" >											
+				<h:form id="formCrianca">
+				
+	
+					<p:messages id="msgs1" showDetail="true">  
+	                     <p:effect type="pulsate" event="load" delay="500" />  
+	                </p:messages>																					
+					<h:panelGrid columns="5" style="margin: 18px auto;" >
+						<p:outputLabel value="Núcleo Famíliar nº." />
+						<p:inputText value="#{MBFamiliaBusca.numeroRegistro}" size="10" />
+						<p:selectOneMenu style="width:250px;" id="cbConselho" value="#{MBFamiliaBusca.conselheiroSelecionado}"
+							    converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" >
+							<f:selectItem noSelectionOption="true" itemLabel="Selecione Conselheiro" />
+							<f:selectItems value="#{MBFamiliaBusca.listaConselhero}"
+								var="conselho" itemValue="#{conselho}" itemLabel="#{conselho.nomeUsual}" />							
+						</p:selectOneMenu>
+						<p:commandButton value="Buscar"  update="tblCrianca" actionListener="#{MBFamiliaBusca.busca}" />
+						<p:commandButton icon="ui-icon-plusthick" action="familia_cadastro?faces-redirect=true" title="Cadastrar novo núcleo familiar" />	
+					</h:panelGrid>					
+					
+					<p:dataTable id="tblCrianca" var="familia" value="#{MBFamiliaBusca.listaFamilia}" paginator="true" rows="6">
+					       				
+					        <p:column headerText="Núcleo Famíliar Nº.">
+					            <h:outputText value="#{familia.numeroPasta}" />
+					        </p:column>
+					        
+					        <p:column headerText="Conselheiro Responsável">
+					            <h:outputText value="#{familia.conselheiroRegistro.pessoa.nomeCompleto}" />
+					        </p:column> 		        
+					        
+					        <p:column style="width:80px;text-align: center;">					        						        						        							            
+					           <p:commandButton icon="ui-icon-search" action="#{MBFamiliaBusca.preparaMostraDados}" title="Abrir Núcleo Familiar" >
+					                <f:setPropertyActionListener value="#{familia.id}" target="#{MBFamiliaBusca.idFamiliaSelecionado}" />					               
+					            </p:commandButton>
+					            
+<!-- 					            <p:commandButton icon="ui-icon-trash" actionListener="{MBFamiliaBusca.excluir}" title="Excluir Núcleo Familiar" update=":formCrianca:msgs1,tblCrianca" > -->
+<!-- 					            	<f:attribute name="familiaSelecionada" value="{familia}" /> -->
+<!-- 					                <p:confirm header="Confirme" message="Deseja realmente excluir ?" icon="ui-icon-alert" />					                -->
+<!-- 					            </p:commandButton>       						        						            -->
+					        </p:column>
+					       					        					        					      
+					    </p:dataTable>
+					    
+					    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+					        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+					        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					    </p:confirmDialog>
+					    							
+					</h:form>						
+			</p:panel>			
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

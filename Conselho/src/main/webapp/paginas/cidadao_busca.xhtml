@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:body>
+	<ui:composition template="#{MBCidadoaCadastro.template}">
+		<ui:define name="content">
+			<p:panel header=" Busca Cidadã(o)" >											
+				<h:form id="formCrianca">
+					<p:messages id="msgs1" showDetail="true">  
+	                     <p:effect type="pulsate" event="load" delay="500" />  
+	                </p:messages>
+													
+					<h:panelGrid columns="6" style="margin: 18px auto;" >
+						<p:selectOneMenu style="width:70px;" id="tpBusca" value="#{MBBuscaCidadao.tipoBusca}">
+								<f:selectItem noSelectionOption="true" itemLabel="Tipo Busca" />
+								<f:selectItem itemLabel="Nome" itemValue="NOME" />
+								<f:selectItem itemLabel="CPF" itemValue="CPF" />
+								<f:selectItem itemLabel="RG" itemValue="RG" />
+								<f:selectItem itemLabel="Cert. Nasc." itemValue="CrtNasc" />
+								<p:ajax event="change" listener="#{MBBuscaCidadao.alteraOrgaoBusca}" update="cbOrgao" />																						
+						</p:selectOneMenu>																		
+						
+						<p:inputText value="#{MBBuscaCidadao.nomeBusca}" size="30" />
+						
+						<p:selectOneMenu style="width:60px;" id="cbOrgao" disabled="#{MBBuscaCidadao.desativaOrgao}"
+										 value="#{MBBuscaCidadao.orgaoSelecionado}"
+										 converter="omnifaces.SelectItemsConverter" filter="true"
+										 filterMatchMode="contains">
+							<f:selectItem noSelectionOption="true" itemLabel="Orgão  " />
+							<f:selectItems value="#{MBBuscaCidadao.listaOrgaoBusca}"
+										   var="orgao" itemValue="#{orgao}"
+										   itemLabel="#{orgao.nome}" />
+						</p:selectOneMenu>
+												
+						<p:commandButton value="Buscar" title="Fazer uma busca" actionListener="#{MBBuscaCidadao.buscarCidadao}" update="tblCrianca, msgs1" />
+						<p:commandButton icon="ui-icon-person" action="cidadao_cadastro?faces-redirect=true" title="Novo Cadastro" />	
+					</h:panelGrid>	
+					
+					<p:dataTable id="tblCrianca" var="pessoa" value="#{MBBuscaCidadao.listaPessoa}" 
+					      	     paginator="true" rows="6" emptyMessage="Nenhum registro, faça uma busca.">
+					       					     
+					       
+					        <p:column headerText="Nome">
+					            <h:outputText value="#{pessoa.nomeCompleto}" />
+					        </p:column> 
+					        
+					        <p:column style="width:100px;" headerText="Núcleo Familiar Nº.">
+					            <h:outputText value="#{pessoa.membro.familia.numeroPasta}" />
+					        </p:column>
+					        					        
+					        
+					        <p:column style="width:100px;text-align: center;">
+					                						        							            
+					            <p:commandButton icon="ui-icon-search" action="#{MBBuscaCidadao.preparaMostraDados}" title="Editar/visualizar" >
+					                <f:setPropertyActionListener value="#{pessoa.id}" target="#{MBBuscaCidadao.idPessoaSelecionada}" />					               
+					            </p:commandButton>
+					            
+					             <p:commandButton icon="ui-icon-arrowreturnthick-1-n" disabled="#{pessoa.membro != null ? false : true}" 
+					                action="#{MBBuscaCidadao.preparaMostraNucleoFamiliar}" title="Ir para o Núcleo Familiar">
+					                <f:setPropertyActionListener value="#{pessoa.membro.familia.id}" target="#{MBBuscaCidadao.idPessoaSelecionada}" />					               
+					            </p:commandButton>            			
+					            	
+					            <p:commandButton icon="ui-icon-trash" actionListener="#{MBBuscaCidadao.excluir}" title="Excluir" update=":formCrianca:msgs1,tblCrianca" >
+					            	<f:attribute name="pessoaSelecionada" value="#{pessoa}" />
+					                <p:confirm header="Confirme" message="Deseja realmente excluir ?" icon="ui-icon-alert" />					               
+					            </p:commandButton>
+					            					        						        						           
+					        </p:column>
+					        
+					       					        					        					      
+					    </p:dataTable>
+					    
+					    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+					        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+					        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					    </p:confirmDialog>
+					    							
+					</h:form>						
+			</p:panel>			
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

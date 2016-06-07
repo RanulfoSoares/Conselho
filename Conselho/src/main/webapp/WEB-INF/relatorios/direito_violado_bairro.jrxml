@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="direito_violado_bairro" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c0c2fb3a-7788-4781-8827-b29a95b00042">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="bairroSelecionado" class="java.lang.String"/>
+	<parameter name="dataInicial" class="java.lang.String"/>
+	<parameter name="dataFim" class="java.lang.String"/>
+	<field name="direitoViolado" class="java.lang.String"/>
+	<field name="quantidade" class="java.lang.String"/>
+	<field name="porcentagem" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="99" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="39" width="555" height="60" forecolor="#000000" backcolor="#CCCCCC" uuid="ccb25f54-76c3-4f69-83a5-e86178eaeb44"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="-15" width="555" height="20" forecolor="#CCCCCC" uuid="e21df91f-eb8b-4a1f-8839-8aad219ca597"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIACAD - Sistema Integrado de Atendimento a Criança e Adolescente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="78" width="498" height="18" uuid="040affee-705b-4cfc-b8d9-5096c4e005cc"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registro de Direitos Violados por Bairro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="56" width="498" height="18" uuid="bf28c1a2-c068-4bb6-8cb1-183c6a920856"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório Operacional - Pesquisa e Análise]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="39" width="498" height="18" uuid="7f9cee0e-4cbb-4243-a113-edac592ef685"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conselho Tutelar do Município de Princesa- SP]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="49" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="23" width="555" height="26" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="5942e167-b9f2-4731-8ba5-3bd4e7abb154"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="390" y="0" width="165" height="24" uuid="83d5a376-2c3b-434a-af3a-f326b9673681"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="390" height="24" backcolor="#FFFFFF" uuid="e13fdf3c-e139-4554-aaae-0a65a36c3208"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="4" y="7" width="74" height="18" uuid="2e50e67b-d54e-4283-b8d2-96c315462708"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período de:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="7" width="19" height="18" uuid="6346f9e5-ea3a-4e94-93a7-f6d5c187cfcd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[a]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="398" y="5" width="74" height="18" uuid="f25ff9d5-678e-4df3-b791-691ccdcfd055"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emitido em:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="31" width="46" height="18" uuid="989e5bf5-753e-43fa-8cd0-6ea0b83019aa"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bairro:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="53" y="29" width="497" height="20" uuid="d3f1911f-6b42-494a-8273-7f899806b18d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{bairroSelecionado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="78" y="7" width="112" height="17" uuid="726759f4-a82e-424d-943e-572bad4a6ca9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataInicial}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="473" y="5" width="77" height="18" uuid="2788e838-32f5-40fd-9088-1317c9352f60"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="208" y="7" width="112" height="16" uuid="be82d940-6361-466a-a039-32cc85e4209b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataFim}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="390" height="24" backcolor="#CCCCCC" uuid="8392fbeb-589c-46af-a70d-501d86a3715f"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="390" y="0" width="83" height="24" backcolor="#CCCCCC" uuid="88ea6bc7-51fc-4f8c-ab05-fa731636cffa"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="402" y="4" width="52" height="20" uuid="daf2cd44-15a6-4891-a623-a87eacbb2bde"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quant.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="6" width="134" height="18" uuid="baf3a724-b05e-4a63-870a-10a27eeb1c45"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Direitos Violados]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="473" y="0" width="82" height="24" backcolor="#CCCCCC" uuid="a2f9f1be-c02e-411e-b1cb-9b69c620e9d8"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="485" y="4" width="52" height="20" uuid="51398490-991b-4d50-93b9-daed5b34268c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="473" y="0" width="82" height="26" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="eb166e8a-1671-43e2-8e64-59f87213cc17"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="390" y="0" width="83" height="26" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="5c696623-3d6f-458f-beae-3f20ffdebe06"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="390" height="26" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="cf221e5e-52ac-447a-b32e-097d580c3f24"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="7" y="4" width="371" height="20" uuid="aa1cf998-087f-4331-81ca-1f2ccc6c9d4f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{direitoViolado}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="408" y="5" width="53" height="20" uuid="d7305758-e46a-4bef-9610-dbac332a5eed"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.0">
+				<reportElement x="482" y="5" width="63" height="20" uuid="7402db44-6603-4bd3-a38b-07db8ad2edee"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{porcentagem}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:body>
+	<ui:composition template="#{MBCidade.template}">
+		<ui:define name="content">
+			<p:panel header=" Cadastro de Bairro" >											
+				<h:form id="formBairro">
+				
+					<p:messages id="msgs1" showDetail="true">  
+	                     <p:effect type="pulsate" event="load" delay="500" />  
+	                </p:messages>
+													
+					<h:panelGrid columns="4" style="margin: 10px auto;" >
+						<p:selectOneMenu style="width:185px;" id="cbCidade" value="#{MBBairro.cidadeSelecionadoBusca}"
+						converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Selecione uma cidade" />
+							<f:selectItems value="#{MBBairro.listaCidade}" var="cidade"
+								itemValue="#{cidade}"
+								itemLabel="#{cidade.nome}" />						
+						</p:selectOneMenu>
+						<p:inputText value="#{MBBairro.nomeBusca}" size="40" placeholder="Nome"/>
+						<p:commandButton value="Buscar" actionListener="#{MBBairro.buscar}" update="tblBairro, msgs1" />
+						<p:commandButton value="Novo" onclick="PF('dlgCadastro').show();" />						
+					</h:panelGrid>
+					
+					<p:dataTable id="tblBairro" var="bairro" value="#{MBBairro.listaBairro}" paginator="true" rows="8" emptyMessage="Nenhum registro, faça uma busca.">
+					        <p:column headerText="Nome do bairro">
+					            <h:outputText value="#{bairro.nome}" />
+					        </p:column>
+					        
+					        <p:column style="width:180px;text-align: center" headerText="Cidade">
+					            <h:outputText value="#{bairro.cidade.nome}" />
+					        </p:column>
+					        
+					        <p:column style="width:140px;text-align: center; border: 0px;">
+					        						        	
+				        		<p:commandButton value="Editar" actionListener="#{MBBairro.preparaEdita}" oncomplete="PF('dlgCadastro').show()" update=":formCadastro">
+				                	<f:attribute name="bairroSelecionado" value="#{bairro}" />				                	
+				            	</p:commandButton>
+				            	
+				            	<p:commandButton value="Excluir"   actionListener="#{MBBairro.excluir}" update="formBairro" >
+				                	<f:attribute name="bairroSelecionado" value="#{bairro}" />
+				                	<p:confirm header="Confirmation" message="Deseja realmente excluir?" icon="ui-icon-alert" />
+				            	</p:commandButton>
+					        						        						           
+					        </p:column>
+					        
+					       					        					        					      
+					    </p:dataTable>							
+					</h:form>						
+			</p:panel>
+			
+			
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+		        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+		        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		    </p:confirmDialog>
+			
+			<p:dialog header="Cadastro" widgetVar="dlgCadastro" height="130" width="450" resizable="false" modal="true" appendTo="@(body)">
+				<h:form id="formCadastro">
+					
+					<p:messages id="msgs1" showDetail="true">  
+	                     <p:effect type="pulsate" event="load" delay="500" />  
+	                </p:messages>
+										
+				    <h:panelGrid columns="2">
+				    	<p:outputLabel value="Bairro:" />
+				    	<p:inputText value="#{MBBairro.nomeBairro}" size="43" />
+				    </h:panelGrid>
+				    
+				    <h:panelGrid columns="4">
+				    	<p:outputLabel value="Cidade:" />				    	
+				    	<p:selectOneMenu style="width:200px;" id="cbEstado" value="#{MBBairro.cidadeSelecionado}"
+						converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Selecione uma cidade" />
+							<f:selectItems value="#{MBBairro.listaCidade}" var="cidade"
+								itemValue="#{cidade}"
+								itemLabel="#{cidade.nome}" />						
+						</p:selectOneMenu>
+				    	<p:commandButton value="salvar" actionListener="#{MBBairro.salvar}" update="msgs1, :formBairro"/>
+				    	<p:commandButton value="Sair"  actionListener="#{MBBairro.limpaCampos}"  oncomplete="PF('dlgCadastro').hide();" 
+				    					 update="formCadastro"/>
+				    </h:panelGrid>
+			    </h:form>
+			</p:dialog>
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

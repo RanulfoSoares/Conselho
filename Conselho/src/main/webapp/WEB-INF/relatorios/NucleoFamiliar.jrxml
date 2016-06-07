@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NucleoFamiliar" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f61f1d82-253a-4161-a60e-5e88465c37ce">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="numeroNucleo" class="java.lang.String"/>
+	<field name="dataInicial" class="java.lang.String"/>
+	<field name="dataFinal" class="java.lang.String"/>
+	<field name="conselheiro" class="java.lang.String"/>
+	<field name="criancas" class="java.lang.String"/>
+	<field name="adultos" class="java.lang.String"/>
+	<field name="endereco" class="java.lang.String"/>
+	<field name="obs" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="555" height="20" forecolor="#CCCCCC" uuid="fac7d9af-a584-4d2a-9161-760e10be33cb"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[SIACAD – Sistema Integrado de Atendimento a Criança e Adolescente]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="35" y="38" width="491" height="65" backcolor="#F0F0F0" uuid="e43ccb15-39f2-4d0a-8f38-6c9051ef5aa9"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<elementGroup>
+				<staticText>
+					<reportElement x="95" y="48" width="373" height="24" uuid="1c123a04-0f97-45a6-8143-88829c899457"/>
+					<textElement textAlignment="Center">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Conselho Tutelar do Município de Princesa - SP]]></text>
+				</staticText>
+			</elementGroup>
+			<elementGroup>
+				<staticText>
+					<reportElement x="139" y="82" width="283" height="24" uuid="5cc56405-205c-4e62-ba7d-ba3143477763"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Relatório  - Histórico do Atendimento]]></text>
+				</staticText>
+			</elementGroup>
+		</band>
+	</title>
+	<detail>
+		<band height="108" splitType="Stretch">
+			<staticText>
+				<reportElement x="275" y="0" width="61" height="18" uuid="87cc8d41-1996-457e-a65f-cfaf7a14932e"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="335" y="1" width="77" height="16" uuid="ee34d9e2-378b-48c5-a368-c3fb11edd844"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataInicial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="23" width="103" height="18" uuid="c54df636-73ad-4764-9837-3d6512a1c1e2"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Núcleo Familiar nº. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="47" width="158" height="18" uuid="355433e3-0b9a-4177-bba0-9ecca6e273cf"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Composição do Núcleo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="65" width="135" height="18" uuid="db35c22d-e3c3-4fc2-a499-d5050f88a603"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Criança e Adolescente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="395" y="24" width="119" height="18" uuid="57d65910-ee66-4fa8-9dd8-7503c32b3bc2"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{conselheiro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="275" y="24" width="120" height="18" uuid="8704b046-5337-4436-b25d-0faad2a04325"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conselheiro Tutelar: ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="22" y="83" width="524" height="16" uuid="07aa3ae6-dbdb-46ff-b2e0-7f59f7a7cb9c"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{criancas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="2" width="71" height="16" uuid="bb3662d1-4782-4292-9cd4-76a11cc7b96a"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataFinal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="112" y="24" width="107" height="14" uuid="71ec8e2b-453d-4a50-a5e5-10e21839f037"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroNucleo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="78" y="0" width="100" height="20" uuid="2803657a-3ad6-4b3a-9381-8cf08aecff70"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="0" width="70" height="20" uuid="de5469d2-ed57-4f18-aece-ff5f51a45642"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emitido em:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="2" width="14" height="18" uuid="bbe140fa-b3ef-40c6-ba35-6b6b90b0c42c"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[a]]></text>
+			</staticText>
+		</band>
+		<band height="38">
+			<staticText>
+				<reportElement x="8" y="0" width="49" height="18" isRemoveLineWhenBlank="true" uuid="f407d47d-9af0-4e0b-8ae6-770292a66c0f"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adultos:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="22" y="18" width="524" height="16" uuid="0b75ab6c-bb24-44cb-b5ad-c34f3a705386"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{adultos}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="38">
+			<textField>
+				<reportElement x="66" y="6" width="478" height="18" uuid="b7a4b577-0967-4752-9ed2-cd69329f756c"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{endereco}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="6" width="58" height="18" uuid="fa599fc6-5c5b-41c2-a030-4cc854a77037"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+		</band>
+		<band height="55">
+			<staticText>
+				<reportElement x="0" y="6" width="80" height="18" uuid="e0cdbbff-b5b5-492f-a9e5-a02575a5807c"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observações:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="21" y="24" width="524" height="16" uuid="20335d43-c708-4b31-a16c-692cb6920f52"/>
+				<textElement textAlignment="Justified">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputScript library="js" name="locale-primefaces.js" />		
+		
+</h:head>
+<h:body>
+	<div id="top">
+		<div id="centro_topo" >
+			<h:panelGrid style="width: 898px;" border="0" columns="3">
+				<p:graphicImage style="border: none" library="img" name="logoConselho.png" /> 				
+				<h:outputText value="Conselho Tutelar  -  Princesa - SP" styleClass="texto_topo" />
+				<p:graphicImage style="border: none" library="img" name="logoPedreira.png" />
+			</h:panelGrid>
+		</div>	
+	</div>
+
+	<div>	
+		<p:layout style="width: 940px; height: 850px;  margin: 10px auto">							 
+		    <p:layoutUnit position="center">
+		        <ui:insert name="content">corpo</ui:insert>
+		    </p:layoutUnit>
+		</p:layout>
+		
+		<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>
+        <p:dialog modal="true" widgetVar="statusDialog" appendTo="@(body)" width="245" id="load" 
+                  draggable="false" closable="false" resizable="false" styleClass="loadPanel">
+            <h:panelGrid>
+                 <div align="center">
+                    <h:outputText value="Aguarde..." style="font-style: italic; font-weight: bold;"/>
+                    <p:graphicImage value="/img/barra_pross.gif"/>
+                 </div>
+             </h:panelGrid>
+         </p:dialog>
+
+	</div>
+
+</h:body>
+
+</html>

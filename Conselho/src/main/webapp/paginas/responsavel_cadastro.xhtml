@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:body>
+	<ui:composition template="template_adm.xhtml">
+		<ui:define name="content">				
+
+			<p:panel header=" Cadastro de Responsável">
+				
+				<p:messages id="msgs1" showDetail="true">
+				 	<p:effect type="pulsate" event="load" delay="500" />
+				</p:messages>
+				
+				<h:form id="formResp">										
+					
+					<h:panelGrid columns="4" style="margin: 18px 30px;" >						
+							<h:outputText value="Ref. Criança/Adolescente:" />
+							<h:outputText value="#{MBResponsavelCadastro.nomeCriancaSelecionado}" styleClass="texto_informativo" />		
+					</h:panelGrid>
+					
+					<h:panelGrid style="margin: 10px auto;" columns="8" >
+						
+						<p:selectOneRadio id="tpBusca" value="#{MBResponsavelCadastro.tipoBusca}" >
+							<f:selectItem itemLabel="CPF" itemValue="CPF" />
+							<f:selectItem itemLabel="RG" itemValue="RG" />
+							<p:ajax event="click" listener="#{MBResponsavelCadastro.alteraOrgaoBusca}" update="cbOrgaoBusca" />
+						</p:selectOneRadio>
+						<p:inputMask value="#{MBResponsavelCadastro.documentoBusca}" maxlength="11" mask="999999?99999" />
+						
+						<p:selectOneMenu style="width:90px;" id="cbOrgaoBusca" disabled="#{MBResponsavelCadastro.desativaOrgao}"
+								value="#{MBResponsavelCadastro.orgaoBuscaSelecionado}"
+								converter="omnifaces.SelectItemsConverter" filter="true"
+								filterMatchMode="contains">
+								<f:selectItem noSelectionOption="true" itemLabel="Orgão  " />
+								<f:selectItems
+									value="#{MBResponsavelCadastro.listaOrgaoBusca}"
+									var="orgao" itemValue="#{orgao}"
+									itemLabel="#{orgao.nome}" />
+						</p:selectOneMenu>
+						
+						<p:commandButton value="Buscar" title="Busca responsável"
+								actionListener="#{MBResponsavelCadastro.buscaPessoa}" update=":msgs1,:formGrid"/>
+								
+						<p:commandButton value="Voltar" action="#{MBResponsavelCadastro.navegaResponsavel}" />
+
+					</h:panelGrid>
+					
+					</h:form>
+					
+					<h:form id="formGrid">
+					<h:panelGrid id="grdCentral" rendered="#{MBResponsavelCadastro.rendCadastro}">						
+
+						<!-- Linha 2 -->
+						<h:panelGrid columns="7">
+							<p:outputLabel value="Nome :" />
+							<h:inputHidden />
+							<p:outputLabel value="CPF:" />
+							<h:inputHidden />
+							<p:outputLabel value="RG:" />
+							<h:inputHidden />
+							<p:outputLabel value="Org. Emissor:" />
+
+							<p:inputText value="#{MBResponsavelCadastro.nome}" size="39" />
+							<p:spacer width="10px;" />
+							
+							<p:inputMask id="cpf" value="#{MBResponsavelCadastro.cpf}" mask="999.999.999-99" size="10">
+								<p:ajax event="blur" listener="#{MBResponsavelCadastro.validaCPF}" update=":msgs1" />							
+							</p:inputMask>															
+							<p:spacer width="10px;" />
+							
+							<p:inputText value="#{MBResponsavelCadastro.rg}" size="11" maxlength="9"  />								
+							<p:spacer width="10px;" />
+							
+								<p:selectOneMenu style="width:90px;" id="cbOrgao" value="#{MBResponsavelCadastro.orgaoSelecionado}"
+								converter="omnifaces.SelectItemsConverter" filter="true" 
+								filterMatchMode="contains">
+								<f:selectItem noSelectionOption="true" itemLabel="Selecione  " />
+								<f:selectItems value="#{MBResponsavelCadastro.listaOrgao}"
+									var="orgao" itemValue="#{orgao}"
+									itemLabel="#{orgao.nome}" />
+							</p:selectOneMenu>
+														
+						</h:panelGrid>
+						
+						<!-- Linha 5 -->
+						<h:panelGrid columns="8">
+							<p:outputLabel value="Fone I:" />
+							<h:inputHidden />
+							<p:outputLabel value="Fone II:" />
+							<h:inputHidden />
+							<p:outputLabel value="Local de Trabalho:" />
+							<h:inputHidden />
+							<p:outputLabel value="Fone Trabalho:" />
+							<h:inputHidden />
+
+							<p:inputMask id="foneI" value="#{MBResponsavelCadastro.foneI}" mask="(99)999?9-9999" size="11" />
+							<p:spacer width="5px;" />
+							<p:inputMask id="foneII" value="#{MBResponsavelCadastro.foneII}" mask="(99) 999?9-99999" size="11" />
+							<p:spacer width="5px;" />
+								<p:inputText value="#{MBResponsavelCadastro.localDeTrabalho}" size="36" />
+							<p:spacer width="5px;" />
+							<p:inputMask id="fonetrabalho" value="#{MBResponsavelCadastro.foneTrabalho}" mask="(99) 999?9-99999" size="11" />
+							<p:spacer width="5px;" />
+							
+							
+						</h:panelGrid>
+
+						<!-- Linha 6 -->
+						<h:panelGrid columns="6">							
+							<p:outputLabel value="Situação Matrimonial:" />
+                     	    <h:inputHidden />
+                     	    <p:outputLabel value="Grau de Parentesco:" />
+                     	    <h:inputHidden />
+                     	    <p:outputLabel value="Grau de Responsabilidade:" />
+                     	    <h:inputHidden />
+
+							
+                           <p:selectOneMenu style="width:210px" id="situacaoMatrimonial" value="#{MBResponsavelCadastro.situacaoMatrimonial}">
+							<f:selectItem itemLabel="Selecione" itemValue=""
+								noSelectionOption="true" />
+							<p:spacer width="10px;" />
+							<f:selectItem itemLabel="Amasiada(o)" itemValue="AM" />
+							<f:selectItem itemLabel="Casada(o)" itemValue="CS" />
+							<f:selectItem itemLabel="Desconhecida(o)" itemValue="DS" />
+							<f:selectItem itemLabel="Divorciada(o)" itemValue="DV" />
+							<f:selectItem itemLabel="Falecida(o)" itemValue="FL" />
+							<f:selectItem itemLabel="Separada(o)" itemValue="SP" />
+							<f:selectItem itemLabel="Solteira(o)" itemValue="ST" />
+							<f:selectItem itemLabel="Viuva(o)(o)" itemValue="VV" />
+							</p:selectOneMenu>
+							<p:spacer width="10px;" />
+														
+							<p:selectOneMenu style="width:210px;" id="cbParentesco" value="#{MBResponsavelCadastro.grauDeParentesco}" converter="omnifaces.SelectItemsConverter" filter="true" ilterMatchMode="contains" >
+							<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+							<f:selectItems value="#{MBResponsavelCadastro.listaParentesco}"
+								var="parentesco" itemValue="#{parentesco}"
+								itemLabel="#{parentesco.nome}" />
+							</p:selectOneMenu>
+							<p:spacer width="15px;" />
+							
+							<p:selectOneMenu style="width:210px;" id="cbResponsabilidade" value="#{MBResponsavelCadastro.grauDeResponsabilidade}" converter="omnifaces.SelectItemsConverter" filter="true"  
+								    filterMatchMode="contains">
+								<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+								<f:selectItems value="#{MBResponsavelCadastro.listaResponsabilidade}"
+									var="responsabilidade" itemValue="#{responsabilidade}"
+									itemLabel="#{responsabilidade.nome}" />
+							</p:selectOneMenu>
+							<p:spacer width="15px;" />
+						</h:panelGrid>						
+						
+						<p:fieldset legend="Endereço" toggleable="false" >
+							<!-- Linha 4 -->							
+							<h:panelGrid columns="5">
+								<p:outputLabel value="Estado:" />
+								<h:inputHidden />								
+								<p:outputLabel value="Cidade:" />
+								<h:inputHidden />								
+								<p:outputLabel value="Bairro:" />
+	                     	    
+	                     	    <p:selectOneMenu style="width:80px;" id="cbEstado" value="#{MBResponsavelCadastro.estadoSelecionado}" converter="omnifaces.SelectItemsConverter" filter="true"
+									filterMatchMode="contains">
+								<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+								<f:selectItems value="#{MBResponsavelCadastro.listaEstado}"
+										var="estado" itemValue="#{estado}"
+										itemLabel="#{estado.sigla}" />
+								<p:ajax event="change" listener="#{MBResponsavelCadastro.buscaCidade}" update="cbCidade, cbBairro, cbLogradouro" />
+								</p:selectOneMenu>
+								<p:spacer width="2px;" />
+								
+								<p:selectOneMenu style="width:270px;" id="cbCidade" value="#{MBResponsavelCadastro.cidadeSelecionado}" converter="omnifaces.SelectItemsConverter" filter="true"
+									filterMatchMode="contains">
+								<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+								<f:selectItems value="#{MBResponsavelCadastro.listaCidade}"
+										var="cidade" itemValue="#{cidade}"
+										itemLabel="#{cidade.nome}" />
+										<p:ajax event="change" listener="#{MBResponsavelCadastro.buscaBairro}" update="cbBairro, cbLogradouro" />
+								</p:selectOneMenu>
+								<p:spacer width="2px;" />
+								
+								<p:selectOneMenu style="width:282px;" id="cbBairro" value="#{MBResponsavelCadastro.bairroSelecionado}" converter="omnifaces.SelectItemsConverter" filter="true" 
+									filterMatchMode="contains">
+								<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+								<f:selectItems value="#{MBResponsavelCadastro.listaBairro}"
+									var="bairro" itemValue="#{bairro}"
+									itemLabel="#{bairro.nome}" />
+								<p:ajax event="change" listener="#{MBResponsavelCadastro.buscaLogradouro}" update="cbLogradouro" />
+								</p:selectOneMenu>
+								<p:spacer width="2px;" />
+							</h:panelGrid>
+							
+							<h:panelGrid columns="7">
+								<p:outputLabel value="Logradouro:" />	                     	    
+								<h:inputHidden />
+								<p:outputLabel value="Numero:" />
+								<h:inputHidden />
+								<p:outputLabel value="Complem.:" />
+								<h:inputHidden />
+								<p:outputLabel value="CEP:" />
+	
+								<p:selectOneMenu style="width:398px;" id="cbLogradouro" value="#{MBResponsavelCadastro.logradouroSelecionado}" converter="omnifaces.SelectItemsConverter" filter="true" 
+									filterMatchMode="contains">
+								<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+								<f:selectItems value="#{MBResponsavelCadastro.listaLogradouro}"
+									var="logradouro" itemValue="#{logradouro}"
+									itemLabel="#{logradouro.nome}" />
+										
+								</p:selectOneMenu> 
+								<p:spacer width="2px;" />
+									<p:inputText value="#{MBResponsavelCadastro.numero}" size="4" />
+								<p:spacer width="2px;" />
+								<p:inputText value="#{MBResponsavelCadastro.complemento}" size="6" />
+								<p:spacer width="2px;" />	
+								<p:inputMask id="cep" value="#{MBResponsavelCadastro.cep}" mask="99999-999" size="6" />					
+							</h:panelGrid>													     								
+						</p:fieldset>	
+																
+					</h:panelGrid>
+					
+					<h:panelGrid id="grdBotoes" style="margin: 10px auto;" columns="7" rendered="#{MBResponsavelCadastro.rendCadastro}">
+						<p:commandButton value="Salvar" actionListener="#{MBResponsavelCadastro.salvar}"  update=":msgs1,:formGrid" />
+						<p:commandButton value="Voltar" action="#{MBResponsavelCadastro.navegaResponsavel}" />
+					</h:panelGrid>
+					</h:form>												
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>
