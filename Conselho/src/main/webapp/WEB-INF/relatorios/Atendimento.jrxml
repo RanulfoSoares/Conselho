@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Atendimento" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="eebe6de7-b2ad-496d-b9c2-6c357e7dfb86">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="3"/>
 	<style name="style1"/>
 	<style name="style2"/>
 	<subDataset name="dataset1" uuid="8391159d-4baf-4862-8e33-aeea1efd5b5f"/>
@@ -21,6 +21,7 @@
 	<field name="descricaoFatos" class="java.lang.String"/>
 	<field name="direitosViolados" class="java.util.List"/>
 	<field name="adendos" class="java.util.List"/>
+	<field name="listaAtribuicao" class="java.util.List"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -160,7 +161,7 @@
 				<textFieldExpression><![CDATA[$F{descricaoFatos}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="79">
+		<band height="75">
 			<subreport>
 				<reportElement x="31" y="21" width="200" height="53" uuid="81508959-b01b-4ae9-a8d6-11a08740c915"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{adendos})]]></dataSourceExpression>
@@ -174,11 +175,18 @@
 				<text><![CDATA[Adendos no Atendimento]]></text>
 			</staticText>
 		</band>
-		<band height="71">
+		<band height="67">
 			<subreport>
 				<reportElement x="31" y="6" width="200" height="59" uuid="940f3782-a3a4-4bd2-b7ac-5794f4114aaa"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{direitosViolados})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Atendimento_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="67">
+			<subreport>
+				<reportElement x="30" y="4" width="200" height="62" uuid="6df07fb6-607a-4526-8f80-571b087ca96d"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaAtribuicao})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subreport_atribuicao.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

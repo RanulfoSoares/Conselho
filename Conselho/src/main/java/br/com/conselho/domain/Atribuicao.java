@@ -118,6 +118,19 @@ public class Atribuicao {
 
 	public void setAtendimento(Atendimento atendimento) {
 		this.atendimento = atendimento;
+	}		
+
+	public List<DeterminacaoAplicada> getListaDeterminacoesAplicadas() {
+		return listaDeterminacoesAplicadas;
+	}
+
+	public void setListaDeterminacoesAplicadas(
+			List<DeterminacaoAplicada> listaDeterminacoesAplicadas) {
+		this.listaDeterminacoesAplicadas = listaDeterminacoesAplicadas;
+	}
+
+	public void setResumoDescricao(String resumoDescricao) {
+		this.resumoDescricao = resumoDescricao;
 	}
 
 	@Override

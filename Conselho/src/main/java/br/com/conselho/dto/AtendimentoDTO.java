@@ -15,7 +15,8 @@ public class AtendimentoDTO {
 	private String descricaoFatos;	
 	
 	private List<AdendoDTO> adendos;
-	private List<DireitoVioladoDTO> direitosViolados; 		
+	private List<DireitoVioladoDTO> direitosViolados; 
+	private List<AtribuicaoDTO> listaAtribuicao;
 		
 	public String getData() {
 		return data;
@@ -84,6 +85,10 @@ public class AtendimentoDTO {
 	public void setAdendos(List<AdendoDTO> adendos) {
 		this.adendos = adendos;
 	}
-		
-
+	public List<AtribuicaoDTO> getListaAtribuicao() {
+		return listaAtribuicao;
+	}
+	public void setListaAtribuicao(List<AtribuicaoDTO> listaAtribuicao) {
+		this.listaAtribuicao = listaAtribuicao;
+	}	
 }

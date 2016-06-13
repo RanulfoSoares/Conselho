@@ -33,9 +33,12 @@ import br.com.conselho.dao.RegistroDireitoVioladoDAO;
 import br.com.conselho.dao.VioladorRegistroMedidaAplicadaDAO;
 import br.com.conselho.domain.Adendo;
 import br.com.conselho.domain.Atendimento;
+import br.com.conselho.domain.Atribuicao;
 import br.com.conselho.domain.Bairro;
 import br.com.conselho.domain.Cidade;
 import br.com.conselho.domain.Conselheiro;
+import br.com.conselho.domain.Determinacao;
+import br.com.conselho.domain.DeterminacaoAplicada;
 import br.com.conselho.domain.Estado;
 import br.com.conselho.domain.Familia;
 import br.com.conselho.domain.Logradouro;
@@ -51,6 +54,8 @@ import br.com.conselho.domain.VioladorRegistroMedidaAplicada;
 import br.com.conselho.domain.Vitima;
 import br.com.conselho.dto.AdendoDTO;
 import br.com.conselho.dto.AtendimentoDTO;
+import br.com.conselho.dto.AtribuicaoDTO;
+import br.com.conselho.dto.DeterminacaoAplicadaDTO;
 import br.com.conselho.dto.DireitoVioladoDTO;
 import br.com.conselho.dto.MedidaAplicadaDTO;
 import br.com.conselho.dto.NucleoFamiliarDTO;
@@ -850,6 +855,26 @@ public class FamiliaCadastroBean implements Serializable{
 							listaDireitoVioladoDTO.add(direitoVioladoDTO);
 						}
 						atendimentoDTO.setDireitosViolados(listaDireitoVioladoDTO);
+						
+						List<AtribuicaoDTO> listaAtribuicaoDTO = new ArrayList<AtribuicaoDTO>();
+						for (Atribuicao atribuicao : atendimento.getListaAtribuicoes()) {
+							
+							AtribuicaoDTO atribuicaoDTO = new AtribuicaoDTO();
+							atribuicaoDTO.setData(Helper.formatDate().format(atribuicao.getData()));
+							atribuicaoDTO.setConselheiro(atribuicao.getConselheiro().getNomeUsual());
+							atribuicaoDTO.setDescumpridor(atribuicao.getDescumpridor().getNome());
+							atribuicaoDTO.setDescricao(atribuicao.getDescricao());
+							
+							List<DeterminacaoAplicadaDTO> listaDeterminacaoAplicadaDTO = new ArrayList<DeterminacaoAplicadaDTO>();
+							for (DeterminacaoAplicada determinacao : atribuicao.getListaDeterminacoesAplicadas()) {								
+								DeterminacaoAplicadaDTO determinacaoAplicadaDTO = new DeterminacaoAplicadaDTO();
+								determinacaoAplicadaDTO.setNomeDeterminacao(determinacao.getDeterminacao().getNome());
+								listaDeterminacaoAplicadaDTO.add(determinacaoAplicadaDTO);								
+							}
+							atribuicaoDTO.setListaDeterminacaoAplicada(listaDeterminacaoAplicadaDTO);							
+							listaAtribuicaoDTO.add(atribuicaoDTO);
+						}
+						atendimentoDTO.setListaAtribuicao(listaAtribuicaoDTO);
 						listaAtendimentoDTO.add(atendimentoDTO);					
 					}					
 				}									                       														

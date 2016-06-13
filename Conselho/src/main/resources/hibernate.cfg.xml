@@ -11,16 +11,16 @@
 		<!-- Configurações da conexão -->
 		<property name="connection.driver_class">org.postgresql.Driver</property>
 		
-<!-- 		<property name="connection.url">jdbc:postgresql://127.0.0.1:5432/conselho</property> -->
+		<property name="connection.url">jdbc:postgresql://127.0.0.1:5432/conselho</property>
 		
-		<property name="connection.url">jdbc:postgresql://127.0.0.1:5432/siacad_conselho</property>
+<!-- 		<property name="connection.url">jdbc:postgresql://127.0.0.1:5432/siacad_conselho</property> -->
 		
-<!-- 		<property name="connection.username">postgres</property> -->
-<!-- 		<property name="connection.password">root</property> -->
+		<property name="connection.username">postgres</property>
+		<property name="connection.password">root</property>
 		
 				
-		<property name="connection.username">siacad</property>
-		<property name="connection.password">r1289a</property>
+<!-- 		<property name="connection.username">siacad</property> -->
+<!-- 		<property name="connection.password">r1289a</property> -->
 		
 
 		<!-- Pool de conexões JDBC -->
