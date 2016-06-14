@@ -9,6 +9,7 @@ public class AtribuicaoDTO {
 	private String descumpridor;
 	private String descricao;	
 	private List<DeterminacaoAplicadaDTO> listaDeterminacaoAplicada;
+	private String caminhoSub;
 	
 	
 	public String getData() {
@@ -42,6 +43,12 @@ public class AtribuicaoDTO {
 			List<DeterminacaoAplicadaDTO> listaDeterminacaoAplicada) {
 		this.listaDeterminacaoAplicada = listaDeterminacaoAplicada;
 	}
+	public String getCaminhoSub() {
+		return caminhoSub;
+	}
+	public void setCaminhoSub(String caminhoSub) {
+		this.caminhoSub = caminhoSub;
+	}	
 	
 }
 

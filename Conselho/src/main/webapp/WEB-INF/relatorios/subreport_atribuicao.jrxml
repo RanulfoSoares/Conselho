@@ -3,11 +3,15 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Thiago Henrique\\Documents\\GitHub\\Conselho\\Conselho\\src\\main\\webapp\\WEB-INF\\relatorios\\"]]></defaultValueExpression>
+	</parameter>
 	<field name="data" class="java.lang.String"/>
 	<field name="conselheiro" class="java.lang.String"/>
 	<field name="descumpridor" class="java.lang.String"/>
 	<field name="descricao" class="java.lang.String"/>
-	<field name="listaDeterminacaoAplicada" class="java.lang.String"/>
+	<field name="listaDeterminacaoAplicada" class="java.util.List"/>
+	<field name="caminhoSub" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -23,50 +27,60 @@
 		</band>
 	</title>
 	<detail>
-		<band height="47" splitType="Stretch">
+		<band height="51" splitType="Stretch">
 			<textField>
-				<reportElement x="6" y="0" width="57" height="20" uuid="a57f7f60-d702-43a6-9009-935f8462489c"/>
+				<reportElement x="6" y="7" width="57" height="20" uuid="a57f7f60-d702-43a6-9009-935f8462489c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="91" y="23" width="277" height="20" uuid="a413c19b-d269-4285-b3c4-dd33308d9d74"/>
+				<reportElement x="91" y="29" width="407" height="20" uuid="a413c19b-d269-4285-b3c4-dd33308d9d74"/>
 				<textFieldExpression><![CDATA[$F{descumpridor}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="6" y="23" width="84" height="20" uuid="0b60c168-5465-4599-90c7-9a5940cddc57"/>
+				<reportElement x="6" y="29" width="84" height="20" uuid="0b60c168-5465-4599-90c7-9a5940cddc57"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Descumpridor:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="68" y="0" width="347" height="20" uuid="e006ed0b-9159-4c73-ad38-045e6ce9dcd5"/>
+				<reportElement x="68" y="7" width="347" height="20" uuid="e006ed0b-9159-4c73-ad38-045e6ce9dcd5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{conselheiro}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="173">
+		<band height="54">
 			<staticText>
-				<reportElement x="6" y="54" width="100" height="20" uuid="7f7a6b91-cae3-407f-861c-95a3e5bdf5ef"/>
+				<reportElement x="6" y="0" width="100" height="20" uuid="7f7a6b91-cae3-407f-861c-95a3e5bdf5ef"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Descrição]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="6" y="70" width="520" height="93" uuid="18f41ebb-66ab-40d5-90cb-424e00e9b32d"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="6" y="18" width="492" height="20" uuid="18f41ebb-66ab-40d5-90cb-424e00e9b32d"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
 			</textField>
+		</band>
+		<band height="50">
 			<staticText>
-				<reportElement x="6" y="14" width="148" height="20" uuid="1173a65b-70c6-4af3-9802-0d5602a3d8e4"/>
+				<reportElement x="6" y="4" width="154" height="20" uuid="1173a65b-70c6-4af3-9802-0d5602a3d8e4"/>
 				<textElement>
 					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[Determinação aplicada:]]></text>
+				<text><![CDATA[Determinações aplicadas:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="6" y="34" width="100" height="20" uuid="b28fe7db-d74b-4b44-a7ba-1c6f7a927cbd"/>
-				<textFieldExpression><![CDATA[$F{listaDeterminacaoAplicada}]]></textFieldExpression>
-			</textField>
+			<subreport>
+				<reportElement x="6" y="25" width="200" height="16" uuid="273ba266-d7a9-4032-b8ec-78da04b6b50d"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaDeterminacaoAplicada})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$F{caminhoSub} + "subreport_atribuicao_determinacao.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 </jasperReport>

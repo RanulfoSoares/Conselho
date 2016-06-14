@@ -862,8 +862,10 @@ public class FamiliaCadastroBean implements Serializable{
 							AtribuicaoDTO atribuicaoDTO = new AtribuicaoDTO();
 							atribuicaoDTO.setData(Helper.formatDate().format(atribuicao.getData()));
 							atribuicaoDTO.setConselheiro(atribuicao.getConselheiro().getNomeUsual());
-							atribuicaoDTO.setDescumpridor(atribuicao.getDescumpridor().getNome());
+							atribuicaoDTO.setDescumpridor(atribuicao.getDescumpridor().getAgenteVioladorClasse().getNome()+", "+atribuicao.getDescumpridor().getNome());
 							atribuicaoDTO.setDescricao(atribuicao.getDescricao());
+							//atribuicaoDTO.setCaminhoSub(JSFUtil.getRealPath("/WEB-INF/relatorios/"));
+							atribuicaoDTO.setCaminhoSub("C:\\Users\\Thiago Henrique\\Documents\\GitHub\\Conselho\\Conselho\\src\\main\\webapp\\WEB-INF\\relatorios\\");
 							
 							List<DeterminacaoAplicadaDTO> listaDeterminacaoAplicadaDTO = new ArrayList<DeterminacaoAplicadaDTO>();
 							for (DeterminacaoAplicada determinacao : atribuicao.getListaDeterminacoesAplicadas()) {								
@@ -887,6 +889,7 @@ public class FamiliaCadastroBean implements Serializable{
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("ERRO: "+e.getMessage());
 		}	
 	}
 	
