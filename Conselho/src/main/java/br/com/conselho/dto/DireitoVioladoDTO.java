@@ -9,7 +9,10 @@ public class DireitoVioladoDTO {
 	private String vitima;
 	private String obs;
 	private String caminhoSub;
-	private List<MedidaAplicadaDTO> medidasAplicadas;	
+	private List<MedidaAplicadaDTO> medidasAplicadas;
+	
+	private String conselheiro;
+	private String dataInc;
 
 	public String getDireitoViolado() {
 		return direitoViolado;
@@ -58,7 +61,21 @@ public class DireitoVioladoDTO {
 	public void setCaminhoSub(String caminhoSub) {
 		this.caminhoSub = caminhoSub;
 	}
-	
-	
-			
+
+	public String getConselheiro() {
+		return conselheiro;
+	}
+
+	public void setConselheiro(String conselheiro) {
+		this.conselheiro = conselheiro;
+	}
+
+	public String getDataInc() {
+		return dataInc;
+	}
+
+	public void setDataInc(String dataInc) {
+		this.dataInc = dataInc;
+	}
+				
 }

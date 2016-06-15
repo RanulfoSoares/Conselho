@@ -7,6 +7,9 @@ public class MedidaAplicadaDTO {
 	private String violador;
 	private String obs;
 	
+	private String conselheiro;
+	private String dataInc;
+	
 	public String getMedidaAplicada() {
 		return medidaAplicada;
 	}
@@ -30,5 +33,17 @@ public class MedidaAplicadaDTO {
 	}
 	public void setObs(String obs) {
 		this.obs = obs;
-	}		
+	}
+	public String getConselheiro() {
+		return conselheiro;
+	}
+	public void setConselheiro(String conselheiro) {
+		this.conselheiro = conselheiro;
+	}
+	public String getDataInc() {
+		return dataInc;
+	}
+	public void setDataInc(String dataInc) {
+		this.dataInc = dataInc;
+	}	
 }

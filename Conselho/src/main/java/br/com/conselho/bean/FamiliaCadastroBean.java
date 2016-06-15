@@ -826,7 +826,11 @@ public class FamiliaCadastroBean implements Serializable{
 							direitoVioladoDTO.setGrupoDireito(registroDireitoViolado.getDireitoViolado().getGrupoDeDireito().getNome());
 							direitoVioladoDTO.setObs(registroDireitoViolado.getObs());
 							direitoVioladoDTO.setVitima(registroDireitoViolado.getVitima().getMembro().getPessoa().getNomeCompleto());
-							direitoVioladoDTO.setCaminhoSub(JSFUtil.getRealPath("/WEB-INF/relatorios/"));
+							//direitoVioladoDTO.setCaminhoSub(JSFUtil.getRealPath("/WEB-INF/relatorios/"));
+							direitoVioladoDTO.setCaminhoSub("C:\\Users\\Thiago Henrique\\Documents\\GitHub\\Conselho\\Conselho\\src\\main\\webapp\\WEB-INF\\relatorios\\");
+							
+							direitoVioladoDTO.setDataInc(Helper.formatDate().format(registroDireitoViolado.getDataInc()));
+							direitoVioladoDTO.setConselheiro(registroDireitoViolado.getConselheiroRegistro().getNomeUsual());
 							
 							listaRegistroMedidaAplicadas = new ArrayList<RegistroMedidaAplicada>();
 							listaRegistroMedidaAplicadas = registroDireitoViolado.getListaRegistroMedidaAplicada();					
@@ -837,6 +841,8 @@ public class FamiliaCadastroBean implements Serializable{
 								medidaAplicadaDTO.setMedidaAplicada(registroMedidaAplicada.getMedidaAplicada().getNome());
 								medidaAplicadaDTO.setMedidaRazao(registroMedidaAplicada.getMedidaEmRazao().getNome());
 								medidaAplicadaDTO.setObs(registroMedidaAplicada.getDescricao());
+								medidaAplicadaDTO.setConselheiro(registroMedidaAplicada.getConselheiroRegistro().getNomeUsual());
+								medidaAplicadaDTO.setDataInc(Helper.formatDate().format(registroMedidaAplicada.getData()));
 								
 								if(!registroMedidaAplicada.getListaVioladorRegistroMedidaAplicada().isEmpty()){
 									String violador = "Violador: ";

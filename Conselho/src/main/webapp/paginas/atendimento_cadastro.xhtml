@@ -808,18 +808,23 @@
 					<h:panelGrid columns="1" style="margin:  20px;">
 						
 						<h:panelGrid columns="1">
-						    <p:outputLabel styleClass="texto_informativo_18" value="Conselheiro:" />
-						  									
-								<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.nomeLogado}" />	
-								<p:spacer width="3px;" />
+							<h:panelGrid columns="3">
+								<p:outputLabel styleClass="texto_informativo_18" value="Data:" />
+								<p:outputLabel styleClass="texto_informativo_18" value="Conselheiro:" />
+						  		<p:spacer width="15px;" />
+						  		
+						  		<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.dataCadastro}" />							
+								<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.nomeLogado}" />
+							</h:panelGrid>						    
+							<p:spacer width="3px;" />
 								
 								
-						<p:outputLabel styleClass="texto_informativo_18" value="Direito Violado de:" />
-						<p:selectCheckboxMenu id="menu" value="#{MBAtendimento.listaVitimasSelecionadas}" label="Selecionar Vitimas" converter="omnifaces.SelectItemsConverter"
-                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-				            <f:selectItems value="#{MBAtendimento.listaVitimas}" />
-				        </p:selectCheckboxMenu>	
-				        <p:spacer width="3px;" />
+							<p:outputLabel styleClass="texto_informativo_18" value="Direito Violado de:" />
+							<p:selectCheckboxMenu id="menu" value="#{MBAtendimento.listaVitimasSelecionadas}" label="Selecionar Vitimas" converter="omnifaces.SelectItemsConverter"
+	                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+					            <f:selectItems value="#{MBAtendimento.listaVitimas}" />
+					        </p:selectCheckboxMenu>	
+					        <p:spacer width="3px;" />
 								
 							<p:outputLabel styleClass="texto_informativo_18" value="Grupo de Direito:" />
 												
@@ -875,8 +880,14 @@
 				
 				<h:form id="formApMedida1">
 					<h:panelGrid columns="1" style="margin: 0 20px;">	
-						<h:outputLabel styleClass="texto_informativo_18" value="Conselheiro:" />
+						<h:panelGrid columns="3">
+						<p:outputLabel styleClass="texto_informativo_18" value="Data:" />
+						<p:outputLabel styleClass="texto_informativo_18" value="Conselheiro:" />
+						<p:spacer width="15px;" />
+						
+						<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.dataCadastro}" />							
 						<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.nomeLogado}" />
+					</h:panelGrid>
 						
 					<p:spacer width="3px;" />									
 						<h:outputLabel styleClass="texto_informativo_18" value="Vitima:" />
@@ -1086,8 +1097,14 @@
 				<h:form id="formApMedidaDV">
 				
 					<h:panelGrid columns="1" style="margin: 10px 20px;">
-						<p:outputLabel styleClass="texto_informativo_18" value="Conselheiro:" />
-						<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.nomeLogado}" />
+						<h:panelGrid columns="3">
+							<p:outputLabel styleClass="texto_informativo_18" value="Data:" />
+							<p:outputLabel styleClass="texto_informativo_18" value="Conselheiro:" />
+							<p:spacer width="15px;" />
+							
+							<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.dataCadastro}" />							
+							<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.nomeLogado}" />
+						</h:panelGrid>
 						<p:spacer width="3px;" />
 										
 						<p:outputLabel styleClass="texto_informativo_18" value="Vitimas:" />

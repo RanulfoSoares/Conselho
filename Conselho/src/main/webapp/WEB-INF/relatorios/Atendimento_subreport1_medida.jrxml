@@ -7,20 +7,22 @@
 	<field name="medidaRazao" class="java.lang.String"/>
 	<field name="obs" class="java.lang.String"/>
 	<field name="violador" class="java.lang.String"/>
+	<field name="conselheiro" class="java.lang.String"/>
+	<field name="dataInc" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="49" splitType="Stretch">
+		<band height="69" splitType="Stretch">
 			<staticText>
-				<reportElement x="1" y="29" width="44" height="20" uuid="08cf4681-e240-49bd-9a22-821901f87f99"/>
+				<reportElement x="1" y="49" width="44" height="20" uuid="08cf4681-e240-49bd-9a22-821901f87f99"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Medida]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="45" y="29" width="457" height="20" uuid="e30ccd7e-cdf7-46cd-a1ec-0951499ddc8c"/>
+				<reportElement x="45" y="49" width="457" height="20" uuid="e30ccd7e-cdf7-46cd-a1ec-0951499ddc8c"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -33,6 +35,20 @@
 				</textElement>
 				<text><![CDATA[Medidas Aplicadas]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="1" y="29" width="100" height="20" uuid="2d05ac60-fa0e-41b5-af81-c661cd98cbc9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataInc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="29" width="401" height="20" uuid="6fb51f7b-28ea-4437-bf64-be3f46668540"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{conselheiro}]]></textFieldExpression>
+			</textField>
 		</band>
 		<band height="22">
 			<textField isStretchWithOverflow="true">

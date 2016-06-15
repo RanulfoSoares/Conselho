@@ -12,11 +12,13 @@
 	<field name="grupoDireito" class="java.lang.String"/>
 	<field name="obs" class="java.lang.String"/>
 	<field name="caminhoSub" class="java.lang.String"/>
+	<field name="dataInc" class="java.lang.String"/>
+	<field name="conselheiro" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="68" splitType="Stretch">
+		<band height="102" splitType="Stretch">
 			<staticText>
 				<reportElement x="2" y="0" width="504" height="34" uuid="f510864e-414b-45c8-905c-46609b7083b3"/>
 				<textElement>
@@ -25,19 +27,33 @@
 				<text><![CDATA[Direito Violado]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="2" y="51" width="364" height="17" uuid="02b3efd8-f7f9-485d-aa40-1f606be2ca50"/>
+				<reportElement x="2" y="81" width="364" height="17" uuid="02b3efd8-f7f9-485d-aa40-1f606be2ca50"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{vitima}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="2" y="34" width="42" height="17" uuid="1271d134-42b9-4bae-b1b5-aa700db52b1c"/>
+				<reportElement x="2" y="64" width="42" height="17" uuid="1271d134-42b9-4bae-b1b5-aa700db52b1c"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Vitima:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="2" y="42" width="100" height="20" uuid="9d1261da-3a70-40b4-b1a1-e3bf30fb3417"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataInc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="42" width="404" height="20" uuid="a2f24806-8583-4dfd-9f42-eab604515e2d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{conselheiro}]]></textFieldExpression>
+			</textField>
 		</band>
 		<band height="46">
 			<staticText>
