@@ -41,19 +41,33 @@
 				<text><![CDATA[Vitima:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="2" y="42" width="100" height="20" uuid="9d1261da-3a70-40b4-b1a1-e3bf30fb3417"/>
+				<reportElement x="48" y="42" width="68" height="20" uuid="9d1261da-3a70-40b4-b1a1-e3bf30fb3417"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dataInc}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="101" y="42" width="404" height="20" uuid="a2f24806-8583-4dfd-9f42-eab604515e2d"/>
+				<reportElement x="258" y="42" width="248" height="20" uuid="a2f24806-8583-4dfd-9f42-eab604515e2d"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{conselheiro}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="181" y="42" width="77" height="20" uuid="97bb7bd3-8bfc-4e54-be36-39b9c53de564"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conselheiro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="42" width="46" height="20" uuid="95a2639b-03e6-48b8-9d3a-b756e882051c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
 		</band>
 		<band height="46">
 			<staticText>
@@ -68,26 +82,35 @@
 				<textFieldExpression><![CDATA[$F{grupoDireito}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="63">
+		<band height="39">
 			<staticText>
-				<reportElement x="1" y="0" width="163" height="20" uuid="efdb4bd5-403a-4aca-a703-d698413aa845"/>
+				<reportElement x="1" y="0" width="163" height="16" uuid="efdb4bd5-403a-4aca-a703-d698413aa845"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Direito Violado]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="2" y="15" width="505" height="20" uuid="b2e0dfa5-e9b7-47f0-b718-bece313b6df5"/>
+				<textFieldExpression><![CDATA[$F{direitoViolado}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="43">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="2" y="20" width="505" height="20" uuid="c088c0f1-fcf8-4291-b40b-bbf7e007ba1a"/>
+				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="0" width="163" height="20" uuid="371d0a2b-f250-4701-9e18-1e14e9b2eca6"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Descrição do direito violado]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="2" y="43" width="505" height="20" uuid="c088c0f1-fcf8-4291-b40b-bbf7e007ba1a"/>
-				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="2" y="23" width="505" height="20" uuid="b2e0dfa5-e9b7-47f0-b718-bece313b6df5"/>
-				<textFieldExpression><![CDATA[$F{direitoViolado}]]></textFieldExpression>
-			</textField>
 		</band>
-		<band height="16">
+		<band height="15">
 			<subreport>
-				<reportElement x="1" y="4" width="200" height="9" uuid="9304c422-6d21-4231-9eea-b1fc62ba9b33"/>
+				<reportElement x="2" y="4" width="200" height="9" uuid="9304c422-6d21-4231-9eea-b1fc62ba9b33"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{medidasAplicadas})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$F{caminhoSub}+ "Atendimento_subreport1_medida.jasper"]]></subreportExpression>
 			</subreport>

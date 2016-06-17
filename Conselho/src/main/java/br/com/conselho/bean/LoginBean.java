@@ -56,11 +56,18 @@ public class LoginBean implements Serializable{
 				
 				if(usuario != null){
 					
-					HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-			        HttpSession session = request.getSession();					
-			        session.setAttribute("conselheiroLogado", usuario);
-			        
-					return "index?faces-redirect=true";
+					if(usuario.getFlgAtivo().equals("S")){
+						
+						HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+				        HttpSession session = request.getSession();					
+				        session.setAttribute("conselheiroLogado", usuario);
+				        
+						return "index?faces-redirect=true";						
+					}else{
+						JSFUtil.addErrorMessage("Usuário Desativado!");
+						return "";
+					}
+					
 				}else{
 					JSFUtil.addErrorMessage("Usuário ou senha incorreto");
 					return "";

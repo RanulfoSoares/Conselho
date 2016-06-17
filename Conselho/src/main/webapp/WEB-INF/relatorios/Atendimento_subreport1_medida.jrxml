@@ -36,19 +36,33 @@
 				<text><![CDATA[Medidas Aplicadas]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="1" y="29" width="100" height="20" uuid="2d05ac60-fa0e-41b5-af81-c661cd98cbc9"/>
+				<reportElement x="47" y="30" width="71" height="20" uuid="2d05ac60-fa0e-41b5-af81-c661cd98cbc9"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dataInc}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="101" y="29" width="401" height="20" uuid="6fb51f7b-28ea-4437-bf64-be3f46668540"/>
+				<reportElement x="258" y="30" width="244" height="20" uuid="6fb51f7b-28ea-4437-bf64-be3f46668540"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{conselheiro}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="181" y="29" width="77" height="20" uuid="b4d52896-d550-4e8d-8b70-fb7bbd556022"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conselheiro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="29" width="46" height="20" uuid="a982a25f-afa8-4800-97e6-78cd55491c9b"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
 		</band>
 		<band height="22">
 			<textField isStretchWithOverflow="true">
