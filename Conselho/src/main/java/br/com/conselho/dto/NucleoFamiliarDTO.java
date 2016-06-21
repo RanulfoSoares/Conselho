@@ -1,5 +1,7 @@
 package br.com.conselho.dto;
 
+import java.util.List;
+
 public class NucleoFamiliarDTO {
 	
 	private String numeroNucleo;
@@ -11,6 +13,9 @@ public class NucleoFamiliarDTO {
 	private String endereco;
 	private String obs;
 	
+	private List<MovimentacaoMembro> listaSaidaMembros;
+	private List<MovimentacaoMembro> listaEntradaMembros;
+		
 	
 	public String getNumeroNucleo() {
 		return numeroNucleo;
@@ -59,5 +64,17 @@ public class NucleoFamiliarDTO {
 	}
 	public void setObs(String obs) {
 		this.obs = obs;
-	}		
+	}
+	public List<MovimentacaoMembro> getListaSaidaMembros() {
+		return listaSaidaMembros;
+	}
+	public void setListaSaidaMembros(List<MovimentacaoMembro> listaSaidaMembros) {
+		this.listaSaidaMembros = listaSaidaMembros;
+	}
+	public List<MovimentacaoMembro> getListaEntradaMembros() {
+		return listaEntradaMembros;
+	}
+	public void setListaEntradaMembros(List<MovimentacaoMembro> listaEntradaMembros) {
+		this.listaEntradaMembros = listaEntradaMembros;
+	}	
 }

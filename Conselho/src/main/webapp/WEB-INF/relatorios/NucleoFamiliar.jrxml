@@ -3,6 +3,9 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Thiago Henrique\\Documents\\GitHub\\Conselho\\Conselho\\src\\main\\webapp\\WEB-INF\\relatorios\\"]]></defaultValueExpression>
+	</parameter>
 	<field name="numeroNucleo" class="java.lang.String"/>
 	<field name="dataInicial" class="java.lang.String"/>
 	<field name="dataFinal" class="java.lang.String"/>
@@ -11,6 +14,8 @@
 	<field name="adultos" class="java.lang.String"/>
 	<field name="endereco" class="java.lang.String"/>
 	<field name="obs" class="java.lang.String"/>
+	<field name="listaSaidaMembros" class="java.util.List"/>
+	<field name="listaEntradaMembros" class="java.util.List"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -187,6 +192,20 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
 			</textField>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="50" uuid="08dc07ce-6eae-4dcc-b6a9-502989dfc54e"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaSaidaMembros})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "NucleoFamiliar_hist_saida_membro.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="50" uuid="51797101-f028-4973-b528-642596604497"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaEntradaMembros})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "NucleoFamiliar_hist_entrada_membro.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 </jasperReport>

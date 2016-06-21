@@ -27,6 +27,7 @@ import br.com.conselho.dao.EstadoDAO;
 import br.com.conselho.dao.FamiliaDAO;
 import br.com.conselho.dao.LogradouroDAO;
 import br.com.conselho.dao.MembroDao;
+import br.com.conselho.dao.MoverMembroDAO;
 import br.com.conselho.dao.OrgaoDAO;
 import br.com.conselho.dao.PessoaDAO;
 import br.com.conselho.dao.RegistroDireitoVioladoDAO;
@@ -44,6 +45,7 @@ import br.com.conselho.domain.Familia;
 import br.com.conselho.domain.Logradouro;
 import br.com.conselho.domain.Membro;
 import br.com.conselho.domain.MembroTela;
+import br.com.conselho.domain.MoverMembro;
 import br.com.conselho.domain.Orgao;
 import br.com.conselho.domain.Pessoa;
 import br.com.conselho.domain.RegistroDireitoViolado;
@@ -58,6 +60,7 @@ import br.com.conselho.dto.AtribuicaoDTO;
 import br.com.conselho.dto.DeterminacaoAplicadaDTO;
 import br.com.conselho.dto.DireitoVioladoDTO;
 import br.com.conselho.dto.MedidaAplicadaDTO;
+import br.com.conselho.dto.MovimentacaoMembro;
 import br.com.conselho.dto.NucleoFamiliarDTO;
 import br.com.conselho.util.AutenticaUsuario;
 import br.com.conselho.util.CpfValidator;
@@ -648,6 +651,7 @@ public class FamiliaCadastroBean implements Serializable{
 		
 	}
 	
+	@Deprecated
 	public void executaRelatorio(){
 		
 		try {
@@ -711,6 +715,7 @@ public class FamiliaCadastroBean implements Serializable{
 				List<AtendimentoDTO> listaAtendimentoDTO = new ArrayList<AtendimentoDTO>();
 				List<Adendo> listaAdendos;
 				RegistroDireitoVioladoDAO registroDireitoVioladoDAO = new RegistroDireitoVioladoDAO();			
+				MoverMembroDAO moverMembroDAO = new MoverMembroDAO();
 				
 				NucleoFamiliarDTO nucleoFamiliar = new NucleoFamiliarDTO();
 				nucleoFamiliar.setNumeroNucleo(familiaEdita.getNumeroPasta());
@@ -739,7 +744,33 @@ public class FamiliaCadastroBean implements Serializable{
 										   familiaEdita.getLogradouro().getBairro().getCidade().getNome()+" - "+
 										   familiaEdita.getLogradouro().getBairro().getCidade().getEstado().getSigla());
 				
-				nucleoFamiliar.setObs(familiaEdita.getObs());						
+				nucleoFamiliar.setObs(familiaEdita.getObs());
+				
+				
+				List<MoverMembro> listaSaidaMembro = moverMembroDAO.buscaHistSaida(familiaEdita);
+				List<MovimentacaoMembro> listaSaidaMembroDTO = new ArrayList<MovimentacaoMembro>();
+				
+				for (MoverMembro moverMembro : listaSaidaMembro) {
+					MovimentacaoMembro movimentacaoMembro = new MovimentacaoMembro();
+					movimentacaoMembro.setNomeMembro(moverMembro.getMembro().getPessoa().getNomeCompleto());
+					movimentacaoMembro.setFamiliaDestina(moverMembro.getFamiliaDestino().getNumeroPasta());
+					movimentacaoMembro.setFamiliaOrigem(moverMembro.getFamilaAtual().getNumeroPasta());
+					listaSaidaMembroDTO.add(movimentacaoMembro);
+				}
+				
+				List<MoverMembro> listaEntradaMembro = moverMembroDAO.buscaHistEntrada(familiaEdita);
+				List<MovimentacaoMembro> listaEntradaMembroDTO = new ArrayList<MovimentacaoMembro>();
+				
+				for (MoverMembro moverMembro : listaEntradaMembro) {
+					MovimentacaoMembro movimentacaoMembro = new MovimentacaoMembro();
+					movimentacaoMembro.setNomeMembro(moverMembro.getMembro().getPessoa().getNomeCompleto());
+					movimentacaoMembro.setFamiliaDestina(moverMembro.getFamiliaDestino().getNumeroPasta());
+					movimentacaoMembro.setFamiliaOrigem(moverMembro.getFamilaAtual().getNumeroPasta());
+					listaEntradaMembroDTO.add(movimentacaoMembro);
+				}
+				
+				nucleoFamiliar.setListaSaidaMembros(listaSaidaMembroDTO);
+				nucleoFamiliar.setListaEntradaMembros(listaEntradaMembroDTO);
 				
 				for (Atendimento atendimento : listaAtendimentos) {				
 					
@@ -826,8 +857,8 @@ public class FamiliaCadastroBean implements Serializable{
 							direitoVioladoDTO.setGrupoDireito(registroDireitoViolado.getDireitoViolado().getGrupoDeDireito().getNome());
 							direitoVioladoDTO.setObs(registroDireitoViolado.getObs());
 							direitoVioladoDTO.setVitima(registroDireitoViolado.getVitima().getMembro().getPessoa().getNomeCompleto());
-							//direitoVioladoDTO.setCaminhoSub(JSFUtil.getRealPath("/WEB-INF/relatorios/"));
-							direitoVioladoDTO.setCaminhoSub("C:\\Users\\Thiago Henrique\\Documents\\GitHub\\Conselho\\Conselho\\src\\main\\webapp\\WEB-INF\\relatorios\\");
+							direitoVioladoDTO.setCaminhoSub(JSFUtil.getRealPath("/WEB-INF/relatorios/"));
+							//direitoVioladoDTO.setCaminhoSub("C:\\Users\\Thiago Henrique\\Documents\\GitHub\\Conselho\\Conselho\\src\\main\\webapp\\WEB-INF\\relatorios\\");
 							
 							direitoVioladoDTO.setDataInc(Helper.formatDate().format(registroDireitoViolado.getDataInc()));
 							direitoVioladoDTO.setConselheiro(registroDireitoViolado.getConselheiroRegistro().getNomeUsual());
@@ -870,8 +901,8 @@ public class FamiliaCadastroBean implements Serializable{
 							atribuicaoDTO.setConselheiro(atribuicao.getConselheiro().getNomeUsual());
 							atribuicaoDTO.setDescumpridor(atribuicao.getDescumpridor().getAgenteVioladorClasse().getNome()+", "+atribuicao.getDescumpridor().getNome());
 							atribuicaoDTO.setDescricao(atribuicao.getDescricao());
-							//atribuicaoDTO.setCaminhoSub(JSFUtil.getRealPath("/WEB-INF/relatorios/"));
-							atribuicaoDTO.setCaminhoSub("C:\\Users\\Thiago Henrique\\Documents\\GitHub\\Conselho\\Conselho\\src\\main\\webapp\\WEB-INF\\relatorios\\");
+							atribuicaoDTO.setCaminhoSub(JSFUtil.getRealPath("/WEB-INF/relatorios/"));
+							//atribuicaoDTO.setCaminhoSub("C:\\Users\\Thiago Henrique\\Documents\\GitHub\\Conselho\\Conselho\\src\\main\\webapp\\WEB-INF\\relatorios\\");
 							
 							List<DeterminacaoAplicadaDTO> listaDeterminacaoAplicadaDTO = new ArrayList<DeterminacaoAplicadaDTO>();
 							for (DeterminacaoAplicada determinacao : atribuicao.getListaDeterminacoesAplicadas()) {								

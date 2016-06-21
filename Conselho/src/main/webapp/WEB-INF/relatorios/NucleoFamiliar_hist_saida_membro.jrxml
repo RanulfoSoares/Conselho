@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NucleoFamiliar_hist_saida_membro" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="11e8fca4-503e-4fbf-b09d-ec4393049918">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="nomeMembro" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="10" width="243" height="21" uuid="6c8f1a25-26fb-4e2e-ac6c-f3f0a104bcc0"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Movimento saida de membros]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="9" width="75" height="20" uuid="6b1f1fff-36c8-4165-b410-f8a0550a2612"/>
+				<text><![CDATA[nomeMembro:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="89" y="9" width="100" height="20" uuid="87ef5a94-b471-4570-a253-3f794d01071d"/>
+				<textFieldExpression><![CDATA[$F{nomeMembro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

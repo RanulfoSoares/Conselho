@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import br.com.conselho.domain.Familia;
 import br.com.conselho.domain.Membro;
 import br.com.conselho.domain.MoverMembro;
 import br.com.conselho.domain.Status;
@@ -115,8 +116,46 @@ public class MoverMembroDAO {
 			sessao.close();
 		}
 		
-		return listaMembro;
+		return listaMembro;		
+	}
+	
+	public List<MoverMembro> buscaHistSaida(Familia familia) throws Exception{
 		
-	}			
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		List<MoverMembro> listaMembro = null;
 
+		try {
+			Criteria criteria = sessao.createCriteria(MoverMembro.class);						
+			criteria.add(Restrictions.eq("familaAtual", familia));
+			listaMembro = criteria.list();
+						
+		} catch (Exception e) {
+			System.out.println("ERRO...." + e.getMessage());
+			throw new Exception();
+		} finally {
+			sessao.close();
+		}
+		
+		return listaMembro;					
+	}
+	
+	public List<MoverMembro> buscaHistEntrada(Familia familia) throws Exception{
+		
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		List<MoverMembro> listaMembro = null;
+
+		try {
+			Criteria criteria = sessao.createCriteria(MoverMembro.class);						
+			criteria.add(Restrictions.eq("familiaDestino", familia));
+			listaMembro = criteria.list();
+						
+		} catch (Exception e) {
+			System.out.println("ERRO...." + e.getMessage());
+			throw new Exception();
+		} finally {
+			sessao.close();
+		}
+		
+		return listaMembro;					
+	}
 }

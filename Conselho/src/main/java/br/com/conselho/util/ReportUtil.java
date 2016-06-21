@@ -142,7 +142,7 @@ public class ReportUtil {
 	private JasperPrint getJasperPrintAtendimento(AtendimentoDTO atendimentoDTO) throws JRException, Exception {
 //      NfseRelatorio nfseRelatorio = NFSeHelper(notaFiscal, scontext, isCarta, consultaExterna, idCidade);
       HashMap parNfse = new HashMap();
-      //parNfse.put("SUBREPORT_DIR", JSFUtil.getRealPath("/WEB-INF/relatorios/"));
+      parNfse.put("SUBREPORT_DIR", JSFUtil.getRealPath("/WEB-INF/relatorios/"));
       List<AtendimentoDTO> listaAtendimentoRelatorio = new ArrayList<AtendimentoDTO>();      
       listaAtendimentoRelatorio.add(atendimentoDTO);
       JRBeanCollectionDataSource jRBeanCollectionDataSourceNfse = new JRBeanCollectionDataSource(listaAtendimentoRelatorio);
