@@ -131,7 +131,8 @@ public class ReportUtil {
 	
 	private JasperPrint getJasperPrintNucleo(NucleoFamiliarDTO nucleoFamiliarDTO) throws JRException, Exception {
 //        NfseRelatorio nfseRelatorio = NFSeHelper(notaFiscal, scontext, isCarta, consultaExterna, idCidade);
-        HashMap parNfse = new HashMap();        
+        HashMap parNfse = new HashMap();
+        parNfse.put("SUBREPORT_DIR", JSFUtil.getRealPath("/WEB-INF/relatorios/"));
         List<NucleoFamiliarDTO> listaNucleoRelatorio = new ArrayList<NucleoFamiliarDTO>();
         listaNucleoRelatorio.add(nucleoFamiliarDTO);
         JRBeanCollectionDataSource jRBeanCollectionDataSourceNfse = new JRBeanCollectionDataSource(listaNucleoRelatorio);
