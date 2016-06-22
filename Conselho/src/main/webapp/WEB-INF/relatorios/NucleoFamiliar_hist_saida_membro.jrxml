@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NucleoFamiliar_hist_saida_membro" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="11e8fca4-503e-4fbf-b09d-ec4393049918">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<field name="nomeMembro" class="java.lang.String"/>
+	<field name="data" class="java.lang.String"/>
+	<field name="destino" class="java.lang.String"/>
+	<field name="conselheiroAtuante" class="java.lang.String"/>
+	<field name="motivo" class="java.lang.String"/>
+	<field name="obs" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -19,14 +24,54 @@
 		</band>
 	</title>
 	<detail>
-		<band height="36" splitType="Stretch">
+		<band height="141" splitType="Stretch">
 			<staticText>
 				<reportElement x="14" y="9" width="75" height="20" uuid="6b1f1fff-36c8-4165-b410-f8a0550a2612"/>
-				<text><![CDATA[nomeMembro:]]></text>
+				<text><![CDATA[Membro:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="89" y="9" width="100" height="20" uuid="87ef5a94-b471-4570-a253-3f794d01071d"/>
+				<reportElement x="89" y="9" width="382" height="20" uuid="87ef5a94-b471-4570-a253-3f794d01071d"/>
 				<textFieldExpression><![CDATA[$F{nomeMembro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="28" width="75" height="20" uuid="14a65bfa-f40a-4557-81c2-b90ed2363266"/>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="89" y="28" width="100" height="20" uuid="360161ab-3105-40cc-aa18-7199d7eb97e9"/>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="47" width="75" height="20" uuid="d29ec1e3-4f45-43cb-9670-495a24df3aba"/>
+				<text><![CDATA[Cons. Atuante:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="89" y="47" width="382" height="20" uuid="36719c17-38a0-437a-90fb-aa3008956dcc"/>
+				<textFieldExpression><![CDATA[$F{conselheiroAtuante}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="66" width="75" height="20" uuid="01767c06-e6c5-4c57-bd4f-6cbeafd50974"/>
+				<text><![CDATA[Destino:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="89" y="66" width="382" height="20" uuid="79b17ead-e54c-43fc-88bc-b5aa7d086f7f"/>
+				<textFieldExpression><![CDATA[$F{destino}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="85" width="75" height="20" uuid="431ef918-8dfd-4eae-b38b-6e681485bdab"/>
+				<text><![CDATA[Motivo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="89" y="85" width="382" height="20" uuid="56269914-2e1f-47fc-8ccb-00fc3ea72193"/>
+				<textFieldExpression><![CDATA[$F{motivo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="104" width="75" height="20" uuid="a47b8654-aa5d-4050-a34c-91b7bac9fd10"/>
+				<text><![CDATA[Observação:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="89" y="104" width="382" height="20" uuid="ef16615d-94c0-48d7-95aa-afc3847ea892"/>
+				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

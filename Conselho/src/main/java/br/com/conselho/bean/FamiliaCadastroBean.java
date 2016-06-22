@@ -753,8 +753,15 @@ public class FamiliaCadastroBean implements Serializable{
 				for (MoverMembro moverMembro : listaSaidaMembro) {
 					MovimentacaoMembro movimentacaoMembro = new MovimentacaoMembro();
 					movimentacaoMembro.setNomeMembro(moverMembro.getMembro().getPessoa().getNomeCompleto());
-					movimentacaoMembro.setFamiliaDestina(moverMembro.getFamiliaDestino().getNumeroPasta());
-					movimentacaoMembro.setFamiliaOrigem(moverMembro.getFamilaAtual().getNumeroPasta());
+					
+					movimentacaoMembro.setDestino(moverMembro.getFamiliaDestino().getNumeroPasta());
+					movimentacaoMembro.setOrigem(moverMembro.getFamilaAtual().getNumeroPasta());
+					
+					movimentacaoMembro.setConselheiroAtuante(moverMembro.getConselheiroRegistro().getNomeUsual());
+					movimentacaoMembro.setData(Helper.formatDate().format(moverMembro.getDataMovimento()));
+					movimentacaoMembro.setMotivo(motivoTransferencia(moverMembro.getMotivo()));
+					movimentacaoMembro.setObs(moverMembro.getObs());
+					
 					listaSaidaMembroDTO.add(movimentacaoMembro);
 				}
 				
@@ -764,8 +771,15 @@ public class FamiliaCadastroBean implements Serializable{
 				for (MoverMembro moverMembro : listaEntradaMembro) {
 					MovimentacaoMembro movimentacaoMembro = new MovimentacaoMembro();
 					movimentacaoMembro.setNomeMembro(moverMembro.getMembro().getPessoa().getNomeCompleto());
-					movimentacaoMembro.setFamiliaDestina(moverMembro.getFamiliaDestino().getNumeroPasta());
-					movimentacaoMembro.setFamiliaOrigem(moverMembro.getFamilaAtual().getNumeroPasta());
+					
+					movimentacaoMembro.setDestino(moverMembro.getFamiliaDestino().getNumeroPasta());
+					movimentacaoMembro.setOrigem(moverMembro.getFamilaAtual().getNumeroPasta());
+					
+					movimentacaoMembro.setConselheiroAtuante(moverMembro.getConselheiroRegistro().getNomeUsual());
+					movimentacaoMembro.setData(Helper.formatDate().format(moverMembro.getDataMovimento()));
+					movimentacaoMembro.setMotivo(motivoTransferencia(moverMembro.getMotivo()));
+					movimentacaoMembro.setObs(moverMembro.getObs());
+					
 					listaEntradaMembroDTO.add(movimentacaoMembro);
 				}
 				
@@ -928,6 +942,41 @@ public class FamiliaCadastroBean implements Serializable{
 			e.printStackTrace();
 			System.out.println("ERRO: "+e.getMessage());
 		}	
+	}
+	
+	public String motivoTransferencia(String sigla){
+		
+		String motivo;
+		
+		switch (sigla) {
+		case "AI":
+			motivo = "Acolhimento Institucional";
+			break;
+		case "AD":
+			motivo = "Adoção";
+			break;
+		case "CS":
+			motivo = "Colocação em família substituta";
+			break;
+		case "IE":
+			motivo = "Internação em estabelecimento educacional";
+			break;
+		case "RP":
+			motivo = "Retorno aos responsáveis, determinação Judicial";
+			break;
+		case "TQ":
+			motivo = "Tratamento para dependência química";
+			break;
+		case "TP":
+			motivo = "Tratamento psiquiátrico";
+			break;
+		default:
+			motivo = "N/C";
+			break;
+		}
+		
+		return motivo;
+		
 	}
 	
 	public Boolean getRendBtHistorico() {

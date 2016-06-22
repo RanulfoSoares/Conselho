@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NucleoFamiliar" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f61f1d82-253a-4161-a60e-5e88465c37ce">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="328"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\Thiago Henrique\\Documents\\GitHub\\Conselho\\Conselho\\src\\main\\webapp\\WEB-INF\\relatorios\\"]]></defaultValueExpression>
 	</parameter>
@@ -161,7 +161,7 @@
 				<textFieldExpression><![CDATA[$F{adultos}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="38">
+		<band height="26">
 			<textField>
 				<reportElement x="66" y="6" width="478" height="18" uuid="b7a4b577-0967-4752-9ed2-cd69329f756c"/>
 				<textElement>
@@ -170,39 +170,39 @@
 				<textFieldExpression><![CDATA[$F{endereco}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="6" width="58" height="18" uuid="fa599fc6-5c5b-41c2-a030-4cc854a77037"/>
+				<reportElement x="8" y="6" width="58" height="18" uuid="fa599fc6-5c5b-41c2-a030-4cc854a77037"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Endereço:]]></text>
 			</staticText>
 		</band>
-		<band height="55">
+		<band height="39">
 			<staticText>
-				<reportElement x="0" y="6" width="80" height="18" uuid="e0cdbbff-b5b5-492f-a9e5-a02575a5807c"/>
+				<reportElement x="8" y="3" width="80" height="18" uuid="e0cdbbff-b5b5-492f-a9e5-a02575a5807c"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Observações:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="21" y="24" width="524" height="16" uuid="20335d43-c708-4b31-a16c-692cb6920f52"/>
+				<reportElement x="21" y="21" width="524" height="16" uuid="20335d43-c708-4b31-a16c-692cb6920f52"/>
 				<textElement textAlignment="Justified">
 					<font size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="50">
+		<band height="11">
 			<subreport>
-				<reportElement x="0" y="0" width="200" height="50" uuid="08dc07ce-6eae-4dcc-b6a9-502989dfc54e"/>
+				<reportElement x="8" y="0" width="200" height="10" uuid="08dc07ce-6eae-4dcc-b6a9-502989dfc54e"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaSaidaMembros})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "NucleoFamiliar_hist_saida_membro.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="50">
+		<band height="13">
 			<subreport>
-				<reportElement x="0" y="0" width="200" height="50" uuid="51797101-f028-4973-b528-642596604497"/>
+				<reportElement x="8" y="0" width="200" height="11" uuid="51797101-f028-4973-b528-642596604497"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaEntradaMembros})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "NucleoFamiliar_hist_entrada_membro.jasper"]]></subreportExpression>
 			</subreport>
