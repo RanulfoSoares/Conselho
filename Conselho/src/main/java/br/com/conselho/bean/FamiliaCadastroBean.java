@@ -754,9 +754,13 @@ public class FamiliaCadastroBean implements Serializable{
 					MovimentacaoMembro movimentacaoMembro = new MovimentacaoMembro();
 					movimentacaoMembro.setNomeMembro(moverMembro.getMembro().getPessoa().getNomeCompleto());
 					
-					movimentacaoMembro.setDestino(moverMembro.getFamiliaDestino().getNumeroPasta());
-					movimentacaoMembro.setOrigem(moverMembro.getFamilaAtual().getNumeroPasta());
-					
+					if(moverMembro.getFamiliaDestino() != null){
+						movimentacaoMembro.setDestino(moverMembro.getFamiliaDestino().getNumeroPasta());
+					}else{
+						movimentacaoMembro.setDestino(moverMembro.getInstituicaoDestino().getNomeRazao());
+					}
+										
+					movimentacaoMembro.setOrigem(moverMembro.getFamilaAtual().getNumeroPasta());					
 					movimentacaoMembro.setConselheiroAtuante(moverMembro.getConselheiroRegistro().getNomeUsual());
 					movimentacaoMembro.setData(Helper.formatDate().format(moverMembro.getDataMovimento()));
 					movimentacaoMembro.setMotivo(motivoTransferencia(moverMembro.getMotivo()));
@@ -772,9 +776,13 @@ public class FamiliaCadastroBean implements Serializable{
 					MovimentacaoMembro movimentacaoMembro = new MovimentacaoMembro();
 					movimentacaoMembro.setNomeMembro(moverMembro.getMembro().getPessoa().getNomeCompleto());
 					
-					movimentacaoMembro.setDestino(moverMembro.getFamiliaDestino().getNumeroPasta());
-					movimentacaoMembro.setOrigem(moverMembro.getFamilaAtual().getNumeroPasta());
+					if(moverMembro.getFamilaAtual() != null){
+						movimentacaoMembro.setOrigem(moverMembro.getFamilaAtual().getNumeroPasta());
+					}else{
+						movimentacaoMembro.setOrigem(moverMembro.getInstituicaoAtual().getNomeRazao());
+					}										
 					
+					movimentacaoMembro.setDestino(moverMembro.getFamiliaDestino().getNumeroPasta());
 					movimentacaoMembro.setConselheiroAtuante(moverMembro.getConselheiroRegistro().getNomeUsual());
 					movimentacaoMembro.setData(Helper.formatDate().format(moverMembro.getDataMovimento()));
 					movimentacaoMembro.setMotivo(motivoTransferencia(moverMembro.getMotivo()));

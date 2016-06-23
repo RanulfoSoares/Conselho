@@ -19,7 +19,7 @@
 				<textElement>
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Movimento saida de membros]]></text>
+				<text><![CDATA[Transferência crian/adol: Saida]]></text>
 			</staticText>
 		</band>
 	</title>

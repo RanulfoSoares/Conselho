@@ -15,11 +15,11 @@
 	<title>
 		<band height="31" splitType="Stretch">
 			<staticText>
-				<reportElement x="14" y="10" width="243" height="21" uuid="c0a1dc84-a306-453e-8557-33e5e748b675"/>
+				<reportElement x="14" y="10" width="259" height="21" uuid="c0a1dc84-a306-453e-8557-33e5e748b675"/>
 				<textElement>
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Movimento entrada de membros]]></text>
+				<text><![CDATA[Transferência crian/adol: Entrada]]></text>
 			</staticText>
 		</band>
 	</title>
