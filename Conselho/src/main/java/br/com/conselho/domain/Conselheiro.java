@@ -105,16 +105,16 @@ public class Conselheiro implements Serializable {
 	public String getNomeNivelAcesso(){
 		switch (nivelAcesso) {
 		case "cor":
-			return "Conselheiro Coordenador";			
+			return "Nivel 1";			
 
 		case "con":
-			return "Conselheiro";			
+			return "Nivel 2";			
 		
 		case "col":
-			return "Colaborador";			
+			return "Nivel 3";			
 		
 		case "rel":
-			return "Relatorio";
+			return "Nivel 4";
 		
 		default:
 			return "Não Especificado";			

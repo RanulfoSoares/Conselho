@@ -140,11 +140,13 @@
 						
 						<p:selectOneMenu style="width:145px;" id="situacaoMatrimonial" value="#{MBConselheiroCadastro.situacaoMatrimonia}" >
 							<f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
-							<f:selectItem itemLabel="Casada(o)" itemValue="CS" />
-							<f:selectItem itemLabel="Divorciada(o)" itemValue="DV" />
-							<f:selectItem itemLabel="Separada(o)" itemValue="SP" />
-							<f:selectItem itemLabel="Solteira(o)" itemValue="ST" />
-							<f:selectItem itemLabel="Viuva(o)" itemValue="VU" />
+							<f:selectItem itemLabel="Amasiada(o)" itemValue="AM" />
+								<f:selectItem itemLabel="Casada(o)" itemValue="CS" />
+<!-- 								<f:selectItem itemLabel="Divorciada(o)" itemValue="DV" /> -->
+								<f:selectItem itemLabel="Desconhecido" itemValue="NA" />
+								<f:selectItem itemLabel="Separada(o)" itemValue="SP" />
+								<f:selectItem itemLabel="Solteira(o)" itemValue="ST" />
+								<f:selectItem itemLabel="Viuva(o)" itemValue="VU" />
 						</p:selectOneMenu>
 						
 					</h:panelGrid>
@@ -218,10 +220,10 @@
 						<p:spacer width="2px;" />						
 						<p:selectOneMenu style="width:110px;" id="nivelAcesso" value="#{MBConselheiroCadastro.nivelAcesso}" >
 							<f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
-							<f:selectItem itemLabel="Coordenador" itemValue="cor" />
-							<f:selectItem itemLabel="Conselheiro" itemValue="con" />
-							<f:selectItem itemLabel="Colaborador" itemValue="col" />
-							<f:selectItem itemLabel="Relatório" itemValue="rel" />						
+							<f:selectItem itemLabel="Nivel 1" itemValue="cor" />
+							<f:selectItem itemLabel="Nivel 2" itemValue="con" />
+							<f:selectItem itemLabel="Nivel 3" itemValue="col" />
+							<f:selectItem itemLabel="Nivel 4" itemValue="rel" />						
 						</p:selectOneMenu>
 					</h:panelGrid>
 					

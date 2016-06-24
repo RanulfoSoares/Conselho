@@ -26,27 +26,27 @@
 	<detail>
 		<band height="141" splitType="Stretch">
 			<staticText>
-				<reportElement x="14" y="9" width="75" height="20" uuid="6b1f1fff-36c8-4165-b410-f8a0550a2612"/>
+				<reportElement x="14" y="47" width="75" height="20" uuid="6b1f1fff-36c8-4165-b410-f8a0550a2612"/>
 				<text><![CDATA[Membro:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="89" y="9" width="382" height="20" uuid="87ef5a94-b471-4570-a253-3f794d01071d"/>
+				<reportElement x="89" y="47" width="382" height="20" uuid="87ef5a94-b471-4570-a253-3f794d01071d"/>
 				<textFieldExpression><![CDATA[$F{nomeMembro}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="14" y="28" width="75" height="20" uuid="14a65bfa-f40a-4557-81c2-b90ed2363266"/>
+				<reportElement x="14" y="9" width="75" height="20" uuid="14a65bfa-f40a-4557-81c2-b90ed2363266"/>
 				<text><![CDATA[Data:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="89" y="28" width="100" height="20" uuid="360161ab-3105-40cc-aa18-7199d7eb97e9"/>
+				<reportElement x="89" y="9" width="100" height="20" uuid="360161ab-3105-40cc-aa18-7199d7eb97e9"/>
 				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="14" y="47" width="75" height="20" uuid="d29ec1e3-4f45-43cb-9670-495a24df3aba"/>
+				<reportElement x="14" y="28" width="75" height="20" uuid="d29ec1e3-4f45-43cb-9670-495a24df3aba"/>
 				<text><![CDATA[Cons. Atuante:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="89" y="47" width="382" height="20" uuid="36719c17-38a0-437a-90fb-aa3008956dcc"/>
+				<reportElement x="89" y="28" width="382" height="20" uuid="36719c17-38a0-437a-90fb-aa3008956dcc"/>
 				<textFieldExpression><![CDATA[$F{conselheiroAtuante}]]></textFieldExpression>
 			</textField>
 			<staticText>

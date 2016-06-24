@@ -63,7 +63,7 @@
 					                <f:setPropertyActionListener value="#{membro.pessoa.id}" target="#{MBFamiliaCadastro.idMembro}"  />					               
 					            </p:commandButton>
 					            
-					            <p:commandButton icon=" ui-icon-transferthick-e-w" action="#{MBFamiliaCadastro.preparaMoverMembro}" onclick="this.form.target='_self';" title="Transferir Membro" update=":msgs1, :formGrid" >
+					            <p:commandButton disabled="#{membro.pessoa.idadeAtual > 18}" icon=" ui-icon-transferthick-e-w" action="#{MBFamiliaCadastro.preparaMoverMembro}" onclick="this.form.target='_self';" title="Transferir Membro 'Somente Menores'" update=":msgs1, :formGrid" >
 					            	<f:setPropertyActionListener value="#{membro.idMembro}" target="#{MBFamiliaCadastro.idMembro}"  />					               
 					            </p:commandButton>
 					            

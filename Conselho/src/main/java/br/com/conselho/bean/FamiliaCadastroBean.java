@@ -879,8 +879,8 @@ public class FamiliaCadastroBean implements Serializable{
 							direitoVioladoDTO.setGrupoDireito(registroDireitoViolado.getDireitoViolado().getGrupoDeDireito().getNome());
 							direitoVioladoDTO.setObs(registroDireitoViolado.getObs());
 							direitoVioladoDTO.setVitima(registroDireitoViolado.getVitima().getMembro().getPessoa().getNomeCompleto());
-							direitoVioladoDTO.setCaminhoSub(JSFUtil.getRealPath("/WEB-INF/relatorios/"));
-							//direitoVioladoDTO.setCaminhoSub("C:\\Users\\Thiago Henrique\\Documents\\GitHub\\Conselho\\Conselho\\src\\main\\webapp\\WEB-INF\\relatorios\\");
+							//direitoVioladoDTO.setCaminhoSub(JSFUtil.getRealPath("/WEB-INF/relatorios/"));
+							direitoVioladoDTO.setCaminhoSub("C:\\Users\\Thiago Henrique\\Documents\\GitHub\\Conselho\\Conselho\\src\\main\\webapp\\WEB-INF\\relatorios\\");
 							
 							direitoVioladoDTO.setDataInc(Helper.formatDate().format(registroDireitoViolado.getDataInc()));
 							direitoVioladoDTO.setConselheiro(registroDireitoViolado.getConselheiroRegistro().getNomeUsual());
@@ -923,8 +923,8 @@ public class FamiliaCadastroBean implements Serializable{
 							atribuicaoDTO.setConselheiro(atribuicao.getConselheiro().getNomeUsual());
 							atribuicaoDTO.setDescumpridor(atribuicao.getDescumpridor().getAgenteVioladorClasse().getNome()+", "+atribuicao.getDescumpridor().getNome());
 							atribuicaoDTO.setDescricao(atribuicao.getDescricao());
-							atribuicaoDTO.setCaminhoSub(JSFUtil.getRealPath("/WEB-INF/relatorios/"));
-							//atribuicaoDTO.setCaminhoSub("C:\\Users\\Thiago Henrique\\Documents\\GitHub\\Conselho\\Conselho\\src\\main\\webapp\\WEB-INF\\relatorios\\");
+							//atribuicaoDTO.setCaminhoSub(JSFUtil.getRealPath("/WEB-INF/relatorios/"));
+							atribuicaoDTO.setCaminhoSub("C:\\Users\\Thiago Henrique\\Documents\\GitHub\\Conselho\\Conselho\\src\\main\\webapp\\WEB-INF\\relatorios\\");
 							
 							List<DeterminacaoAplicadaDTO> listaDeterminacaoAplicadaDTO = new ArrayList<DeterminacaoAplicadaDTO>();
 							for (DeterminacaoAplicada determinacao : atribuicao.getListaDeterminacoesAplicadas()) {								
