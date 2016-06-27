@@ -819,14 +819,14 @@
 							<p:spacer width="3px;" />
 								
 								
-							<p:outputLabel styleClass="texto_informativo_18" value="Direito Violado de:" />
+							<p:outputLabel styleClass="texto_informativo_18" value="Violação de Direito de:" />
 							<p:selectCheckboxMenu id="menu" value="#{MBAtendimento.listaVitimasSelecionadas}" label="Selecionar Vitimas" converter="omnifaces.SelectItemsConverter"
 	                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
 					            <f:selectItems value="#{MBAtendimento.listaVitimas}" />
 					        </p:selectCheckboxMenu>	
 					        <p:spacer width="3px;" />
 								
-							<p:outputLabel styleClass="texto_informativo_18" value="Grupo de Direito:" />
+							<p:outputLabel styleClass="texto_informativo_18" value="Direito Fundamental:" />
 												
 							<p:selectOneMenu style="width:400px;" id="cbGrupoDireito" converter="omnifaces.SelectItemsConverter" filter="true"
 										value="#{MBAtendimento.grupoDeDireitoSelecionado}" filterMatchMode="contains" >
@@ -839,7 +839,7 @@
 						</h:panelGrid>																																
 						
 						<p:spacer width="3px;" />
-						<p:outputLabel styleClass="texto_informativo_18" value="Direito Violado"   />
+						<p:outputLabel styleClass="texto_informativo_18" value="Violação de Direito"   />
 						<p:selectOneMenu style="width:690px;" id="cbDireitoViolado" converter="omnifaces.SelectItemsConverter" filter="true"
 									value="#{MBAtendimento.direitoVioladoSelecionado}" filterMatchMode="contains" >
 							<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
@@ -897,7 +897,7 @@
 					</h:panelGrid>
 				
 					<h:panelGrid columns="1" style="margin: 20px;">
-						<h:outputLabel styleClass="texto_informativo_18" value="Direito Violado Selecionado:" />
+						<h:outputLabel styleClass="texto_informativo_18" value="Violação de Direito Selecionado:" />
 						<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.registroDireitoVioladoAplicandoMedida.direitoViolado.resumoDescricao}" />
 					</h:panelGrid>
 					
@@ -914,7 +914,7 @@
 					
 					<h:panelGrid columns="1" style="margin: 20px;">
 										
-						<p:outputLabel  style="margin-top: 10px;" styleClass="texto_informativo_18" value="Medida Aplicada em Razão/Por ação de - Art. 98 do ECA:" />
+						<p:outputLabel  style="margin-top: 10px;" styleClass="texto_informativo_18" value="Medida de Proteção (Agente Violador):" />
 						<p:selectOneMenu style="width:480px;" id="cbMedidaEmRazao" converter="omnifaces.SelectItemsConverter" filter="true"
 									 value="#{MBAtendimento.medidaEmRazaoSelecionada}" filterMatchMode="contains" >
 							<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
@@ -1116,13 +1116,13 @@
 				        
 					</h:panelGrid>				
 					<h:panelGrid columns="1" style="margin: 20px;">
-						<h:outputLabel styleClass="texto_informativo_18" value="Direito Violado Selecionado:" />
+						<h:outputLabel styleClass="texto_informativo_18" value="Violação de Direito Selecionado:" />
 						<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.direitoSelecionadoAplicaMedida.resumoDescricao}" />
 					</h:panelGrid>
 					
 					<h:panelGrid columns="1" style="margin: 20px;">
 										
-						<p:outputLabel  style="margin-top: 10px;" styleClass="texto_informativo_18" value="Medida Aplicada em Razão/Por ação de - Art. 98 do ECA:" />
+						<p:outputLabel  style="margin-top: 10px;" styleClass="texto_informativo_18" value="Medida de Proteção (Agente Violador):" />
 						<p:selectOneMenu style="width:480px;" id="cbMedidaEmRazao" converter="omnifaces.SelectItemsConverter" filter="true"
 									 value="#{MBAtendimento.medidaEmRazaoSelecionada}" filterMatchMode="contains" >
 							<f:selectItem noSelectionOption="true" itemLabel="Selecione" />

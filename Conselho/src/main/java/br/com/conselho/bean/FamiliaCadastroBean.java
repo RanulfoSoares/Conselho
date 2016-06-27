@@ -481,7 +481,7 @@ public class FamiliaCadastroBean implements Serializable{
 						}
 						
 						if(adultoForaLista || menorForaLista){
-							JSFUtil.addErrorMessage("Informe no minimo um adulto e um menor");
+							JSFUtil.addErrorMessage("Informe no minimo um adulto e uma criança ou adolescente");
 							return;
 						}
 					
@@ -904,7 +904,7 @@ public class FamiliaCadastroBean implements Serializable{
 									}
 									medidaAplicadaDTO.setViolador(violador);
 								}else{
-									medidaAplicadaDTO.setViolador("Violado");
+									medidaAplicadaDTO.setViolador("Violador");
 								}
 								
 								listaMedidaAplicadaDTO.add(medidaAplicadaDTO);

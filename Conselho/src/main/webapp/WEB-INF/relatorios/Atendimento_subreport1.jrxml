@@ -71,11 +71,11 @@
 		</band>
 		<band height="46">
 			<staticText>
-				<reportElement x="2" y="0" width="99" height="20" uuid="0296d397-36cc-461d-8540-33490f9bd25b"/>
+				<reportElement x="2" y="0" width="127" height="20" uuid="0296d397-36cc-461d-8540-33490f9bd25b"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Grupo de direito]]></text>
+				<text><![CDATA[Direito Fundamental]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="1" y="20" width="505" height="20" uuid="bb2fdc0e-f490-4d03-a6b5-4207ddab2eb4"/>
@@ -88,7 +88,7 @@
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Direito Violado]]></text>
+				<text><![CDATA[Violaçao de Direito]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="2" y="15" width="505" height="20" uuid="b2e0dfa5-e9b7-47f0-b718-bece313b6df5"/>
