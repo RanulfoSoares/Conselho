@@ -6,21 +6,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Transient;
 
 @Entity
-@SequenceGenerator(name = "direitoViolado_seq", sequenceName = "direitoViolado_cod_seq", allocationSize =1)
-public class DireitoViolado {
+@SequenceGenerator(name = "direito_fundamental_seq", sequenceName = "direito_fundamental_cod_seq", allocationSize =1)
+public class DireitoFundamental {
 	
 	@Id
-	@GeneratedValue(generator = "direitoViolado_seq", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "direito_fundamental_seq", strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
-	@Column(nullable = false, length = 400)
-	private String nome;		
+	@Column(nullable = false, length = 70)
+	private String nome;
 	
-	@Transient
-	private String resumoDescricao;	
 	
 	public Long getId() {
 		return id;
@@ -33,17 +30,6 @@ public class DireitoViolado {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}	
-	
-	public String getResumoDescricao() {
-		
-		if(nome.length() <= 180){
-			resumoDescricao = nome.substring(0, nome.length());
-		}else{
-			resumoDescricao = nome.substring(0, 180);
-		}		
-		
-		return resumoDescricao;
 	}
 	@Override
 	public int hashCode() {
@@ -61,7 +47,7 @@ public class DireitoViolado {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DireitoViolado other = (DireitoViolado) obj;
+		DireitoFundamental other = (DireitoFundamental) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -73,7 +59,6 @@ public class DireitoViolado {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
-	}
-	
+	}		
 	
 }
