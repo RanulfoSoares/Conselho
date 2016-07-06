@@ -802,7 +802,7 @@
 <!-- 			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 			<p:dialog header="Incluir Direito Violado" widgetVar="dlg" 
-					  modal="true" resizable="false" height="470" width="850"  appendTo="@(body)"
+					  modal="true" resizable="false" height="530" width="850"  appendTo="@(body)"
 					  closable="false" draggable="false">
 				<h:form id="formDialogDViolado">
 					<h:panelGrid columns="1" style="margin:  20px;">
@@ -829,23 +829,34 @@
 							<p:outputLabel styleClass="texto_informativo_18" value="Direito Fundamental:" />
 												
 							<p:selectOneMenu style="width:400px;" id="cbGrupoDireito" converter="omnifaces.SelectItemsConverter" filter="true"
-										value="#{MBAtendimento.grupoDeDireitoSelecionado}" filterMatchMode="contains" >
+										value="#{MBAtendimento.direitoFundamentalSelecionado}" filterMatchMode="contains" >
 								<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-								<f:selectItems value="#{MBAtendimento.listaGrupoDireito}"
-										var="grupodedireito" itemValue="#{grupodedireito}"
-										itemLabel="#{grupodedireito.nome}" />
-								<p:ajax event="change" listener="#{MBAtendimento.buscaDireitoViolado}" update="cbDireitoViolado, :msgs1" />										
+								<f:selectItems value="#{MBAtendimento.listaDireitoFundamental}"
+										var="direitoFundamental" itemValue="#{direitoFundamental}"
+										itemLabel="#{direitoFundamental.nome}" />
+								<p:ajax event="change" listener="#{MBAtendimento.buscaCaracterizacaoViolacaoDireito}" update="cbCaracterizacao, :msgs1" />										
 							</p:selectOneMenu>
 						</h:panelGrid>																																
 						
 						<p:spacer width="3px;" />
-						<p:outputLabel styleClass="texto_informativo_18" value="Violação de Direito"   />
-						<p:selectOneMenu style="width:690px;" id="cbDireitoViolado" converter="omnifaces.SelectItemsConverter" filter="true"
-									value="#{MBAtendimento.direitoVioladoSelecionado}" filterMatchMode="contains" >
+						<p:outputLabel styleClass="texto_informativo_18" value="Caracterização da Violação de Direito"   />
+						<p:selectOneMenu style="width:690px;" id="cbCaracterizacao" converter="omnifaces.SelectItemsConverter" filter="true"
+									value="#{MBAtendimento.caracterizacaoViolacaoDireitoSelecionado}" filterMatchMode="contains" >
 							<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-							<f:selectItems value="#{MBAtendimento.listaDireitoViolado}"
-									var="direitoViolado" itemValue="#{direitoViolado}"
-									itemLabel="#{direitoViolado.resumoDescricao}" />
+							<f:selectItems value="#{MBAtendimento.listaCaracterizacaoViolacaoDireito}"
+									var="caracterizacaoViolacaoDireito" itemValue="#{caracterizacaoViolacaoDireito}"
+									itemLabel="#{caracterizacaoViolacaoDireito.resumoDescricao}" />
+							<p:ajax event="change" listener="#{MBAtendimento.buscaCaracterizarViolacaoDireito}" update="cbViolacaoDireito, :msgs1" />										
+						</p:selectOneMenu>
+						
+						<p:spacer width="3px;" />
+						<p:outputLabel styleClass="texto_informativo_18" value="Violação de Direito"   />
+						<p:selectOneMenu style="width:690px;" id="cbViolacaoDireito" converter="omnifaces.SelectItemsConverter" filter="true"
+									value="#{MBAtendimento.caracterizarDireitoVioladoSelecionado}" filterMatchMode="contains" >
+							<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+							<f:selectItems value="#{MBAtendimento.listaCaracterizarViolacaoDireito}"
+									var="caracterizarDireitoViolado" itemValue="#{caracterizarDireitoViolado}"
+									itemLabel="#{caracterizarDireitoViolado.direitoViolado.resumoDescricao}" />
 							<p:ajax event="change" listener="#{MBAtendimento.ativaBotaoIncluiDireitoViolado}" update="btnSalvarDireitoViolado, :msgs1" />										
 						</p:selectOneMenu>						
 					</h:panelGrid>

@@ -22,9 +22,12 @@ import br.com.conselho.dao.AgenteVioladorSubClasseDAO;
 import br.com.conselho.dao.AtendimentoDAO;
 import br.com.conselho.dao.AtribuicaoDAO;
 import br.com.conselho.dao.BairroDAO;
+import br.com.conselho.dao.CaracterizacaoViolacaoDireitoDAO;
+import br.com.conselho.dao.CaracterizarViolacaoDireitoDAO;
 import br.com.conselho.dao.CidadeDAO;
 import br.com.conselho.dao.DeterminacaoAplicadaDAO;
 import br.com.conselho.dao.DeterminacoesDAO;
+import br.com.conselho.dao.DireitoFundamentalDAO;
 import br.com.conselho.dao.DireitoVioladoDAO;
 import br.com.conselho.dao.EstadoDAO;
 import br.com.conselho.dao.FamiliaDAO;
@@ -51,10 +54,13 @@ import br.com.conselho.domain.AgenteVioladorSubClasse;
 import br.com.conselho.domain.Atendimento;
 import br.com.conselho.domain.Atribuicao;
 import br.com.conselho.domain.Bairro;
+import br.com.conselho.domain.CaracterizacaoViolacaoDireito;
+import br.com.conselho.domain.CaracterizarDireitoViolado;
 import br.com.conselho.domain.Cidade;
 import br.com.conselho.domain.Conselheiro;
 import br.com.conselho.domain.Determinacao;
 import br.com.conselho.domain.DeterminacaoAplicada;
+import br.com.conselho.domain.DireitoFundamental;
 import br.com.conselho.domain.DireitoViolado;
 import br.com.conselho.domain.Estado;
 import br.com.conselho.domain.Familia;
@@ -160,10 +166,12 @@ public class AtendimentoBean implements Serializable {
 	
 	private Adendo adendoSelecionado;
 	
-	private List<GrupoDeDireito> listaGrupoDireito;
-	private GrupoDeDireito grupoDeDireitoSelecionado;
-	private List<DireitoViolado> listaDireitoViolado;
-	private DireitoViolado direitoVioladoSelecionado;
+	private List<DireitoFundamental> listaDireitoFundamental;
+	private DireitoFundamental direitoFundamentalSelecionado;
+	private List<CaracterizacaoViolacaoDireito> listaCaracterizacaoViolacaoDireito;
+	private CaracterizacaoViolacaoDireito caracterizacaoViolacaoDireitoSelecionado;
+	private List<CaracterizarDireitoViolado> listaCaracterizarViolacaoDireito;
+	private CaracterizarDireitoViolado caracterizarDireitoVioladoSelecionado;
 	private Boolean rendTblAdendoDireitoViolado;
 	private List<RegistroDireitoViolado> listaRegistroDireitoVioladoAtendimento;	
 	private RegistroDireitoViolado registroDireitoVioladoAplicandoMedida;
@@ -261,7 +269,7 @@ public class AtendimentoBean implements Serializable {
 			desabilitaBotoesEdita = Boolean.FALSE;
 			visualizar = Boolean.FALSE;
 			rendTblAdendoDireitoViolado = Boolean.FALSE;
-			listaGrupoDireito = new GrupoDeDireitoDAO().lista(); 
+			listaDireitoFundamental = new DireitoFundamentalDAO().lista(); 
 			listaRegistroDireitoVioladoAtendimento = new ArrayList<RegistroDireitoViolado>();
 			btnIncluiDireitoViolado = true;
 			listaDireitosVioladosNoAtendimento = new ArrayList<DireitoViolado>();
@@ -1333,10 +1341,20 @@ public class AtendimentoBean implements Serializable {
 		
 	}
 	
-	public void buscaDireitoViolado(){
+	public void buscaCaracterizacaoViolacaoDireito(){
 		
 		try {
-			listaDireitoViolado = new DireitoVioladoDAO().lista(grupoDeDireitoSelecionado);
+			listaCaracterizacaoViolacaoDireito = new CaracterizacaoViolacaoDireitoDAO().lista(direitoFundamentalSelecionado);
+		} catch (Exception e) {
+			JSFUtil.addErrorMessage("Erro ao carregar lista de direito violados: "+e.getMessage());
+			e.printStackTrace();
+		}		
+	}
+	
+	public void buscaCaracterizarViolacaoDireito(){
+		
+		try {
+			listaCaracterizarViolacaoDireito = new CaracterizarViolacaoDireitoDAO().lista(caracterizacaoViolacaoDireitoSelecionado);
 		} catch (Exception e) {
 			JSFUtil.addErrorMessage("Erro ao carregar lista de direito violados: "+e.getMessage());
 			e.printStackTrace();
@@ -1352,74 +1370,74 @@ public class AtendimentoBean implements Serializable {
 		
 		boolean salvou = true;				
 		
-		try {														
+//		try {														
 			
-			if(this.atendimento != null){
-				if(direitoVioladoSelecionado != null){
-					if(!listaVitimasSelecionadas.isEmpty()){
-						if(obsDireitoViolado.length() > 25){
-																			
-							RegistroDireitoViolado registroDireitoViolado;
-							RegistroDireitoVioladoDAO registroDireitoVioladoDAO = new RegistroDireitoVioladoDAO();
-							
-							for (Vitima vitima : listaVitimasSelecionadas) {
-								
-								RegistroDireitoViolado registroDireitoViolado1 = registroDireitoVioladoDAO.buscaRegistroDireitoViolado(atendimento, direitoVioladoSelecionado, vitima);
-								if(registroDireitoViolado1 != null){
-									JSFUtil.addErrorMessage(vitima.getMembro().getPessoa().getNomeCompleto()+" já possui este Direito Violado");
-									return;
-								}
-								
-							}
-							
-							for (Vitima vitima : listaVitimasSelecionadas) {														
-								
-								registroDireitoViolado = new RegistroDireitoViolado();							
-								registroDireitoViolado.setDireitoViolado(direitoVioladoSelecionado);
-								registroDireitoViolado.setVitima(vitima);
-								registroDireitoViolado.setAtendimento(atendimento);
-								registroDireitoViolado.setDataInc(new Date());
-								registroDireitoViolado.setConselheiro("Ranulfo");
-								registroDireitoViolado.setObs(obsDireitoViolado);
-								registroDireitoViolado.setConselheiroRegistro(conselheiroLogado);
-								
-								registroDireitoVioladoDAO.salvar(registroDireitoViolado);
-								listaRegistroDireitoVioladoAtendimento.add(registroDireitoViolado);
-							}												
-							
-												
-							direitoVioladoSelecionado = new DireitoViolado();
-							grupoDeDireitoSelecionado = new GrupoDeDireito();
-						}else{
-							JSFUtil.addErrorMessage("Justifique Direito Violado com no mínimo 25 caracteres na descrição");
-							salvou = false;
-						}			
-					}else{
-						JSFUtil.addErrorMessage("Informe no minimo uma vitima");
-						salvou = false;
-					}
-				}else{								
-					JSFUtil.addErrorMessage("Informe o Direito Violado");
-					salvou = false;
-				}
-			}else{
-				JSFUtil.addErrorMessage("Atendimento ainda não foi concluido. Conclua o atendimento.");
-			}
-						
-						
-		} catch (Exception e) {						
-			JSFUtil.addErrorMessage("Erro ao Incluir direito violado: "+e.getMessage());
-			salvou = false;
-		}
-		
-		if(salvou){
-			// ..:: Reseta Diolog Direito violado ::.. //
-			vitimaSelecionada = null;
-			obsDireitoViolado = null;
-			grupoDeDireitoSelecionado = null;
-			direitoVioladoSelecionado = null;
-			btnIncluiDireitoViolado = true;
-		}
+//			if(this.atendimento != null){
+//				if(direitoVioladoSelecionado != null){
+//					if(!listaVitimasSelecionadas.isEmpty()){
+//						if(obsDireitoViolado.length() > 25){
+//																			
+//							RegistroDireitoViolado registroDireitoViolado;
+//							RegistroDireitoVioladoDAO registroDireitoVioladoDAO = new RegistroDireitoVioladoDAO();
+//							
+//							for (Vitima vitima : listaVitimasSelecionadas) {
+//								
+//								RegistroDireitoViolado registroDireitoViolado1 = registroDireitoVioladoDAO.buscaRegistroDireitoViolado(atendimento, direitoVioladoSelecionado, vitima);
+//								if(registroDireitoViolado1 != null){
+//									JSFUtil.addErrorMessage(vitima.getMembro().getPessoa().getNomeCompleto()+" já possui este Direito Violado");
+//									return;
+//								}
+//								
+//							}
+//							
+//							for (Vitima vitima : listaVitimasSelecionadas) {														
+//								
+//								registroDireitoViolado = new RegistroDireitoViolado();							
+//								registroDireitoViolado.setDireitoViolado(direitoVioladoSelecionado);
+//								registroDireitoViolado.setVitima(vitima);
+//								registroDireitoViolado.setAtendimento(atendimento);
+//								registroDireitoViolado.setDataInc(new Date());
+//								registroDireitoViolado.setConselheiro("Ranulfo");
+//								registroDireitoViolado.setObs(obsDireitoViolado);
+//								registroDireitoViolado.setConselheiroRegistro(conselheiroLogado);
+//								
+//								registroDireitoVioladoDAO.salvar(registroDireitoViolado);
+//								listaRegistroDireitoVioladoAtendimento.add(registroDireitoViolado);
+//							}												
+//							
+//												
+//							direitoVioladoSelecionado = new DireitoViolado();
+//							direitoFundamentalSelecionado = new DireitoFundamental();
+//						}else{
+//							JSFUtil.addErrorMessage("Justifique Direito Violado com no mínimo 25 caracteres na descrição");
+//							salvou = false;
+//						}			
+//					}else{
+//						JSFUtil.addErrorMessage("Informe no minimo uma vitima");
+//						salvou = false;
+//					}
+//				}else{								
+//					JSFUtil.addErrorMessage("Informe o Direito Violado");
+//					salvou = false;
+//				}
+//			}else{
+//				JSFUtil.addErrorMessage("Atendimento ainda não foi concluido. Conclua o atendimento.");
+//			}
+//						
+//						
+//		} catch (Exception e) {						
+//			JSFUtil.addErrorMessage("Erro ao Incluir direito violado: "+e.getMessage());
+//			salvou = false;
+//		}
+//		
+//		if(salvou){
+//			// ..:: Reseta Diolog Direito violado ::.. //
+//			vitimaSelecionada = null;
+//			obsDireitoViolado = null;
+//			direitoFundamentalSelecionado = null;
+//			direitoVioladoSelecionado = null;
+//			btnIncluiDireitoViolado = true;
+//		}
 		
 		FacesUtil.getRequestContext().addCallbackParam("salvou", salvou);
 	}
@@ -1427,14 +1445,14 @@ public class AtendimentoBean implements Serializable {
 	public void limpaDlgDireitoViolado(){
 		vitimaSelecionada = null;
 		obsDireitoViolado = null;
-		grupoDeDireitoSelecionado = null;
-		direitoVioladoSelecionado = null;
+		direitoFundamentalSelecionado = null;
+		caracterizacaoViolacaoDireitoSelecionado = null;
 		btnIncluiDireitoViolado = true;
 	}
 	
 	public void ativaBotaoIncluiDireitoViolado(){
 		
-		if(direitoVioladoSelecionado != null){
+		if(caracterizarDireitoVioladoSelecionado != null){
 			btnIncluiDireitoViolado = false;
 		}else{
 			btnIncluiDireitoViolado = true;
@@ -2306,41 +2324,43 @@ public class AtendimentoBean implements Serializable {
 
 	public void setAdendoSelecionado(Adendo adendoSelecionado) {
 		this.adendoSelecionado = adendoSelecionado;
+	}		
+	
+	public List<DireitoFundamental> getListaDireitoFundamental() {
+		return listaDireitoFundamental;
 	}
 
-	public List<GrupoDeDireito> getListaGrupoDireito() {
-		return listaGrupoDireito;
+	public void setListaDireitoFundamental(
+			List<DireitoFundamental> listaDireitoFundamental) {
+		this.listaDireitoFundamental = listaDireitoFundamental;
+	}		
+
+	public List<CaracterizacaoViolacaoDireito> getListaCaracterizacaoViolacaoDireito() {
+		return listaCaracterizacaoViolacaoDireito;
 	}
 
-	public void setListaGrupoDireito(List<GrupoDeDireito> listaGrupoDireito) {
-		this.listaGrupoDireito = listaGrupoDireito;
-	}
-
-	public List<DireitoViolado> getListaDireitoViolado() {
-		return listaDireitoViolado;
-	}
-
-	public void setListaDireitoViolado(List<DireitoViolado> listaDireitoViolado) {
-		this.listaDireitoViolado = listaDireitoViolado;
-	}
-
-	public GrupoDeDireito getGrupoDeDireitoSelecionado() {
-		return grupoDeDireitoSelecionado;
-	}
-
-	public void setGrupoDeDireitoSelecionado(
-			GrupoDeDireito grupoDeDireitoSelecionado) {
-		this.grupoDeDireitoSelecionado = grupoDeDireitoSelecionado;
-	}
-
-	public DireitoViolado getDireitoVioladoSelecionado() {
-		return direitoVioladoSelecionado;
-	}
-
-	public void setDireitoVioladoSelecionado(
-			DireitoViolado direitoVioladoSelecionado) {
-		this.direitoVioladoSelecionado = direitoVioladoSelecionado;
+	public void setListaCaracterizacaoViolacaoDireito(
+			List<CaracterizacaoViolacaoDireito> listaCaracterizacaoViolacaoDireito) {
+		this.listaCaracterizacaoViolacaoDireito = listaCaracterizacaoViolacaoDireito;
 	}	
+
+	public DireitoFundamental getDireitoFundamentalSelecionado() {
+		return direitoFundamentalSelecionado;
+	}
+
+	public void setDireitoFundamentalSelecionado(
+			DireitoFundamental direitoFundamentalSelecionado) {
+		this.direitoFundamentalSelecionado = direitoFundamentalSelecionado;
+	}		
+
+	public CaracterizacaoViolacaoDireito getCaracterizacaoViolacaoDireitoSelecionado() {
+		return caracterizacaoViolacaoDireitoSelecionado;
+	}
+
+	public void setCaracterizacaoViolacaoDireitoSelecionado(
+			CaracterizacaoViolacaoDireito caracterizacaoViolacaoDireitoSelecionado) {
+		this.caracterizacaoViolacaoDireitoSelecionado = caracterizacaoViolacaoDireitoSelecionado;
+	}
 
 	public List<RegistroDireitoViolado> getListaRegistroDireitoVioladoAtendimento() {
 		return listaRegistroDireitoVioladoAtendimento;
@@ -2709,5 +2729,24 @@ public class AtendimentoBean implements Serializable {
 	public void setListaAtribuicoes(List<Atribuicao> listaAtribuicoes) {
 		this.listaAtribuicoes = listaAtribuicoes;
 	}
+
+	public List<CaracterizarDireitoViolado> getListaCaracterizarViolacaoDireito() {
+		return listaCaracterizarViolacaoDireito;
+	}
+
+	public void setListaCaracterizarViolacaoDireito(
+			List<CaracterizarDireitoViolado> listaCaracterizarViolacaoDireito) {
+		this.listaCaracterizarViolacaoDireito = listaCaracterizarViolacaoDireito;
+	}
+
+	public CaracterizarDireitoViolado getCaracterizarDireitoVioladoSelecionado() {
+		return caracterizarDireitoVioladoSelecionado;
+	}
+
+	public void setCaracterizarDireitoVioladoSelecionado(
+			CaracterizarDireitoViolado caracterizarDireitoVioladoSelecionado) {
+		this.caracterizarDireitoVioladoSelecionado = caracterizarDireitoVioladoSelecionado;
+	}
+	
 	
 }
