@@ -834,7 +834,7 @@
 								<f:selectItems value="#{MBAtendimento.listaDireitoFundamental}"
 										var="direitoFundamental" itemValue="#{direitoFundamental}"
 										itemLabel="#{direitoFundamental.nome}" />
-								<p:ajax event="change" listener="#{MBAtendimento.buscaCaracterizacaoViolacaoDireito}" update="cbCaracterizacao, :msgs1" />										
+								<p:ajax event="change" listener="#{MBAtendimento.buscaCaracterizacaoViolacaoDireito}" update="cbCaracterizacao, btnSalvarDireitoViolado, cbViolacaoDireito, :msgs1" />										
 							</p:selectOneMenu>
 						</h:panelGrid>																																
 						
@@ -846,7 +846,7 @@
 							<f:selectItems value="#{MBAtendimento.listaCaracterizacaoViolacaoDireito}"
 									var="caracterizacaoViolacaoDireito" itemValue="#{caracterizacaoViolacaoDireito}"
 									itemLabel="#{caracterizacaoViolacaoDireito.resumoDescricao}" />
-							<p:ajax event="change" listener="#{MBAtendimento.buscaCaracterizarViolacaoDireito}" update="cbViolacaoDireito, :msgs1" />										
+							<p:ajax event="change" listener="#{MBAtendimento.buscaCaracterizarViolacaoDireito}" update="cbViolacaoDireito, btnSalvarDireitoViolado, :msgs1" />										
 						</p:selectOneMenu>
 						
 						<p:spacer width="3px;" />

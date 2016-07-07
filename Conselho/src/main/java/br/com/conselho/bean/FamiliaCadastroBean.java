@@ -875,8 +875,8 @@ public class FamiliaCadastroBean implements Serializable{
 						
 						for (RegistroDireitoViolado registroDireitoViolado : listaRegistroDireitoVioladoAtendimento) {
 							direitoVioladoDTO = new DireitoVioladoDTO();
-							direitoVioladoDTO.setDireitoViolado(registroDireitoViolado.getDireitoViolado().getNome());
-							direitoVioladoDTO.setGrupoDireito(registroDireitoViolado.getDireitoViolado().getNome()+" ERRO PROVOCADO POR MUDANÇA GRUPO DIREITO");
+//							direitoVioladoDTO.setDireitoViolado(registroDireitoViolado.getDireitoViolado().getNome());
+//							direitoVioladoDTO.setGrupoDireito(registroDireitoViolado.getDireitoViolado().getNome()+" ERRO PROVOCADO POR MUDANÇA GRUPO DIREITO");
 							direitoVioladoDTO.setObs(registroDireitoViolado.getObs());
 							direitoVioladoDTO.setVitima(registroDireitoViolado.getVitima().getMembro().getPessoa().getNomeCompleto());
 							direitoVioladoDTO.setCaminhoSub(JSFUtil.getRealPath("/WEB-INF/relatorios/"));

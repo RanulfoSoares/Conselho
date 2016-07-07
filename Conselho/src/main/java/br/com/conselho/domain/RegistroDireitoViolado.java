@@ -38,7 +38,7 @@ public class RegistroDireitoViolado implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
-	private DireitoViolado direitoViolado;
+	private CaracterizarDireitoViolado caracterizarDireitoViolado;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
@@ -65,14 +65,15 @@ public class RegistroDireitoViolado implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}		
+
+	public CaracterizarDireitoViolado getCaracterizarDireitoViolado() {
+		return caracterizarDireitoViolado;
 	}
 
-	public DireitoViolado getDireitoViolado() {
-		return direitoViolado;
-	}
-
-	public void setDireitoViolado(DireitoViolado direitoViolado) {
-		this.direitoViolado = direitoViolado;
+	public void setCaracterizarDireitoViolado(
+			CaracterizarDireitoViolado caracterizarDireitoViolado) {
+		this.caracterizarDireitoViolado = caracterizarDireitoViolado;
 	}
 
 	public Vitima getVitima() {
@@ -138,6 +139,10 @@ public class RegistroDireitoViolado implements Serializable {
 		int result = 1;
 		result = prime * result
 				+ ((atendimento == null) ? 0 : atendimento.hashCode());
+		result = prime
+				* result
+				+ ((caracterizarDireitoViolado == null) ? 0
+						: caracterizarDireitoViolado.hashCode());
 		result = prime * result
 				+ ((conselheiro == null) ? 0 : conselheiro.hashCode());
 		result = prime
@@ -145,8 +150,6 @@ public class RegistroDireitoViolado implements Serializable {
 				+ ((conselheiroRegistro == null) ? 0 : conselheiroRegistro
 						.hashCode());
 		result = prime * result + ((dataInc == null) ? 0 : dataInc.hashCode());
-		result = prime * result
-				+ ((direitoViolado == null) ? 0 : direitoViolado.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime
 				* result
@@ -171,6 +174,12 @@ public class RegistroDireitoViolado implements Serializable {
 				return false;
 		} else if (!atendimento.equals(other.atendimento))
 			return false;
+		if (caracterizarDireitoViolado == null) {
+			if (other.caracterizarDireitoViolado != null)
+				return false;
+		} else if (!caracterizarDireitoViolado
+				.equals(other.caracterizarDireitoViolado))
+			return false;
 		if (conselheiro == null) {
 			if (other.conselheiro != null)
 				return false;
@@ -185,11 +194,6 @@ public class RegistroDireitoViolado implements Serializable {
 			if (other.dataInc != null)
 				return false;
 		} else if (!dataInc.equals(other.dataInc))
-			return false;
-		if (direitoViolado == null) {
-			if (other.direitoViolado != null)
-				return false;
-		} else if (!direitoViolado.equals(other.direitoViolado))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -213,6 +217,6 @@ public class RegistroDireitoViolado implements Serializable {
 		} else if (!vitima.equals(other.vitima))
 			return false;
 		return true;
-	}	
+	}		
 				
 }

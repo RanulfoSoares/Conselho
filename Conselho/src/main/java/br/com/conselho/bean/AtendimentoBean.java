@@ -346,11 +346,11 @@ public class AtendimentoBean implements Serializable {
 			List<RegistroDireitoViolado> resgistrosViolados = new RegistroDireitoVioladoDAO().busca(atendimento);
 			listaDireitosVioladosNoAtendimento = new ArrayList<DireitoViolado>();
 			
-			for (RegistroDireitoViolado registroDireitoViolado : resgistrosViolados) {
-				if(!listaDireitosVioladosNoAtendimento.contains(registroDireitoViolado.getDireitoViolado())){
-					listaDireitosVioladosNoAtendimento.add(registroDireitoViolado.getDireitoViolado());
-				}
-			}
+//			for (RegistroDireitoViolado registroDireitoViolado : resgistrosViolados) {
+//				if(!listaDireitosVioladosNoAtendimento.contains(registroDireitoViolado.getDireitoViolado())){
+//					listaDireitosVioladosNoAtendimento.add(registroDireitoViolado.getDireitoViolado());
+//				}
+//			}
 			
 			
 		} catch (Exception e) {
@@ -1345,6 +1345,12 @@ public class AtendimentoBean implements Serializable {
 		
 		try {
 			listaCaracterizacaoViolacaoDireito = new CaracterizacaoViolacaoDireitoDAO().lista(direitoFundamentalSelecionado);
+			btnIncluiDireitoViolado = true;
+			listaCaracterizarViolacaoDireito = new ArrayList<CaracterizarDireitoViolado>();
+			
+			caracterizacaoViolacaoDireitoSelecionado = new CaracterizacaoViolacaoDireito();
+			caracterizarDireitoVioladoSelecionado = new CaracterizarDireitoViolado();
+			
 		} catch (Exception e) {
 			JSFUtil.addErrorMessage("Erro ao carregar lista de direito violados: "+e.getMessage());
 			e.printStackTrace();
@@ -1355,6 +1361,8 @@ public class AtendimentoBean implements Serializable {
 		
 		try {
 			listaCaracterizarViolacaoDireito = new CaracterizarViolacaoDireitoDAO().lista(caracterizacaoViolacaoDireitoSelecionado);
+			btnIncluiDireitoViolado = true;
+			caracterizarDireitoVioladoSelecionado = new CaracterizarDireitoViolado();			
 		} catch (Exception e) {
 			JSFUtil.addErrorMessage("Erro ao carregar lista de direito violados: "+e.getMessage());
 			e.printStackTrace();
@@ -1371,7 +1379,7 @@ public class AtendimentoBean implements Serializable {
 		boolean salvou = true;				
 		
 //		try {														
-			
+//			
 //			if(this.atendimento != null){
 //				if(direitoVioladoSelecionado != null){
 //					if(!listaVitimasSelecionadas.isEmpty()){
@@ -1466,7 +1474,7 @@ public class AtendimentoBean implements Serializable {
 			
 			registroDireitoVioladoAplicandoMedida = (RegistroDireitoViolado) event.getComponent().getAttributes().get("direitoVioladoSelecionado");			
 			listaMedidaAplicadasEmViolador = new ArrayList<MedidaAplicada>();
-			listaMedidaAplicadasEmViolador = new MedidaAplicadaDAO().busca(registroDireitoVioladoAplicandoMedida.getDireitoViolado(), "VIOLADOR");
+//			listaMedidaAplicadasEmViolador = new MedidaAplicadaDAO().busca(registroDireitoVioladoAplicandoMedida.getDireitoViolado(), "VIOLADOR");
 			listaMedidaEmRazao = new ArrayList<MedidaEmRazao>();
 			
 			listaMedidaEmRazao = new MedidaEmRazaoDAO().busca();		
