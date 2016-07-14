@@ -226,8 +226,8 @@ public class AtendimentoBean implements Serializable {
 	
 	private List<Membro> listaMembroFamiliaVioladores = new ArrayList<Membro>();	
 	
-	private List<DireitoViolado> listaDireitosVioladosNoAtendimento;
-	private DireitoViolado direitoSelecionadoAplicaMedida;
+	private List<CaracterizarDireitoViolado> listaCaracterizarDireitoVioladosNoAtendimento;
+	private CaracterizarDireitoViolado caracterizarDireitoVioladoSelecionadoAplicaMedida;
 	private String numeroFamiliaBusca;
 	private List<Vitima> listaVitimaAplicaMedidaEmGrupo = new ArrayList<Vitima>();
 	private List<Vitima> listaVitimaAplicaMedidaEmGrupoSelecionados = new ArrayList<Vitima>();	
@@ -272,7 +272,7 @@ public class AtendimentoBean implements Serializable {
 			listaDireitoFundamental = new DireitoFundamentalDAO().lista(); 
 			listaRegistroDireitoVioladoAtendimento = new ArrayList<RegistroDireitoViolado>();
 			btnIncluiDireitoViolado = true;
-			listaDireitosVioladosNoAtendimento = new ArrayList<DireitoViolado>();
+			listaCaracterizarDireitoVioladosNoAtendimento = new ArrayList<CaracterizarDireitoViolado>();
 			
 			dataResgistro = Helper.formatDate().format(new Date());
 			nomeLogado = conselheiroLogado.getNomeUsual();
@@ -344,13 +344,13 @@ public class AtendimentoBean implements Serializable {
 		
 		try {
 			List<RegistroDireitoViolado> resgistrosViolados = new RegistroDireitoVioladoDAO().busca(atendimento);
-			listaDireitosVioladosNoAtendimento = new ArrayList<DireitoViolado>();
+			listaCaracterizarDireitoVioladosNoAtendimento = new ArrayList<CaracterizarDireitoViolado>();
 			
-//			for (RegistroDireitoViolado registroDireitoViolado : resgistrosViolados) {
-//				if(!listaDireitosVioladosNoAtendimento.contains(registroDireitoViolado.getDireitoViolado())){
-//					listaDireitosVioladosNoAtendimento.add(registroDireitoViolado.getDireitoViolado());
-//				}
-//			}
+			for (RegistroDireitoViolado registroDireitoViolado : resgistrosViolados) {
+				if(!listaCaracterizarDireitoVioladosNoAtendimento.contains(registroDireitoViolado.getCaracterizarDireitoViolado())){
+					listaCaracterizarDireitoVioladosNoAtendimento.add(registroDireitoViolado.getCaracterizarDireitoViolado());
+				}
+			}
 			
 			
 		} catch (Exception e) {
@@ -1378,74 +1378,74 @@ public class AtendimentoBean implements Serializable {
 		
 		boolean salvou = true;				
 		
-//		try {														
-//			
-//			if(this.atendimento != null){
-//				if(direitoVioladoSelecionado != null){
-//					if(!listaVitimasSelecionadas.isEmpty()){
-//						if(obsDireitoViolado.length() > 25){
-//																			
-//							RegistroDireitoViolado registroDireitoViolado;
-//							RegistroDireitoVioladoDAO registroDireitoVioladoDAO = new RegistroDireitoVioladoDAO();
-//							
-//							for (Vitima vitima : listaVitimasSelecionadas) {
-//								
+		try {														
+			
+			if(this.atendimento != null){
+				if(caracterizarDireitoVioladoSelecionado != null){
+					if(!listaVitimasSelecionadas.isEmpty()){
+						if(obsDireitoViolado.length() > 25){
+																			
+							RegistroDireitoViolado registroDireitoViolado;
+							RegistroDireitoVioladoDAO registroDireitoVioladoDAO = new RegistroDireitoVioladoDAO();
+							
+							for (Vitima vitima : listaVitimasSelecionadas) {
+								
 //								RegistroDireitoViolado registroDireitoViolado1 = registroDireitoVioladoDAO.buscaRegistroDireitoViolado(atendimento, direitoVioladoSelecionado, vitima);
 //								if(registroDireitoViolado1 != null){
 //									JSFUtil.addErrorMessage(vitima.getMembro().getPessoa().getNomeCompleto()+" já possui este Direito Violado");
 //									return;
 //								}
-//								
-//							}
-//							
-//							for (Vitima vitima : listaVitimasSelecionadas) {														
-//								
-//								registroDireitoViolado = new RegistroDireitoViolado();							
-//								registroDireitoViolado.setDireitoViolado(direitoVioladoSelecionado);
-//								registroDireitoViolado.setVitima(vitima);
-//								registroDireitoViolado.setAtendimento(atendimento);
-//								registroDireitoViolado.setDataInc(new Date());
-//								registroDireitoViolado.setConselheiro("Ranulfo");
-//								registroDireitoViolado.setObs(obsDireitoViolado);
-//								registroDireitoViolado.setConselheiroRegistro(conselheiroLogado);
-//								
-//								registroDireitoVioladoDAO.salvar(registroDireitoViolado);
-//								listaRegistroDireitoVioladoAtendimento.add(registroDireitoViolado);
-//							}												
-//							
-//												
-//							direitoVioladoSelecionado = new DireitoViolado();
-//							direitoFundamentalSelecionado = new DireitoFundamental();
-//						}else{
-//							JSFUtil.addErrorMessage("Justifique Direito Violado com no mínimo 25 caracteres na descrição");
-//							salvou = false;
-//						}			
-//					}else{
-//						JSFUtil.addErrorMessage("Informe no minimo uma vitima");
-//						salvou = false;
-//					}
-//				}else{								
-//					JSFUtil.addErrorMessage("Informe o Direito Violado");
-//					salvou = false;
-//				}
-//			}else{
-//				JSFUtil.addErrorMessage("Atendimento ainda não foi concluido. Conclua o atendimento.");
-//			}
-//						
-//						
-//		} catch (Exception e) {						
-//			JSFUtil.addErrorMessage("Erro ao Incluir direito violado: "+e.getMessage());
-//			salvou = false;
-//		}
-//		
-//		if(salvou){
-//			// ..:: Reseta Diolog Direito violado ::.. //
-//			vitimaSelecionada = null;
-//			obsDireitoViolado = null;
-//			direitoFundamentalSelecionado = null;
-//			direitoVioladoSelecionado = null;
-//			btnIncluiDireitoViolado = true;
-//		}
+								
+							}
+							
+							for (Vitima vitima : listaVitimasSelecionadas) {														
+								
+								registroDireitoViolado = new RegistroDireitoViolado();							
+								registroDireitoViolado.setCaracterizarDireitoViolado(caracterizarDireitoVioladoSelecionado);
+								registroDireitoViolado.setVitima(vitima);
+								registroDireitoViolado.setAtendimento(atendimento);
+								registroDireitoViolado.setDataInc(new Date());
+								registroDireitoViolado.setConselheiro("Ranulfo");
+								registroDireitoViolado.setObs(obsDireitoViolado);
+								registroDireitoViolado.setConselheiroRegistro(conselheiroLogado);
+								
+								registroDireitoVioladoDAO.salvar(registroDireitoViolado);
+								listaRegistroDireitoVioladoAtendimento.add(registroDireitoViolado);
+							}												
+							
+												
+							caracterizarDireitoVioladoSelecionado = new CaracterizarDireitoViolado();
+							direitoFundamentalSelecionado = new DireitoFundamental();
+						}else{
+							JSFUtil.addErrorMessage("Justifique Direito Violado com no mínimo 25 caracteres na descrição");
+							salvou = false;
+						}			
+					}else{
+						JSFUtil.addErrorMessage("Informe no minimo uma vitima");
+						salvou = false;
+					}
+				}else{								
+					JSFUtil.addErrorMessage("Informe o Direito Violado");
+					salvou = false;
+				}
+			}else{
+				JSFUtil.addErrorMessage("Atendimento ainda não foi concluido. Conclua o atendimento.");
+			}
+						
+						
+		} catch (Exception e) {						
+			JSFUtil.addErrorMessage("Erro ao Incluir direito violado: "+e.getMessage());
+			salvou = false;
+		}
+		
+		if(salvou){
+			// ..:: Reseta Diolog Direito violado ::.. //
+			vitimaSelecionada = null;
+			obsDireitoViolado = null;
+			direitoFundamentalSelecionado = null;
+			caracterizarDireitoVioladoSelecionado = null;
+			btnIncluiDireitoViolado = true;
+		}
 		
 		FacesUtil.getRequestContext().addCallbackParam("salvou", salvou);
 	}
@@ -1474,7 +1474,7 @@ public class AtendimentoBean implements Serializable {
 			
 			registroDireitoVioladoAplicandoMedida = (RegistroDireitoViolado) event.getComponent().getAttributes().get("direitoVioladoSelecionado");			
 			listaMedidaAplicadasEmViolador = new ArrayList<MedidaAplicada>();
-//			listaMedidaAplicadasEmViolador = new MedidaAplicadaDAO().busca(registroDireitoVioladoAplicandoMedida.getDireitoViolado(), "VIOLADOR");
+			listaMedidaAplicadasEmViolador = new MedidaAplicadaDAO().busca(registroDireitoVioladoAplicandoMedida.getCaracterizarDireitoViolado().getDireitoViolado(), "VIOLADOR");
 			listaMedidaEmRazao = new ArrayList<MedidaEmRazao>();
 			
 			listaMedidaEmRazao = new MedidaEmRazaoDAO().busca();		
@@ -1722,21 +1722,21 @@ public class AtendimentoBean implements Serializable {
 	public void preparaAplicaMedidaEmVitima(ActionEvent event){
 		try {						
 			
-			direitoSelecionadoAplicaMedida = (DireitoViolado) event.getComponent().getAttributes().get("registrodireitoVioladoSelecionado");
+			caracterizarDireitoVioladoSelecionadoAplicaMedida = (CaracterizarDireitoViolado) event.getComponent().getAttributes().get("registrodireitoVioladoSelecionado");
 			
-			List<RegistroDireitoViolado> listaRegistroDireitoViolado = new RegistroDireitoVioladoDAO().buscaRegistroDireitoViolado(atendimento, direitoSelecionadoAplicaMedida);
+			List<RegistroDireitoViolado> listaRegistroDireitoViolado = new RegistroDireitoVioladoDAO().buscaRegistroDireitoViolado(atendimento, caracterizarDireitoVioladoSelecionadoAplicaMedida);
 			
 			for (RegistroDireitoViolado registroDireitoViolado : listaRegistroDireitoViolado) {
 				listaVitimaAplicaMedidaEmGrupo.add(registroDireitoViolado.getVitima());
 			}
 			
 			listaMedidaAplicadasEmVitima = new ArrayList<MedidaAplicada>();
-			listaMedidaAplicadasEmVitima = new MedidaAplicadaDAO().busca(direitoSelecionadoAplicaMedida, "VITIMA");
+			listaMedidaAplicadasEmVitima = new MedidaAplicadaDAO().busca(caracterizarDireitoVioladoSelecionadoAplicaMedida.getDireitoViolado(), "VITIMA");
 			
 			listaMedidaEmRazao = new ArrayList<MedidaEmRazao>();			
 			listaMedidaEmRazao = new MedidaEmRazaoDAO().busca();						
 			
-			System.out.println("DIREITO VIOLADO SELECIONADO: "+direitoSelecionadoAplicaMedida.getNome());
+			System.out.println("DIREITO VIOLADO SELECIONADO: "+caracterizarDireitoVioladoSelecionadoAplicaMedida.getDireitoViolado().getNome());
 			
 		} catch (Exception e) {
 			System.out.println("Erro preparaAplicaMedidaSobreDireitoViolado: "+e.getMessage());
@@ -1769,7 +1769,7 @@ public class AtendimentoBean implements Serializable {
 							System.out.println("Vitima: "+vitima.getMembro().getPessoa().getNomeCompleto());
 							System.out.println("Medida a aplicar: "+medida.getResumoDescricao());
 							
-							RegistroDireitoViolado registroDireitoViolado = registroDireitoVioladoDAO.buscaRegistroDireitoViolado(atendimento, direitoSelecionadoAplicaMedida, vitima);
+							RegistroDireitoViolado registroDireitoViolado = registroDireitoVioladoDAO.buscaRegistroDireitoViolado(atendimento, caracterizarDireitoVioladoSelecionadoAplicaMedida, vitima);
 							
 							RegistroMedidaAplicada registroMedidaAplicada = new RegistroMedidaAplicada();
 							
@@ -1861,7 +1861,7 @@ public class AtendimentoBean implements Serializable {
 	
 	public void limpaDlgMedidaDireitoViolado(){
 		
-		direitoSelecionadoAplicaMedida = new DireitoViolado();
+		caracterizarDireitoVioladoSelecionadoAplicaMedida = new CaracterizarDireitoViolado();
 		listaVitimaAplicaMedidaEmGrupo = new ArrayList<Vitima>();
 		descricaoMedida = "";		
 		medidaEmRazaoSelecionada = new MedidaEmRazao();
@@ -1872,7 +1872,7 @@ public class AtendimentoBean implements Serializable {
 	public void limpaDlg3(){
 		
 		registroDireitoVioladoAplicandoMedida = new  RegistroDireitoViolado();
-		direitoSelecionadoAplicaMedida = new DireitoViolado();
+		caracterizarDireitoVioladoSelecionadoAplicaMedida = new CaracterizarDireitoViolado();
 		listaVitimaAplicaMedidaEmGrupo = new ArrayList<Vitima>();
 		descricaoMedida = "";
 		selecaoMedidaAplicada = null;
@@ -2607,15 +2607,15 @@ public class AtendimentoBean implements Serializable {
 	public void setListaVioladoresSelecionadas(
 			List<Violador> listaVioladoresSelecionadas) {
 		this.listaVioladoresSelecionadas = listaVioladoresSelecionadas;
-	}
-	
-	public DireitoViolado getDireitoSelecionadoAplicaMedida() {
-		return direitoSelecionadoAplicaMedida;
+	}	
+
+	public CaracterizarDireitoViolado getCaracterizarDireitoVioladoSelecionadoAplicaMedida() {
+		return caracterizarDireitoVioladoSelecionadoAplicaMedida;
 	}
 
-	public void setDireitoSelecionadoAplicaMedida(
-			DireitoViolado direitoSelecionadoAplicaMedida) {
-		this.direitoSelecionadoAplicaMedida = direitoSelecionadoAplicaMedida;
+	public void setCaracterizarDireitoVioladoSelecionadoAplicaMedida(
+			CaracterizarDireitoViolado caracterizarDireitoVioladoSelecionadoAplicaMedida) {
+		this.caracterizarDireitoVioladoSelecionadoAplicaMedida = caracterizarDireitoVioladoSelecionadoAplicaMedida;
 	}
 
 	public List<Vitima> getListaVitimaAplicaMedidaEmGrupo() {
@@ -2634,15 +2634,15 @@ public class AtendimentoBean implements Serializable {
 	public void setListaVitimaAplicaMedidaEmGrupoSelecionados(
 			List<Vitima> listaVitimaAplicaMedidaEmGrupoSelecionados) {
 		this.listaVitimaAplicaMedidaEmGrupoSelecionados = listaVitimaAplicaMedidaEmGrupoSelecionados;
+	}	
+
+	public List<CaracterizarDireitoViolado> getListaCaracterizarDireitoVioladosNoAtendimento() {
+		return listaCaracterizarDireitoVioladosNoAtendimento;
 	}
 
-	public List<DireitoViolado> getListaDireitosVioladosNoAtendimento() {
-		return listaDireitosVioladosNoAtendimento;
-	}
-
-	public void setListaDireitosVioladosNoAtendimento(
-			List<DireitoViolado> listaDireitosVioladosNoAtendimento) {
-		this.listaDireitosVioladosNoAtendimento = listaDireitosVioladosNoAtendimento;
+	public void setListaCaracterizarDireitoVioladosNoAtendimento(
+			List<CaracterizarDireitoViolado> listaCaracterizarDireitoVioladosNoAtendimento) {
+		this.listaCaracterizarDireitoVioladosNoAtendimento = listaCaracterizarDireitoVioladosNoAtendimento;
 	}
 
 	public Boolean getVioladoNaoIdentificado() {

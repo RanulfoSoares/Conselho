@@ -16,6 +16,8 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.conselho.domain.Atendimento;
 import br.com.conselho.domain.Bairro;
+import br.com.conselho.domain.CaracterizacaoViolacaoDireito;
+import br.com.conselho.domain.CaracterizarDireitoViolado;
 import br.com.conselho.domain.DireitoViolado;
 import br.com.conselho.domain.RegistroDireitoViolado;
 import br.com.conselho.domain.Vitima;
@@ -97,7 +99,7 @@ public class RegistroDireitoVioladoDAO {
 		
 	}
 	
-	public List<RegistroDireitoViolado> buscaRegistroDireitoViolado(Atendimento atendimento, DireitoViolado direitoViolado) throws Exception {
+	public List<RegistroDireitoViolado> buscaRegistroDireitoViolado(Atendimento atendimento, CaracterizarDireitoViolado caracterizarDireitoViolado) throws Exception {
 		
 		
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
@@ -106,7 +108,7 @@ public class RegistroDireitoVioladoDAO {
 		try{
 			Criteria criteria = sessao.createCriteria(RegistroDireitoViolado.class);
 			criteria.add(Restrictions.eq("atendimento", atendimento));			
-			criteria.add(Restrictions.eq("direitoViolado", direitoViolado));
+			criteria.add(Restrictions.eq("caracterizarDireitoViolado", caracterizarDireitoViolado));
 			lista =  criteria.list();				
 		}catch(Exception e){
 			System.out.println("ERRO...."+e.getMessage());
@@ -119,7 +121,7 @@ public class RegistroDireitoVioladoDAO {
 		
 	}
 	
-	public RegistroDireitoViolado buscaRegistroDireitoViolado(Atendimento atendimento, DireitoViolado direitoViolado, Vitima  vitima) throws Exception {
+	public RegistroDireitoViolado buscaRegistroDireitoViolado(Atendimento atendimento, CaracterizarDireitoViolado caracterizarDireitoViolado, Vitima  vitima) throws Exception {
 		
 		
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
@@ -128,7 +130,7 @@ public class RegistroDireitoVioladoDAO {
 		try{
 			Criteria criteria = sessao.createCriteria(RegistroDireitoViolado.class);
 			criteria.add(Restrictions.eq("atendimento", atendimento));			
-			criteria.add(Restrictions.eq("direitoViolado", direitoViolado));
+			criteria.add(Restrictions.eq("caracterizarDireitoViolado", caracterizarDireitoViolado));
 			criteria.add(Restrictions.eq("vitima", vitima));
 			registroDireitoViolado = (RegistroDireitoViolado) criteria.uniqueResult();				
 		}catch(Exception e){

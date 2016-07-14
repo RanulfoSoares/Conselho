@@ -598,7 +598,7 @@
 				                            </p:column>
 				
 				                            <p:column style="width: 220px; text-align: center" headerText="Direito Violado">
-				                                <h:outputText value="#{direito.direitoViolado.nome}"/>
+				                                <h:outputText value="#{direito.caracterizarDireitoViolado.direitoViolado.resumoDescricao}"/>
 				                            </p:column>
 				                            
 				                            <p:column style="width: 130px; text-align: center" headerText="Vitima">
@@ -902,14 +902,17 @@
 						
 					<p:spacer width="3px;" />									
 						<h:outputLabel styleClass="texto_informativo_18" value="Vitima:" />
-						<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.registroDireitoVioladoAplicandoMedida.vitima}" />
-						
-						
+						<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.registroDireitoVioladoAplicandoMedida.vitima.membro.pessoa.nomeCompleto}" />												
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1" style="margin: 10px 20px;">
+						<h:outputLabel styleClass="texto_informativo_18" value="Caracterização de Direito Violado:" />
+						<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.registroDireitoVioladoAplicandoMedida.caracterizarDireitoViolado.caracterizacaoViolacaoDireito.nome}" />
 					</h:panelGrid>
 				
-					<h:panelGrid columns="1" style="margin: 20px;">
+					<h:panelGrid columns="1" style="margin: 10px 20px;">
 						<h:outputLabel styleClass="texto_informativo_18" value="Violação de Direito Selecionado:" />
-						<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.registroDireitoVioladoAplicandoMedida.direitoViolado.resumoDescricao}" />
+						<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.registroDireitoVioladoAplicandoMedida.caracterizarDireitoViolado.direitoViolado.resumoDescricao}" />
 					</h:panelGrid>
 					
 					
@@ -923,7 +926,7 @@
 				            <f:selectItems value="#{MBAtendimento.listaViolador}" />
 				        </p:selectCheckboxMenu>
 					
-					<h:panelGrid columns="1" style="margin: 20px;">
+					<h:panelGrid columns="1" style="margin: 10px 20px;">
 										
 						<p:outputLabel  style="margin-top: 10px;" styleClass="texto_informativo_18" value="Medida de Proteção (Agente Violador):" />
 						<p:selectOneMenu style="width:480px;" id="cbMedidaEmRazao" converter="omnifaces.SelectItemsConverter" filter="true"
@@ -972,7 +975,7 @@
 					  closable="true" draggable="false">
 				
 					<h:form>
-						<p:dataTable id="tblAdendos" var="registro" value="#{MBAtendimento.listaDireitosVioladosNoAtendimento}" 
+						<p:dataTable id="tblAdendos" var="registro" value="#{MBAtendimento.listaCaracterizarDireitoVioladosNoAtendimento}" 
 									 paginator="true" rows="6">
 									      
 							<f:facet name="header" >										 
@@ -980,7 +983,7 @@
 							</f:facet>
 									       					     					       
 							<p:column >																  	 
-								<h:outputText value="#{registro.nome}" />
+								<h:outputText value="#{registro.direitoViolado.nome}" />
 							</p:column>
 																					
 							<p:column style="width: 25px; text-align: center;">
@@ -1102,7 +1105,7 @@
 <!-- 			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 			
 			<p:dialog header="Aplicar Medida em vitima" widgetVar="dlgMedidaDireitoViolado" 
-					  modal="true" resizable="false" height="493" width="850"  appendTo="@(body)"
+					  modal="true" resizable="false" height="593" width="850"  appendTo="@(body)"
 					  closable="false" draggable="false">
 				
 				<h:form id="formApMedidaDV">
@@ -1122,13 +1125,17 @@
 						<p:selectCheckboxMenu value="#{MBAtendimento.listaVitimaAplicaMedidaEmGrupoSelecionados}" label="Selecione as Vitimas" converter="omnifaces.SelectItemsConverter"
                               filter="true" filterMatchMode="startsWith" panelStyle="width:290px">
 				            <f:selectItems value="#{MBAtendimento.listaVitimaAplicaMedidaEmGrupo}" />
-				        </p:selectCheckboxMenu>
-				       
-				        
-					</h:panelGrid>				
+				        </p:selectCheckboxMenu>				       				        
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1" style="margin: 20px;">
+						<h:outputLabel styleClass="texto_informativo_18" value="Caracterização Violação de Direito:" />
+						<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.caracterizarDireitoVioladoSelecionadoAplicaMedida.caracterizacaoViolacaoDireito.nome}" />
+					</h:panelGrid>
+									
 					<h:panelGrid columns="1" style="margin: 20px;">
 						<h:outputLabel styleClass="texto_informativo_18" value="Violação de Direito Selecionado:" />
-						<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.direitoSelecionadoAplicaMedida.resumoDescricao}" />
+						<h:outputLabel styleClass="texto_informativo_negrito_16" value="#{MBAtendimento.caracterizarDireitoVioladoSelecionadoAplicaMedida.direitoViolado.resumoDescricao}" />
 					</h:panelGrid>
 					
 					<h:panelGrid columns="1" style="margin: 20px;">
