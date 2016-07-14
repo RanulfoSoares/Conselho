@@ -1517,7 +1517,7 @@ public class RelatoriosBean implements Serializable {
 				for (DireitoViolado direitoViolado : listaDireitoVioladoUtilizados) {				
 					registroDiretitoVioladoDTO = new RegistroDiretitoVioladoDTO();
 					for (RegistroDireitoViolado registroDireitoViolado : listaTodosRegistroDireitoViolados) {
-						if(registroDireitoViolado.getDireitoViolado().equals(direitoViolado)){
+						if(registroDireitoViolado.getCaracterizarDireitoViolado().getDireitoViolado().equals(direitoViolado)){
 							cont = cont+1;
 						}										
 					}
@@ -1634,7 +1634,7 @@ public class RelatoriosBean implements Serializable {
 				int cont = 0;
 				for (DireitoViolado direitoViolado : direitoVioladoUtilizados) {										
 					for (RegistroDireitoViolado registroDireitoViolado : registroDireitoVioladoUtilizados) {
-						if(registroDireitoViolado.getDireitoViolado().equals(direitoViolado)){
+						if(registroDireitoViolado.getCaracterizarDireitoViolado().getDireitoViolado().equals(direitoViolado)){
 							cont++;
 						}						
 					}

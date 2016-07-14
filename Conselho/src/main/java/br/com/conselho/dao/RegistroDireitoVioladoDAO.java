@@ -167,7 +167,8 @@ public class RegistroDireitoVioladoDAO {
 			
 			Criteria criteria = sessao.createCriteria(RegistroDireitoViolado.class);
 			criteria.add(Restrictions.between("dataInc", inicio, fim));
-			criteria.setProjection(Projections.distinct(Projections.property("direitoViolado")));
+			criteria.createAlias("caracterizarDireitoViolado", "c");
+			criteria.setProjection(Projections.distinct(Projections.property("c.direitoViolado")));
 			lista =  criteria.list();				
 		}catch(Exception e){
 			System.out.println("ERRO...."+e.getMessage());
