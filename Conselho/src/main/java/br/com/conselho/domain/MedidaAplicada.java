@@ -22,9 +22,9 @@ public class MedidaAplicada {
 	@Column(nullable = false, length = 450)
 	private String nome;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(nullable = false)
-	private DireitoViolado direitoViolado;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(nullable = false)
+//	private DireitoViolado direitoViolado;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	//@JoinColumn(nullable = false)
@@ -49,13 +49,7 @@ public class MedidaAplicada {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	public DireitoViolado getDireitoViolado() {
-		return direitoViolado;
-	}
-	public void setDireitoViolado(DireitoViolado direitoViolado) {
-		this.direitoViolado = direitoViolado;
-	}
+	}	
 	
 	public String getResumoDescricao() {
 		
@@ -67,18 +61,20 @@ public class MedidaAplicada {
 		
 		return resumoDescricao;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((direitoViolado == null) ? 0 : direitoViolado.hashCode());
+				+ ((aplicacao == null) ? 0 : aplicacao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result
+				+ ((resumoDescricao == null) ? 0 : resumoDescricao.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -88,10 +84,10 @@ public class MedidaAplicada {
 		if (getClass() != obj.getClass())
 			return false;
 		MedidaAplicada other = (MedidaAplicada) obj;
-		if (direitoViolado == null) {
-			if (other.direitoViolado != null)
+		if (aplicacao == null) {
+			if (other.aplicacao != null)
 				return false;
-		} else if (!direitoViolado.equals(other.direitoViolado))
+		} else if (!aplicacao.equals(other.aplicacao))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -103,6 +99,12 @@ public class MedidaAplicada {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
+		if (resumoDescricao == null) {
+			if (other.resumoDescricao != null)
+				return false;
+		} else if (!resumoDescricao.equals(other.resumoDescricao))
+			return false;
 		return true;
-	}		
+	}
+		
 }
