@@ -13,14 +13,13 @@ import br.com.conselho.util.HibernateUtil;
 
 public class MedidaAplicadaDAO {
 	
-	public List<MedidaAplicada> busca(DireitoViolado direitoViolado, String aplicacao) throws Exception {		
+	public List<MedidaAplicada> busca(String aplicacao) throws Exception {		
 		
 			Session sessao = HibernateUtil.getSessionFactory().openSession();
 			List<MedidaAplicada> listaCidade = null;
 			
 			try{
-				Criteria criteria = sessao.createCriteria(MedidaAplicada.class);								
-				criteria.add(Restrictions.eq("direitoViolado", direitoViolado));
+				Criteria criteria = sessao.createCriteria(MedidaAplicada.class);												
 				criteria.createAlias("aplicacao", "ap");
 				criteria.add(Restrictions.eq("ap.nome", aplicacao));
 				criteria.addOrder(Order.asc("nome"));

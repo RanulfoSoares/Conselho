@@ -1474,7 +1474,7 @@ public class AtendimentoBean implements Serializable {
 			
 			registroDireitoVioladoAplicandoMedida = (RegistroDireitoViolado) event.getComponent().getAttributes().get("direitoVioladoSelecionado");			
 			listaMedidaAplicadasEmViolador = new ArrayList<MedidaAplicada>();
-			listaMedidaAplicadasEmViolador = new MedidaAplicadaDAO().busca(registroDireitoVioladoAplicandoMedida.getCaracterizarDireitoViolado().getDireitoViolado(), "VIOLADOR");
+			listaMedidaAplicadasEmViolador = new MedidaAplicadaDAO().busca("VIOLADOR");
 			listaMedidaEmRazao = new ArrayList<MedidaEmRazao>();
 			
 			listaMedidaEmRazao = new MedidaEmRazaoDAO().busca();		
@@ -1731,7 +1731,7 @@ public class AtendimentoBean implements Serializable {
 			}
 			
 			listaMedidaAplicadasEmVitima = new ArrayList<MedidaAplicada>();
-			listaMedidaAplicadasEmVitima = new MedidaAplicadaDAO().busca(caracterizarDireitoVioladoSelecionadoAplicaMedida.getDireitoViolado(), "VITIMA");
+			listaMedidaAplicadasEmVitima = new MedidaAplicadaDAO().busca("VITIMA");
 			
 			listaMedidaEmRazao = new ArrayList<MedidaEmRazao>();			
 			listaMedidaEmRazao = new MedidaEmRazaoDAO().busca();						
